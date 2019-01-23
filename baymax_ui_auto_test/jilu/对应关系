@@ -1,0 +1,26 @@
+-
+ 操作===testcase 结构分解
+ element_info： 意思element的路径或者id等信息 与find_type方式对应
+ find_type： 意思查找element的方式，如id,ids,xpath等
+ operate_type： 对element的操作类型 如 click，send_keys 等
+ info： 此元素的基本信息 比如 登录按钮， 输入密码框等
+ check_time： 查找元素的最长等待时间
+ msg:     这里填写 send_keys要输入的value
+ index: 3 配合find_type使用 当find_type 为复数是 填写位置 如配合find_type为ids时
+ is_time: 5 如果有值 那么操作完此element后会等待 N 秒
+
+ case信息：
+ 字段 testinfo
+'id': 'test001' 用例id
+'title': '登录失败'  用例名称
+'launch': 1 *******************
+'info': '打开testerhome'   ---case 信息
+'msg':  记录用例的信息 比如错误的信息
+
+检查信息
+字段：check
+element_info： 意思element的路径或者id等信息 与find_type方式对应
+find_type: xpath  意思查找element的方式，如id,ids,xpath等
+operate_type: get_text  对element的操作类型 如 click，send_keys 等
+check: compare       检查的方法 contrary default_check compare contrary_getval
+info: 详情页的标题和历史标题相等   检查的信息或者叫检查点的名字
