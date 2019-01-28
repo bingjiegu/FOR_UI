@@ -80,6 +80,12 @@ class PagesObjects:
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
+                # 检查当前页面的URL与预期的地址相等
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.GET_CURRENT_URL and op_re['url'] != ElementParam.HOST + i.get('url', 'ooo'):
+                    msg = get_error_info({'type': ElementParam.URL_INEQUALITY_ERROR, 'info': i['info'], 'get_url': op_re['url'], 'expect_url': ElementParam.HOST + i.get('url', 'ooo')})
+                    self.testInfo[0]['msg'] = msg
+                    result = False
+                    break
         else:
             result = False
         return result
