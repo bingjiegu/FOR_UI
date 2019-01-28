@@ -58,7 +58,7 @@ class PagesObjects:
                 op_re = self.operateElement.operate(i, self.testInfo, self.logTest)
                 # 默认检查点，检查元素存在
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.DEFAULT_CHECK and not op_re['result']:
-                    msg = get_error_info({"type": ElementParam.DEFAULT_CHECK, "element_info": i['element_info'], "info": i['info']})
+                    msg = get_error_info({"type": ElementParam.DEFAULT_ERROR, "element_info": i['element_info'], "info": i['info']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     return result
@@ -81,7 +81,7 @@ class PagesObjects:
                     result = False
                     break
                 # 检查当前页面的URL与预期的地址相等
-                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.GET_CURRENT_URL and op_re['url'] != ElementParam.HOST + i.get('url', 'ooo'):
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.URL_INEQUALITY_ERROR and op_re['url'] != ElementParam.HOST + i.get('url', 'ooo'):
                     msg = get_error_info({'type': ElementParam.URL_INEQUALITY_ERROR, 'info': i['info'], 'get_url': op_re['url'], 'expect_url': ElementParam.HOST + i.get('url', 'ooo')})
                     self.testInfo[0]['msg'] = msg
                     result = False
