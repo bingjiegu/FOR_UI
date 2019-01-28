@@ -48,7 +48,6 @@ class OperateElement():
         res = self.findElement(operate)
         print(res)
         if res["result"]:
-
             return self.operate_by(operate, testInfo, logTest)
         else:
             return res
@@ -67,7 +66,8 @@ class OperateElement():
                 ep.ACTION_CHAINS: lambda: self.action_chains(operate),
                 ep.MOVE_BY_OFFSET: lambda: self.move_mouse(operate),
                 ep.GET_TEXT: lambda: self.get_text(operate),
-                ep.GET_VALUE: lambda: self.get_value(operate)
+                ep.GET_VALUE: lambda: self.get_value(operate),
+                ep.GET_CURRENT_URL: lambda: self.get_current_url(operate)
             }
             return elements[operate['operate_type']]()
 
@@ -96,11 +96,17 @@ class OperateElement():
             )
             return {"result": False}
         except Exception as msg:
+            print(msg)
             logTest.buildStartLine(
-                testInfo[0]['id'] + '__' + testInfo[0]["title"] + "__" + operate[
-                     "element_info"] +"__" + '没定位的错误' + msg
+                testInfo[0]['id'] + '__' + testInfo[0]["title"] + "__" +
+                operate["element_info"] +"__" + '没定位的错误' + msg
             )
             return {'result': False}
+
+    # 获取当前的URL
+    def get_current_url(self, operate):
+        url = self.driver.current_url
+        return {'result': True, 'url': url}
 
     # 移动鼠标到某个像素
     def move_mouse(self, operate):

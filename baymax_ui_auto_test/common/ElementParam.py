@@ -18,6 +18,7 @@ class ElementParam(object):
     GET_TEXT = 'get_text'
     GET_VALUE = 'get_value'
     MOVE_BY_OFFSET = 'move_by_offset'  # 移动鼠标到某个像素
+    GET_CURRENT_URL = 'get_current_url'
 
 
     # 错误日志
@@ -27,15 +28,16 @@ class ElementParam(object):
     INDEX_ERROR = "index_error"
     STALE_ELEMENT_REFERENCE_EXCEPTION = "StaleElementReferenceException"
     DEFAULT_ERROR = "default_error"
+    URL_INEQUALITY_ERROR = "url_inequality_error"  # URL不相等错误
 
 
     # 检查点
     CONTRARY = "contrary" # 相反检查点，表示如果检查元素存在就说明失败，如删除后，此元素依然存在
     CONTRARY_GETVAL = "contrary_getval" # 检查点关键字contrary_getval: 相反值检查点，如果对比成功，说明失败
-    DEFAULT_CHECK = "default_check" # 默认检查点，就是查找页面元素
+    DEFAULT_CHECK = "default_check" # 默认检查点，查找页面元素是否存在
     COMPARE = "compare" # 历史数据和实际数据对比
 
-     # 文件名字
+    # 文件名字
     INFO_FILE = "info.pickle"
     SUM_FILE = "sum.pickle"
     REPORT_FILE = "Report.xlsx"
@@ -43,6 +45,8 @@ class ElementParam(object):
 
 
     URL = 'http://192.168.1.189:8515/#/login'
+
+    HOST = 'http://192.168.1.189:8515'
     #脚本版本
     VERSION = '2019-01-22'
 
