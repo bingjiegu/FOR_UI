@@ -19,6 +19,8 @@ class ElementParam(object):
     GET_VALUE = 'get_value'
     MOVE_BY_OFFSET = 'move_by_offset'  # 移动鼠标到某个像素
     GET_CURRENT_URL = 'get_current_url'
+    GET_ATTR = 'get_attr'
+    IS_DISPLAYED = "is_displayed"  # 检查元素是否显示
 
 
     # 错误日志
@@ -32,10 +34,14 @@ class ElementParam(object):
 
 
     # 检查点
-    CONTRARY = "contrary" # 相反检查点，表示如果检查元素存在就说明失败，如删除后，此元素依然存在
-    CONTRARY_GETVAL = "contrary_getval" # 检查点关键字contrary_getval: 相反值检查点，如果对比成功，说明失败
-    DEFAULT_CHECK = "default_check" # 默认检查点，查找页面元素是否存在
-    COMPARE = "compare" # 历史数据和实际数据对比
+    CONTRARY = "contrary"  # 相反检查点，表示如果检查元素存在就说明失败，如删除后，此元素依然存在
+    CONTRARY_GETVAL = "contrary_getval"  # 检查点关键字contrary_getval: 相反值检查点，如果对比成功，说明失败
+    DEFAULT_CHECK = "default_check"  # 默认检查点，查找页面元素是否存在
+    COMPARE = "compare"  # 历史数据和实际数据对比
+    ATTR_NOT_CONTAIN = "attr_not_contain"  # 属性值不包含某值
+    ATTR_CONTAIN = "attr_contain"  # 属性值包含某值
+    DISPLAYED = "displayed"  # 检查元素显示
+    NOT_DISPLAYED = "not_displayed"  # 检查元素显示
 
     # 文件名字
     INFO_FILE = "info.pickle"
@@ -48,6 +54,6 @@ class ElementParam(object):
 
     HOST = 'http://192.168.1.189:8515'
     #脚本版本
-    VERSION = '2019-01-22'
+    VERSION = '2019-01-31'
 
 

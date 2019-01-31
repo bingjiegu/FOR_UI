@@ -67,7 +67,9 @@ class OperateElement():
                 ep.MOVE_BY_OFFSET: lambda: self.move_mouse(operate),
                 ep.GET_TEXT: lambda: self.get_text(operate),
                 ep.GET_VALUE: lambda: self.get_value(operate),
-                ep.GET_CURRENT_URL: lambda: self.get_current_url(operate)
+                ep.GET_CURRENT_URL: lambda: self.get_current_url(operate),
+                ep.GET_ATTR: lambda: self.get_attr(operate),
+                ep.IS_DISPLAYED: lambda: self.displayed(operate)
             }
             return elements[operate['operate_type']]()
 
@@ -97,11 +99,23 @@ class OperateElement():
             return {"result": False}
         except Exception as msg:
             print(msg)
+            msg = str(msg)
             logTest.buildStartLine(
                 testInfo[0]['id'] + '__' + testInfo[0]["title"] + "__" +
                 operate["element_info"] +"__" + '没定位的错误' + msg
             )
             return {'result': False}
+
+    # 检查元素是否显示
+    def displayed(self, operate):
+        if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
+            operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
+            result = self.element_by(operate).is_displayed()
+            return {'result': result}
+        elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
+            operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
+            result = self.element_by(operate)[operate['index']].is_displayed()
+            return {'result': result}
 
     # 获取当前的URL
     def get_current_url(self, operate):
@@ -154,12 +168,12 @@ class OperateElement():
             operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
             re_value = re.findall(r'[a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate).get_attribute('value'))
             value = ''.join(re_value)
-            return {'result': True, 'value': value}
+            return {'result': True, 'text': value}
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
             re_value = re.findall(r'[a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate)[operate['index']].get_attribute('value'))
             value = ''.join(re_value)
-            return {'result': True, 'value': value}
+            return {'result': True, 'text': value}
 
 
     def get_text(self, operate):
@@ -172,6 +186,16 @@ class OperateElement():
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
             re_reulst = re.findall(r'[a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate)[operate['index']].get_attribute('text'))
             text = ''.join(re_reulst)
+            return {'result': True, 'text': text}
+
+    def get_attr(self, operate):
+        if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
+            operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
+            text = self.element_by(operate).get_attribute(operate['attr'])
+            return {'result': True, 'text': text}
+        elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
+            operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
+            text =  self.element_by(operate)[operate['index']].get_attribute(operate['attr'])
             return {'result': True, 'text': text}
 
     # 查找元素的封装

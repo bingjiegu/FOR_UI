@@ -1,0 +1,45 @@
+testinfo:
+- id: test018
+  title: 校验“闭合资源目录的文件夹”页面
+  launch: 1
+  info: 先进入资源目录
+testcase:
+- element_info: //*[@name="数据标准"]/preceding-sibling::i[1]
+  find_type: xpath
+  operate_type: get_attr
+  attr: class
+  info: 获取点击‘数据标准’文件夹图标之前 的class属性值
+- element_info: //*[@name="数据标准"]/preceding-sibling::i[1]
+  find_type: xpath
+  operate_type: click
+  info: 点击‘数据标准’文件夹图标
+- element_info: //*[@name="数据标准"]/preceding-sibling::i[1]
+  find_type: xpath
+  operate_type: get_attr
+  attr: class
+  info: 获取点击‘数据标准’文件夹图标之前 的class属性值
+check:
+- check: attr_contain
+  attr_value: fa-folder-open
+  attr_index: 0
+  info: 断言 点击文件夹按钮之前 元素的属性值class包含fa-folder-open
+- check: attr_not_contain
+  attr_value: fa-folder-open
+  attr_index: 1
+  info: 断言 点击文件夹按钮后 元素的属性值class不包含fa-folder-open
+- check: attr_contain
+  attr_value: close
+  attr_index: 1
+  info: 断言 点击文件夹按钮后 元素的属性值class包含close
+- element_info: a
+  find_type: name
+  operate_type: is_displayed
+  check: not_displayed
+  check_time: 0.1
+  info: 断言“文件夹a”不是可见的
+- element_info: b
+  find_type: name
+  operate_type: is_displayed
+  check: not_displayed
+  check_time: 0.1
+  info: 断言“文件夹b”不是可见的

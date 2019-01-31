@@ -4,6 +4,7 @@ from common.ElementParam import ElementParam
 from PageObject.CountResult import count_result
 from time import sleep
 import os
+from common.Operate_str import *
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
@@ -41,7 +42,7 @@ class PagesObjects:
                 return False
             if i.get('is_time', 0) != 0:
                 sleep(i['is_time'])
-            if i.get('operate_type', 0) == ElementParam.GET_TEXT or i.get('operate_type', 0) == ElementParam.GET_VALUE:
+            if i.get('operate_type', 0) == ElementParam.GET_TEXT or i.get('operate_type', 0) == ElementParam.GET_VALUE or i.get('operate_type', 0) == ElementParam.GET_ATTR:
                 self.get_value.append(result['text'])
                 self.is_get = True
         return True
@@ -58,31 +59,58 @@ class PagesObjects:
                 op_re = self.operateElement.operate(i, self.testInfo, self.logTest)
                 # 默认检查点，检查元素存在
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.DEFAULT_CHECK and not op_re['result']:
-                    msg = get_error_info({"type": ElementParam.DEFAULT_ERROR, "element_info": i['element_info'], "info": i['info']})
+                    msg = get_error_info({"type": ElementParam.DEFAULT_CHECK, "element_info": i['element_info'], "info": i['info']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     return result
                 # 检查 元素不存在
-                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.CONTRARY and op_re[result]:
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.CONTRARY and op_re['result']:
                     msg = get_error_info({'type': ElementParam.CONTRARY, 'element': i['element_info'], 'info': i['info']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
                 # 检查前面页面的值 与后面页面某值相等
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.COMPARE and self.is_get and op_re['text'] not in self.get_value:
-                    msg = get_error_info({'type': ElementParam.COMPARE, 'element_info': i['element_info'], 'info': i['info'], 'history': op_re['text']})
+                    msg = get_error_info({'type': ElementParam.COMPARE, 'history': self.get_value, 'info': i['info'], 'current': op_re['text']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
-                 # 检查前面页面的值 与后面页面某值相等
+                 # 检查前面页面的值 与后面页面某值不相等
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.CONTRARY_GETVAL and self.is_get and op_re['text'] in self.get_value:
-                    msg = get_error_info({'type': ElementParam.CONTRARY_GETVAL, 'element_info': i['element_info'], 'info': i['info'], 'history': op_re['text']})
+                    msg = get_error_info({'type': ElementParam.CONTRARY_GETVAL, 'history': self.get_value, 'info': i['info'], 'current': op_re['text']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
                 # 检查当前页面的URL与预期的地址相等
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.URL_INEQUALITY_ERROR and op_re['url'] != ElementParam.HOST + i.get('url', 'ooo'):
                     msg = get_error_info({'type': ElementParam.URL_INEQUALITY_ERROR, 'info': i['info'], 'get_url': op_re['url'], 'expect_url': ElementParam.HOST + i.get('url', 'ooo')})
+                    self.testInfo[0]['msg'] = msg
+                    result = False
+                    break
+                # 检查前面页面是属性值不包含预期的属性值 如果包含就返回False
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.ATTR_NOT_CONTAIN and self.is_get \
+                        and contain_str(i['attr_value'], self.get_value, i.get('attr_index', 0)):
+                    msg = get_error_info({'type': ElementParam.ATTR_NOT_CONTAIN, 'history': self.get_value, 'info': i['info'], 'current': i['attr_value']})
+                    self.testInfo[0]['msg'] = msg
+                    result = False
+                    break
+                # 检查前面页面获取的属性值 包含预期的属性值  如果不包含就返回False
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.ATTR_CONTAIN and self.is_get \
+                        and contain_not_str(i['attr_value'], self.get_value, i.get('attr_index', 0)):
+                    msg = get_error_info({'type': ElementParam.ATTR_CONTAIN, 'history': self.get_value, 'info': i['info'], 'current': i['attr_value']})
+                    self.testInfo[0]['msg'] = msg
+                    result = False
+                    break
+                # 检查页面元素显示  如果 不显示就返回False
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.DISPLAYED and not op_re['result']:
+                    msg = get_error_info({'type': ElementParam.DISPLAYED, 'info': i['info'], 'element': i['element_info']})
+                    self.testInfo[0]['msg'] = msg
+                    result = False
+                    break
+
+                # 检查页面元素不显示  如果 显示就返回False
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.NOT_DISPLAYED and op_re['result']:
+                    msg = get_error_info({'type': ElementParam.NOT_DISPLAYED, 'info': i['info'], 'element': i['element_info']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break

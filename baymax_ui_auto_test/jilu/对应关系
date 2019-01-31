@@ -16,11 +16,30 @@
 'launch': 1 *******************
 'info': '打开testerhome'   ---case 信息
 'msg':  记录用例的信息 比如错误的信息
-
+operate_type: # 操作类型
+   - get_attr:  获取属性操作
+   - get_text: 获取text
+   - get_value:  获取value 操作
+   - click:  点击操作
+   - is_displayed:   检查元素是否显示
+attr:  配合 operate_type的get_attr使用 获取属性的属性字段 如name， class
+attr_index: 配合 operate_type的get_attr  设置存放属性值的位置
 检查信息
 字段：check
 element_info： 意思element的路径或者id等信息 与find_type方式对应
 find_type: xpath  意思查找element的方式，如id,ids,xpath等
 operate_type: get_text  对element的操作类型 如 click，send_keys 等
 check: compare       检查的方法 contrary default_check compare contrary_getval
+   - url_inequality_error:  检查当前URL是否符合预期
+   - default_check: 检查  断言元素存在
+   - contrary:   检查  断言元素不存在
+   - compare: 检查 断言前面页面的值 与后面页面某值相等       ---针对 get_text和get_value方法
+   - contrary_getval: 检查 断言前面页面的值 与后面页面某值不相等       ---针对 get_text和get_value方法
+   - attr_not_contain: 检查 断言前面获取属性值 不包含预期的属性值
+   - attr_contain: 检查 断言前面获取属性值 包含预期的属性值
+   - displayed:  检查元素显示
+   - not_displayed: 检查元素显示
+
+attr_value: 此字段配合 check里的attr_not_contain，attr_contain使用 填入预期的属性值
 info: 详情页的标题和历史标题相等   检查的信息或者叫检查点的名字
+
