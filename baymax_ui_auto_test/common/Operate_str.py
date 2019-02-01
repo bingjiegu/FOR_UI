@@ -1,4 +1,4 @@
-
+import random
 
 def contain_str(current='', history=[], att_index=0):
     try:
@@ -24,10 +24,13 @@ def contain_not_str(current='', history=[], attr_index=0):
         print('++++++++++++索引错误++++++++++++++++++')
         return True
 
+def random_str(value='+随机数'):
+    L = []
+    for i in range(6):
+         rand_num = random.randint(0, 9)
+         L.append(str(rand_num))
+    return value[:-4]+''.join(L)
 
 if __name__ == "__main__":
-    a = ['bbbaaaddd', True]
-    b = 'True'
-    c = 'sdfsd'
-    print(contain_str(b, a))
-    print(contain_not_str(c, a, '2'))
+    a = 'aa+随机数'
+    print(random_str(a))

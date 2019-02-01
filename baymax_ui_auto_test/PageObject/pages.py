@@ -34,6 +34,13 @@ class PagesObjects:
             return False
         self.operateElement = OperateElement(self.driver)
         for i in self.testcase:
+            # 生成随机的send_keys的值
+            print('11111111111111111111111::::::', str(i.get('msg', 'aaaaaaa'))[:-4])
+            if str(i.get('msg', 'aaaaaaa'))[-4:] == '+随机数':
+                print('222222222222222222222222::::::::', random_str(i['msg']))
+                i['msg'] = random_str(i['msg'])
+                print('333333333333333333333::::::',  i['msg'])
+                self.get_value.append(i['msg'])
             result = self.operateElement.operate(i, self.testInfo, self.logTest)
             if not result['result']:
                 msg = get_error_info({'type': ElementParam.DEFAULT_ERROR, 'element_info': i['element_info']})
@@ -56,6 +63,8 @@ class PagesObjects:
         result = True
         if self.isOperate:
             for i in self.testcheck:
+                if i.get('element_info', 'aaaaaa')[-4:] == '+随机数':
+                    i['element_info'] = self.get_value[int(i['index'])]
                 op_re = self.operateElement.operate(i, self.testInfo, self.logTest)
                 # 默认检查点，检查元素存在
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.DEFAULT_CHECK and not op_re['result']:

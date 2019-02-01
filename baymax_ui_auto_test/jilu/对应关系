@@ -24,6 +24,9 @@ operate_type: # 操作类型
    - is_displayed:   检查元素是否显示
 attr:  配合 operate_type的get_attr使用 获取属性的属性字段 如name， class
 attr_index: 配合 operate_type的get_attr  设置存放属性值的位置
+is_time: 1 执行完之后等待时间
+
+
 检查信息
 字段：check
 element_info： 意思element的路径或者id等信息 与find_type方式对应

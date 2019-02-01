@@ -39,6 +39,14 @@ class OperateDirTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
+    # 校验“闭合数据标准文件夹”
+    def test_a019_create_dir(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/新建文件夹.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
     @classmethod
     def setUpClass(cls):
         super(OperateDirTest, cls).setUpClass()
