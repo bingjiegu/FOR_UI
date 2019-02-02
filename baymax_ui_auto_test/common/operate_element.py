@@ -33,7 +33,8 @@ class OperateElement():
                 print('找到了element：', operate['info'])
                 print(el)
                 return {'result': True}
-        except selenium.common.exceptions.TimeoutException:
+        except selenium.common.exceptions.TimeoutException as msg:
+            print('TimeoutException:===========', msg)
             return {'result': False, 'type': ep.TIME_OUT}
         except selenium.common.exceptions.NoSuchElementException:
             return {'result': False, 'type': ep.NO_SUCH}
@@ -111,10 +112,12 @@ class OperateElement():
         if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
             operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
             result = self.element_by(operate).is_displayed()
+            print('检查元素是否显示++++++++++++++++++++++++++++', result)
             return {'result': result}
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
             result = self.element_by(operate)[operate['index']].is_displayed()
+            print('检查元素是否显示++++++++++++++++++++++++++++', result)
             return {'result': result}
 
     # 获取当前的URL
@@ -179,12 +182,12 @@ class OperateElement():
     def get_text(self, operate):
         if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
             operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
-            re_reulst = re.findall(r'[a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate).get_attribute('text'))
+            re_reulst = re.findall(r'[-_a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate).text)
             text = ''.join(re_reulst)
             return {'result': True, 'text': text}
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
-            re_reulst = re.findall(r'[a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate)[operate['index']].get_attribute('text'))
+            re_reulst = re.findall(r'[-_a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate)[operate['index']].text)
             text = ''.join(re_reulst)
             return {'result': True, 'text': text}
 

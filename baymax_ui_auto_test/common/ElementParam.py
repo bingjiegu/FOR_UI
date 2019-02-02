@@ -41,7 +41,7 @@ class ElementParam(object):
     ATTR_NOT_CONTAIN = "attr_not_contain"  # 属性值不包含某值
     ATTR_CONTAIN = "attr_contain"  # 属性值包含某值
     DISPLAYED = "displayed"  # 检查元素显示
-    NOT_DISPLAYED = "not_displayed"  # 检查元素显示
+    NOT_DISPLAYED = "not_displayed"  # 检查元素不显示
 
     # 文件名字
     INFO_FILE = "info.pickle"

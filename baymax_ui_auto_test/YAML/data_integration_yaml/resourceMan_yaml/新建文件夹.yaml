@@ -28,7 +28,7 @@ testcase:
   operate_type: click
   info: 点击‘确定’按钮
 check:
-- element_info: +随机数
-  index: 0
+- element_info: dir+随机数
+  v_index: 0
   find_type: name
-  info: 断言“文件夹b”存在
+  info: 断言“dir+随机数”文件夹存在

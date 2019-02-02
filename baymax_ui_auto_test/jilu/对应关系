@@ -13,7 +13,7 @@
  字段 testinfo
 'id': 'test001' 用例id
 'title': '登录失败'  用例名称
-'launch': 1 *******************
+'launch': 1  # 是否刷新当前页面 刷新为0 不刷新填非零
 'info': '打开testerhome'   ---case 信息
 'msg':  记录用例的信息 比如错误的信息
 operate_type: # 操作类型
@@ -22,8 +22,10 @@ operate_type: # 操作类型
    - get_value:  获取value 操作
    - click:  点击操作
    - is_displayed:   检查元素是否显示
+   - send_keys: 输入操作  如果输入的操作 以‘+随机数’结尾 那么默认会加6位随机数字 例如 dir+随机数  处理后的内容为 dir654321
+        - 如果为随机数：程序会把处理后的内容 存放到get_value容器中 以备后面check调用
 attr:  配合 operate_type的get_attr使用 获取属性的属性字段 如name， class
-attr_index: 配合 operate_type的get_attr  设置存放属性值的位置
+
 is_time: 1 执行完之后等待时间
 
 
@@ -32,6 +34,7 @@ is_time: 1 执行完之后等待时间
 element_info： 意思element的路径或者id等信息 与find_type方式对应
 find_type: xpath  意思查找element的方式，如id,ids,xpath等
 operate_type: get_text  对element的操作类型 如 click，send_keys 等
+              ####：operate_type： 如果填入的值 以‘+随机数’结尾， 会从 get_value容器取值  配合 index：使用
 check: compare       检查的方法 contrary default_check compare contrary_getval
    - url_inequality_error:  检查当前URL是否符合预期
    - default_check: 检查  断言元素存在
@@ -42,7 +45,8 @@ check: compare       检查的方法 contrary default_check compare contrary_get
    - attr_contain: 检查 断言前面获取属性值 包含预期的属性值
    - displayed:  检查元素显示
    - not_displayed: 检查元素显示
-
+attr_index: 配合 operate_type的get_attr  设置存放属性值的位置
 attr_value: 此字段配合 check里的attr_not_contain，attr_contain使用 填入预期的属性值
 info: 详情页的标题和历史标题相等   检查的信息或者叫检查点的名字
+v_index: get_value容器中的位置
 
