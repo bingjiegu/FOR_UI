@@ -46,24 +46,13 @@ def send_mail(**kwargs):
 
 
 def send():
-    to_addr = ['9262623@qq.com']
-    mail_host = "smtp.exmail.qq.com"
-    mail_user = "anchong.wang@inforefiner.com"
-    mail_pass = "WAC4kgarden"
+    to_addr = ['bingjie.gu@inforefiner.com', 'zhiming.wang@inforefiner.com', 'yuan.peng@inforefiner.com', "anchong.wang@inforefiner.com"]
+    mail_host = "smtp.163.com"
+    mail_user = "ruifan_test@163.com"
+    mail_pass = "ruifantest2018"
     port = "465"
     header_msg = "Baymax_ui_自动化测试报告"
     attach = "Dear all:\n   附件中是本次Baymax_UI自动化执行的详细报告，有问题请随时联系！"
     report = PATH("../Report/Report.xlsx")
     send_mail(to_addr=to_addr, mail_host=mail_host, mail_user=mail_user, port=port, mail_pass=mail_pass, header_msg=header_msg, report=report, attach=attach, report_name="ui测试报告.xlsx")
 
-if __name__ == '__main__':
-    to_addr = ['bingjie.gu@inforefiner.com', 'zhiming.wang@inforefiner.com', 'yuan.peng@inforefiner.com', "anchong.wang@inforefiner.com"]
-    # to_addr = ['9262623@qq.com']
-    mail_host = "smtp.exmail.qq.com"
-    mail_user = "anchong.wang@inforefiner.com"
-    mail_pass = "WAC4kgarden"
-    port = "465"
-    header_msg = "Baymax_ui_自动化测试报告"
-    attach = "Dear all:\n   附件中是本次Baymax_UI自动化执行的详细报告，有问题请随时联系！"
-    report = PATH("../Report/Report.xlsx")
-    send_mail(to_addr=to_addr, mail_host=mail_host, mail_user=mail_user, port=port, mail_pass=mail_pass, header_msg=header_msg, report=report, attach=attach, report_name="ui测试报告.xlsx")
