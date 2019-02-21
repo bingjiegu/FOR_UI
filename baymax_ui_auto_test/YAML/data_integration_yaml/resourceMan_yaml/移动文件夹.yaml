@@ -46,11 +46,11 @@ testcase:
   find_type: xpath
   operate_type: click
   info: 点击‘移动目录’按钮
-- element_info: /html/body/div/div/div/div[2]/section/div/div/section/div[1]/div[2]/div/div[2]/form/form/div/ul/li/ul/li/i
+- element_info: //*[@id="dataTree"]//*[@name="数据标准"]/preceding-sibling::i[1]
   find_type: xpath
   operate_type: click
   info: 点击弹框中‘数据标准’前的文件夹
-- element_info: /html/body/div/div/div/div[2]/section/div/div/section/div[1]/div[2]/div/div[2]/form/form/div/ul/li/ul/li/ul/li[4]/em
+- element_info: //*[@id="dataTree"]//*[@name="box2019"]
   find_type: xpath
   operate_type: click
   info: 点击文件夹box2019

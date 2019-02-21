@@ -4,11 +4,15 @@ testinfo:
   launch: 0
   info: 先进入资源目录
 testcase:
-- element_info: 数据源
-  find_type: name
+- element_info: //*[@name="数据源"]/preceding-sibling::i[1]
+  find_type: xpath
   operate_type: click
-  info: 点击‘数据源'的文字
-  is_time: 0.8
+  info: 点击‘数据源'文件夹图标
+- element_info: //em[@name="auto_DataSource"]
+  find_type: xpath
+  operate_type: click
+  info: 点击‘auto_DataSource'的文字
+  is_time: 1
 - element_info: //tr//*[contains(text(), "JDBC")]
   find_type: xpaths
   index: -1

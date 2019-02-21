@@ -16,6 +16,7 @@ testcase:
   find_type: id
   operate_type: click
   info: 点击‘新建’按钮
+  is_time: 0.8
 - element_info: bm-ch-resMan-resourceman-schema-dropdown-menu
   find_type: id
   operate_type: click

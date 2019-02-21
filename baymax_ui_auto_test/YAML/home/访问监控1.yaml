@@ -26,9 +26,9 @@ check:
 - element_info: //*[text()='请求成功数']
   find_type: xpath
   info: 检查“请求成功数”组件是否存在
-- element_info: //*[text()='请求URL TOP100']
+- element_info: //*[text()='请求量前100']
   find_type: xpath
-  info: 检查“请求URL TOP100”组件是否存在
-- element_info: //*[text()='URL 请求时间TOP100']
+  info: 检查“请求量前100”组件是否存在
+- element_info: //*[text()='请求耗时前100']
   find_type: xpath
-  info: 检查“URL 请求时间TOP100”组件是否存在
+  info: 检查“请求耗时前100”组件是否存在

@@ -19,16 +19,16 @@ check:
 - element_info: //*[text()="创建"]
   find_type: xpath
   info: 检查“创建按钮是否存在”
-- element_info: //*[contains(text(),'采集器')]
+- element_info: //button/*[contains(text(),'采集器')]
   find_type: xpath
   info: 检查“采集器按钮是否存在”
 - operate_type: get_current_url
   check: url_inequality_error
   url: /#/collector/collectorTemplate
   info: 检查"采集器的URL"是否正确
-- element_info: //*[contains(text(),'ID')]
+- element_info: //*[contains(text(),'主键')]
   find_type: xpath
-  info: 检查“列表字段ID”是否存在
-- element_info: //*[contains(text(),'Hostname')]
+  info: 检查“列表字段 主键”是否存在
+- element_info: //*[contains(text(),'主机地址')]
   find_type: xpath
-  info: 检查“列表字段Hostname”是否存在
+  info: 检查“列表字段 主机地址”是否存在

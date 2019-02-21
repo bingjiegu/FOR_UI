@@ -4,10 +4,18 @@ testinfo:
   launch: 1
   info: 先进入资源目录
 testcase:
+- element_info: //*[@name="数据标准"]/preceding-sibling::i[1]
+  find_type: xpath
+  operate_type: click
+  info: 点击‘数据标准’前的文件夹，展开文件夹
 - element_info: 数据标准
   find_type: name
   operate_type: click
-  info: 点击‘数据标准’文字
+  info: 点击‘数据标准’文字，选中‘数据标准’
+- element_info: //em[@name="auto_dir"]
+  find_type: xpath
+  operate_type: click
+  info: 点击树‘auto_dir’文字，选中‘auto_dir’
 - element_info: //button/span[contains(text(), '目录')]
   find_type: xpath
   operate_type: click
