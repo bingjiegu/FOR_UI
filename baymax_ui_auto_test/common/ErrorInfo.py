@@ -13,6 +13,9 @@ def get_error_info(kw):
         ElementParam.DISPLAYED: lambda: "==检查点____info:_%s___element:__%s__没有在页面显示" % (kw["info"], kw["element"]),
         ElementParam.NOT_DISPLAYED: lambda: "==检查点____info:_%s___element:__%s__在页面显示了" % (kw["info"], kw["element"]),
         ElementParam.URL_INEQUALITY_ERROR: lambda : '预期的URL: %s 不等于获取的URL: %s'% (kw['expect_url'], kw['get_url']),
+        ElementParam.URL_CONTAIN: lambda: '预期的URL: %s 不被获取的URL包含: %s'% (kw['expect_url'], kw['get_url']),
         ElementParam.DEFAULT_ERROR: lambda: '请检查%s是否存在' % kw['element_info'],
+        ElementParam.EXPECT_VALUE_EQUAL: lambda: '==检查点____info: %s___ 预期的属性值: %s 不等于获取的属性值: %s'% (kw["info"], kw['expect_value'], kw['get_attr']),
+        ElementParam.IS_DOWNLOAD: lambda: '==检查点____info: %s___ 文件没有下载' % kw["info"],
     }
     return elements[kw['type']]()

@@ -1,0 +1,39 @@
+testinfo:
+- id: test033
+  title: 校验“数据集-预览Dataset”页面
+  launch: 0
+  info: 先进入资源目录
+testcase:
+- element_info: //*[@name="数据集"]/preceding-sibling::i[1]
+  find_type: xpath
+  operate_type: click
+  info: 点击‘数据集'文件夹图标
+- element_info: auto_dataset
+  find_type: name
+  operate_type: click
+  info: 点击‘auto_dataset'的文字
+  is_time: 1
+- element_info: //div[@id="bm-ch-resourceMan-table"]/div[4]//*[contains(text(), "预览")]
+  find_type: xpaths
+  index: -1
+  operate_type: click
+  info: 点击列表中最后一条'DBdataset'的 预览按钮
+check:
+- element_info: //*[contains(text(), "数据集预览")]
+  find_type: xpath
+  check: displayed
+  info: 断言“数据集预览”元素显示存在
+- element_info: //*[contains(text(), "刷新")]
+  find_type: xpath
+  check: displayed
+  info: 断言“刷新”按钮元素显示存在
+- element_info: //*[contains(text(), "刷新")]/ancestor::button/following-sibling::button[1]/span[text()="确定"]
+  find_type: xpath
+  check: displayed
+  info: 断言“确定”按钮元素显示存在
+- element_info: //*[contains(text(), "刷新")]/ancestor::button/following-sibling::button[2]/span[text()="取消"]
+  find_type: xpath
+  check: displayed
+  info: 断言“取消”按钮元素显示存在
+
+

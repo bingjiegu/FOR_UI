@@ -5,6 +5,8 @@ from PageObject.CountResult import count_result
 from time import sleep
 import os
 from common.Operate_str import *
+import time
+from common.OperateFile import new_download_file_mtime
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
@@ -44,6 +46,11 @@ class PagesObjects:
                     i['element_info'] = self.get_value[int(i['v_index'])]
                 if i['find_type'] == 'xpath':
                     i['element_info'] = i['element_info'][: -4] % self.get_value[int(i['v_index'])]
+            if i.get('element_info', 'aaaaaa')[-3:] == '+拼接':
+                if i['find_type'] == 'name':
+                    i['element_info'] = self.get_value[int(i['v_index'])] + i['join_value']
+                if i['find_type'] == 'xpath':
+                    i['element_info'] = i['element_info'][: -3] % (self.get_value[int(i['v_index'])] + i['join_value'])
 
             result = self.operateElement.operate(i, self.testInfo, self.logTest)
             if not result['result']:
@@ -72,6 +79,11 @@ class PagesObjects:
                         i['element_info'] = self.get_value[int(i['v_index'])]
                     if i['find_type'] == 'xpath':
                         i['element_info'] = i['element_info'][: -4] % self.get_value[int(i['v_index'])]
+                if i.get('element_info', 'aaaaaa')[-3:] == '+拼接':
+                    if i['find_type'] == 'name':
+                        i['element_info'] = self.get_value[int(i['v_index'])] + i['join_value']
+                    if i['find_type'] == 'xpath':
+                        i['element_info'] = i['element_info'][: -3] % (self.get_value[int(i['v_index'])] + i['join_value'])
                 op_re = self.operateElement.operate(i, self.testInfo, self.logTest)
                 # 默认检查点，检查元素存在
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.DEFAULT_CHECK and not op_re['result']:
@@ -86,13 +98,13 @@ class PagesObjects:
                     result = False
                     break
                 # 检查前面页面的值 与后面页面某值相等
-                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.COMPARE and self.is_get and op_re['text'] not in self.get_value:
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.COMPARE and self.is_get and op_re['text'] not in self.get_value[i['attr_index']]:
                     msg = get_error_info({'type': ElementParam.COMPARE, 'history': self.get_value, 'info': i['info'], 'current': op_re['text']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
                  # 检查前面页面的值 与后面页面某值不相等
-                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.CONTRARY_GETVAL and self.is_get and op_re['text'] in self.get_value:
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.CONTRARY_GETVAL and self.is_get and op_re['text'] in self.get_value[i['attr_index']]:
                     msg = get_error_info({'type': ElementParam.CONTRARY_GETVAL, 'history': self.get_value, 'info': i['info'], 'current': op_re['text']})
                     self.testInfo[0]['msg'] = msg
                     result = False
@@ -100,6 +112,18 @@ class PagesObjects:
                 # 检查当前页面的URL与预期的地址相等
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.URL_INEQUALITY_ERROR and op_re['url'] != ElementParam.HOST + i.get('url', 'ooo'):
                     msg = get_error_info({'type': ElementParam.URL_INEQUALITY_ERROR, 'info': i['info'], 'get_url': op_re['url'], 'expect_url': ElementParam.HOST + i.get('url', 'ooo')})
+                    self.testInfo[0]['msg'] = msg
+                    result = False
+                    break
+                # 检查当前页面的URL是否包含预期的url
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.URL_CONTAIN and (ElementParam.HOST + i.get('url', 'ooo')) not in op_re['url']:
+                    msg = get_error_info({'type': ElementParam.URL_CONTAIN, 'info': i['info'], 'get_url': op_re['url'], 'expect_url': ElementParam.HOST + i.get('url', 'ooo')})
+                    self.testInfo[0]['msg'] = msg
+                    result = False
+                    break
+                # 检查当前页面的属性值等于预期的值 如果不相等就返回False
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.EXPECT_VALUE_EQUAL and op_re['text'] != i.get('expect_value', 'ooo'):
+                    msg = get_error_info({'type': ElementParam.EXPECT_VALUE_EQUAL, 'info': i['info'], 'get_attr': op_re['text'], 'expect_value': i.get('expect_value', 'ooo')})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
@@ -123,10 +147,15 @@ class PagesObjects:
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
-
                 # 检查页面元素不显示  如果 显示就返回False
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.NOT_DISPLAYED and op_re['result']:
                     msg = get_error_info({'type': ElementParam.NOT_DISPLAYED, 'info': i['info'], 'element': i['element_info']})
+                    self.testInfo[0]['msg'] = msg
+                    result = False
+                    break
+                # 检查有没有成功下载文件
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.IS_DOWNLOAD and (time.time() - new_download_file_mtime()) > 5:
+                    msg = get_error_info({'type': ElementParam.IS_DOWNLOAD,  'info': i['info'], 'd_timeout': i['d_timeout']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break

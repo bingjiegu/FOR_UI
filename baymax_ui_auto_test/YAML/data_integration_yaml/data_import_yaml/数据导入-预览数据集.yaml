@@ -1,0 +1,17 @@
+testinfo:
+- id: test055
+  title: 校验数据导入“打开预览数据集”
+  launch: 0
+  info: 先进入"数据导入"目录
+testcase:
+- info: “等待1秒”
+  is_time: 1
+- element_info: //*[@id="bm-ch-syschronization-table"]/div[4]//tr[1]//a[contains(text(), "预览数据集")]
+  find_type: xpath
+  operate_type: click
+  info: 在数据导入首页‘勾选’第一条任务
+check:
+- element_info: bm-ch-taskDialog-dataSet-dialog-template
+  find_type: id
+  check: displayed
+  info: 断言“预览数据集”弹框显示存在

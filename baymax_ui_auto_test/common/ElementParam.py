@@ -21,6 +21,9 @@ class ElementParam(object):
     GET_CURRENT_URL = 'get_current_url'
     GET_ATTR = 'get_attr'
     IS_DISPLAYED = "is_displayed"  # 检查元素是否显示
+    FIND_DOWN = "find_down"  # 下拉菜单中向下查找元素
+    MOVE_SCROLLBAR_BOTTOM = "move_scrollbar_bottom"  # 移动滚动条到某元素底部
+    UPLOAD_FILE = "upload_file"  # 上传文件 使用autoit可执行文件
 
 
     # 错误日志
@@ -38,10 +41,13 @@ class ElementParam(object):
     CONTRARY_GETVAL = "contrary_getval"  # 检查点关键字contrary_getval: 相反值检查点，如果对比成功，说明失败
     DEFAULT_CHECK = "default_check"  # 默认检查点，查找页面元素是否存在
     COMPARE = "compare"  # 历史数据和实际数据对比
-    ATTR_NOT_CONTAIN = "attr_not_contain"  # 属性值不包含某值
-    ATTR_CONTAIN = "attr_contain"  # 属性值包含某值
+    ATTR_NOT_CONTAIN = "attr_not_contain"  # 历史属性值不包含某值
+    ATTR_CONTAIN = "attr_contain"  # 历史属性值包含某值
     DISPLAYED = "displayed"  # 检查元素显示
     NOT_DISPLAYED = "not_displayed"  # 检查元素不显示
+    EXPECT_VALUE_EQUAL = "expect_value_equal" #当前页面的任意类型（text\value\其他属性）的属性值 是否符合预期值
+    IS_DOWNLOAD = 'is_download'  # 检查是否成下载了任务
+    URL_CONTAIN = "url_contain"  # 获取的url包含预期的url
 
     # 文件名字
     INFO_FILE = "info.pickle"
@@ -49,11 +55,10 @@ class ElementParam(object):
     REPORT_FILE = "Report.xlsx"
 
 
-
     URL = 'http://192.168.1.189:8515/#/login'
 
     HOST = 'http://192.168.1.189:8515'
     #脚本版本
-    VERSION = '2019-01-31'
+    VERSION = '2019-02-21'
 
 

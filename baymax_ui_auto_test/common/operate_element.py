@@ -4,8 +4,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
 import selenium.common.exceptions
 from selenium.webdriver.common.action_chains import ActionChains
-import time
-import re
+import time, os, re, subprocess
+from selenium.webdriver.common.keys import Keys
+
+PATH = lambda p: os.path.abspath(
+    os.path.join(os.path.dirname(__file__), p)
+)
 
 class OperateElement():
 
@@ -70,7 +74,10 @@ class OperateElement():
                 ep.GET_VALUE: lambda: self.get_value(operate),
                 ep.GET_CURRENT_URL: lambda: self.get_current_url(operate),
                 ep.GET_ATTR: lambda: self.get_attr(operate),
-                ep.IS_DISPLAYED: lambda: self.displayed(operate)
+                ep.IS_DISPLAYED: lambda: self.displayed(operate),
+                ep.FIND_DOWN: lambda: self.find_element_down(operate),
+                ep.MOVE_SCROLLBAR_BOTTOM: lambda: self.move_scrollbar_bottom(operate),
+                ep.UPLOAD_FILE: lambda: self.upload_file(operate)
             }
             return elements[operate['operate_type']]()
 
@@ -105,6 +112,21 @@ class OperateElement():
                 testInfo[0]['id'] + '__' + testInfo[0]["title"] + "__" +
                 operate["element_info"] +"__" + '没定位的错误' + msg
             )
+            return {'result': False}
+
+    # 上传文件 使用autoit可执行文件
+    def upload_file(self, operate):
+        main = PATH("../exe/上传文件.exe")
+        print(main)
+        if os.path.exists(main):
+            rc,out= subprocess.getstatusoutput(main)
+            if not rc:
+                return {'result': True}
+            else:
+                print('执行状态为:', rc,'错误msg: ', out)
+                return {'result': False}
+        else:
+            print(main, "路径不存在！！！")
             return {'result': False}
 
     # 检查元素是否显示
@@ -171,11 +193,13 @@ class OperateElement():
             operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
             re_value = re.findall(r'[a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate).get_attribute('value'))
             value = ''.join(re_value)
+            print('获取到的值为：', value)
             return {'result': True, 'text': value}
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
             re_value = re.findall(r'[a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate)[operate['index']].get_attribute('value'))
             value = ''.join(re_value)
+            print('获取到的值为：', value)
             return {'result': True, 'text': value}
 
 
@@ -184,22 +208,94 @@ class OperateElement():
             operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
             re_reulst = re.findall(r'[-_a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate).text)
             text = ''.join(re_reulst)
+            print('获取到的值为：', text)
             return {'result': True, 'text': text}
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
             re_reulst = re.findall(r'[-_a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate)[operate['index']].text)
             text = ''.join(re_reulst)
+            print('获取到的值为：', text)
             return {'result': True, 'text': text}
 
     def get_attr(self, operate):
         if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
             operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
             text = self.element_by(operate).get_attribute(operate['attr'])
+            print('获取到的值为：', text)
             return {'result': True, 'text': text}
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
             text =  self.element_by(operate)[operate['index']].get_attribute(operate['attr'])
+            print('获取到的值为：', text)
             return {'result': True, 'text': text}
+
+    # 在下拉菜单中 向下查找元素 直到元素出现
+    def find_element_down(self, operate):
+        if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
+            operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
+            start_time = time.time()
+            while True:
+                self.element_by(operate).send_keys(Keys.DOWN)
+                time.sleep(0.1)
+                if operate['find_type2'] == ep.find_element_by_id or operate['find_type2'] == ep.find_element_by_xpath or \
+            operate['find_type2'] == ep.find_element_by_name or operate['find_type2'] == ep.find_element_by_class_name:
+                    result = self.element_by2(operate).text
+                elif operate['find_type2'] == ep.find_elements_by_id or operate['find_type2'] == ep.find_elements_by_xpath or \
+            operate['find_type2'] == ep.find_elements_by_name or operate['find_type2'] == ep.find_elements_by_class_name:
+                    result = self.element_by2(operate)[operate['index']].text
+                re_reulst = re.findall(r'[-_a-zA-Z\d+\u4e00-\u9fa5]', result)
+                text = ''.join(re_reulst)
+                print('33333333333::::::::',text)
+                if text == operate["find_v"]:
+                    time.sleep(1)
+                    return {'result': True}
+                if time.time()-start_time > operate['find_time_out']:
+                    return {'result': False}
+        elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
+            operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
+            start_time = time.time()
+            while True:
+                self.element_by(operate)[operate['index']].send_keys(Keys.DOWN)
+                time.sleep(0.1)
+                if operate['find_type2'] == ep.find_element_by_id or operate['find_type2'] == ep.find_element_by_xpath or \
+            operate['find_type2'] == ep.find_element_by_name or operate['find_type2'] == ep.find_element_by_class_name:
+                    result = self.element_by2(operate).text
+                elif operate['find_type2'] == ep.find_elements_by_id or operate['find_type2'] == ep.find_elements_by_xpath or \
+            operate['find_type2'] == ep.find_elements_by_name or operate['find_type2'] == ep.find_elements_by_class_name:
+                    result = self.element_by2(operate)[operate['index2']].text
+                re_reulst = re.findall(r'[-_a-zA-Z\d+\u4e00-\u9fa5]', result)
+                text = ''.join(re_reulst)
+                print('33333333333::::::::',text)
+                if text == operate["find_v"]:
+                    time.sleep(1)
+                    return {'result': True}
+                if time.time()-start_time > operate['find_time_out']:
+                    return {'result': False}
+    # 移动滚动条到某元素底部
+    def move_scrollbar_bottom(self, operate):
+        js2 = "arguments[0].scrollIntoView(false);"   #  false 底部对齐  true 顶部对齐 默认为true
+        if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
+            operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
+            self.driver.execute_script(js2, self.element_by(operate))
+            return {'result': True}
+        elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
+            operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
+            self.driver.execute_script(js2, self.element_by(operate)[operate['index']])
+            return {'result': True}
+
+    # 查找元素的封装
+    def element_by2(self, operate):
+        elements = {
+            ep.find_element_by_id: lambda :self.driver.find_element_by_id(operate['element_info2']),
+            ep.find_element_by_class_name: lambda :self.driver.find_element_by_class_name(operate['element_info2']),
+            ep.find_element_by_name: lambda : self.driver.find_element_by_name(operate['element_info2']),
+            ep.find_element_by_xpath: lambda : self.driver.find_element_by_xpath(operate['element_info2']),
+            ep.find_elements_by_id: lambda: self.driver.find_elements_by_id(operate['element_info2']),
+            ep.find_elements_by_class_name: lambda : self.driver.find_elements_by_class_name(operate['element_info2']),
+            ep.find_elements_by_xpath: lambda: self.driver.find_elements_by_xpath(operate['element_info2']),
+            ep.find_elements_by_name: lambda: self. driver.find_elements_by_name(operate['element_info2'])
+        }
+        return elements[operate['find_type2']]()
 
     # 查找元素的封装
     def element_by(self, operate):
@@ -217,7 +313,6 @@ class OperateElement():
 
 if __name__=='__main__':
     from common.operate_yaml import getYam
-    import os,time
     from common.Logger import myLog
     logTest = myLog.getLog("chrome")
     driver = webdriver.Chrome()

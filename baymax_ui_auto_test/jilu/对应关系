@@ -1,33 +1,40 @@
 -
- 操作===testcase 结构分解
- element_info： 意思element的路径或者id等信息 与find_type方式对应
- find_type： 意思查找element的方式，如id,ids,xpath等
- operate_type： 对element的操作类型 如 click，send_keys 等
- info： 此元素的基本信息 比如 登录按钮， 输入密码框等
- check_time： 查找元素的最长等待时间
- msg:     这里填写 send_keys要输入的value
- index: 3 配合find_type使用 当find_type 为复数是 填写位置 如配合find_type为ids时
- is_time: 5 如果有值 那么操作完此element后会等待 N 秒
+testinfo:  用例的基本信息
+  - id: test045  用例id
+  - title: 校验文件管理“进入文件夹”  用例的标题
+  - launch: 0                         执行用例前是否刷新页面  0 为刷新 非0不刷新
+  - info: 先进入"数据导入"目录         用前置条件
+  - 'msg':  记录用例的信息 比如错误的信息
 
- case信息：
- 字段 testinfo
-'id': 'test001' 用例id
-'title': '登录失败'  用例名称
-'launch': 1  # 是否刷新当前页面 刷新为0 不刷新填非零
-'info': '打开testerhome'   ---case 信息
-'msg':  记录用例的信息 比如错误的信息
-operate_type: # 操作类型
-   - get_attr:  获取属性操作
-   - get_text: 获取text
-   - get_value:  获取value 操作
-   - click:  点击操作
-   - is_displayed:   检查元素是否显示
-   - send_keys: 输入操作  如果输入的操作 以‘+随机数’结尾 那么默认会加6位随机数字 例如 dir+随机数  处理后的内容为 dir654321
-        - 如果为随机数：程序会把处理后的内容 存放到get_value容器中 以备后面check调用
-attr:  配合 operate_type的get_attr使用 获取属性的属性字段 如name， class
-
-is_time: 1 执行完之后等待时间
-
+testcase  操作=== 结构分解:  # 操作类型
+ - element_info: element的路径或者id等信息 与find_type方式对应
+ - find_type: 查找element的方式，如id,ids,xpath等意思查找element的方式，如id,ids,xpath等
+ - operate_type: 对element的操作类型 如 click，send_keys 等
+        - click: 点击方法
+        - get_text: 获取text
+        - get_value:  获取value 操作
+        - get_attr:  获取属性操作
+        - send_keys:   输入事件
+        - action_chains: 鼠标悬停事件
+        - move_by_offset:   移动鼠标到某个像素
+        - get_current_url:  获取当前的URL
+        - is_displayed:    检查元素是否显示
+        - move_scrollbar_bottom:  移动滚动条到某元素底部
+        - upload_file: 上传文件 使用autoit可执行文件
+        - find_down: 下拉菜单中 向下查找内容的方法
+                此方法通过获取 当前元素的text 是否等于 预期的值  符合预期返回True 超时返回 False
+                find_down方法  需要第二个元素:
+                element_info2: 第二元素的 的路径或者id等信息 与find_type2方式对应
+                find_type2: 第二元素的 的路径或者id等信息 与find_type方式对应
+                index2:  第二元素的位置 配合find_type使用 当find_type 为复数是 填写位置 如配合find_type为ids时
+                find_v:  要查找的值
+                find_time_out: 查找的超时时间时间为秒
+ - info: 此元素的基本信息 比如 登录按钮， 输入密码框等
+ - check_time:  查找元素的最长等待时间
+ - msg:     这里填写 send_keys要输入的value
+ - index: 3 配合find_type使用 当find_type 为复数是 填写位置 如配合find_type为ids时
+ - is_time: 5 如果有值 那么操作完此element后会等待 N 秒
+ - attr:  配合 operate_type的get_attr使用 获取属性的属性字段 如name， class
 
 检查信息
 字段：check
@@ -37,6 +44,7 @@ operate_type: get_text  对element的操作类型 如 click，send_keys 等
               ####：operate_type： 如果填入的值 以‘+随机数’结尾， 会从 get_value容器取值  配合 index：使用
 check: compare       检查的方法 contrary default_check compare contrary_getval
    - url_inequality_error:  检查当前URL是否符合预期
+   - url_contain:   获取的url包含预期的url
    - default_check: 检查  断言元素存在
    - contrary:   检查  断言元素不存在
    - compare: 检查 断言前面页面的值 与后面页面某值相等       ---针对 get_text和get_value方法
@@ -45,8 +53,39 @@ check: compare       检查的方法 contrary default_check compare contrary_get
    - attr_contain: 检查 断言前面获取属性值 包含预期的属性值
    - displayed:  检查元素显示
    - not_displayed: 检查元素显示
-attr_index: 配合 operate_type的get_attr  设置存放属性值的位置
+   - expect_value_equal: 检查当前页面的属性值等于预期的值
+   - is_download: 文件有没有下载成功
+expect_value: 输入预期的值 配合check  的expect_value方法使用
+attr_index: 配合 operate_type的get_attr、get_text、get_value使用  # get_text get_value get_attr方法存放属性值的位置
 attr_value: 此字段配合 check里的attr_not_contain，attr_contain使用 填入预期的属性值
 info: 详情页的标题和历史标题相等   检查的信息或者叫检查点的名字
-v_index: get_value容器中的位置
+v_index: get_value容器中的位置 用于 随机数定位 # send_keys 方法存放属性值的位置
+join_value: 拼接字符串 值
+url: 对比url值
+
+- 容器:
+- get_value:
+   - 写入:
+      - msg: send_keys方法中 msg的值 后四位 等于 “+随机数”时 添加到 get_value
+      - get_text: 获取text          添加到 get_value
+      - get_value:  获取value 操作  添加到 get_value
+      - get_attr:  获取属性操作     添加到 get_value
+   - 读取:
+      +随机数:
+      - element_info: 后四位为‘+随机数’ 读取 ‘get_value’ 需要传入位置：v_index
+          - find_type: 目前支持 name 和xpath 方法
+          - v_index: value 在‘get_value' 容器的位置
+      '+拼接':
+      - element_info: 后三位为‘+拼接’ 读取 ‘get_value’ 需要传入位置：v_index， 拼接值：join_value
+          - find_type: 目前支持 name 和xpath 方法
+          - v_index:  value 在‘get_value' 容器的位置   # send_keys 方法存放属性值的位置
+          - join_value: 要拼接字符串的值
+      获取 属性值时:
+      - attr_index:  # gget_text get_value get_attr方法存放属性值的位置
+
+xpath:
+  先辈: /ancestor::td
+  之前的同级: /preceding-sibling::td[1]
+  之后的所有同级节点: following-sibling 选取当前节点之后的所有同级节点
+
 
