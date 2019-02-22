@@ -5,7 +5,7 @@ from common.BaseRunner import ParametrizedTestCase
 from cases.case_home.case_home_page_click import HomePageTest
 from cases.case_login import LoginTest
 from cases.case_data_integration.case_resourceMan.case_operate_dir import OperateDirTest, OperateDirTest2
-from cases.case_data_integration.case_data_import import DataImportTest
+from cases.case_data_integration.case_data_import import DataImportTest, DataImportTest2
 from cases.case_data_integration.case_file_management import FileManagementTest
 import unittest
 from datetime import datetime
@@ -21,6 +21,7 @@ def runnerCaseApp():
     suite.addTest(ParametrizedTestCase.parametrize(OperateDirTest))
     suite.addTest(ParametrizedTestCase.parametrize(OperateDirTest2))
     suite.addTest(ParametrizedTestCase.parametrize(DataImportTest))
+    suite.addTest(ParametrizedTestCase.parametrize(DataImportTest2))
     suite.addTest(ParametrizedTestCase.parametrize(FileManagementTest))
     unittest.TextTestRunner(verbosity=2).run(suite)
     end_time = datetime.now()

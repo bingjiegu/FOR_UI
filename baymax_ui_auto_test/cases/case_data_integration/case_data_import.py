@@ -47,6 +47,20 @@ class DataImportTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
+class DataImportTest2(ParametrizedTestCase):
+    def login(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = LoginTestPage(app)
+        page.operate()
+
+    def to_resource_dir(self):
+        self.login()
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/数据导入.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = HomePage(app)
+        page.operate()
+
     # 校验“数据导入-执行列表”任务
     def test_a054_execute_list_data_import(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-执行列表.yaml"),
@@ -63,14 +77,21 @@ class DataImportTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
+    def setUp(self):
+        super(DataImportTest2, self).setUpClass()
+        self.to_resource_dir()
+
+    def tearDown(self):
+        super(DataImportTest2, self).tearDownClass()
+
 
     @classmethod
     def setUpClass(cls):
-        super(DataImportTest, cls).setUpClass()
+        pass
 
     @classmethod
     def tearDownClass(cls):
-        super(DataImportTest, cls).tearDownClass()
+        pass
 
 if __name__ == "__main__":
     unittest.main()
