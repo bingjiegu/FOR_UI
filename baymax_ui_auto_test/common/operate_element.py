@@ -33,7 +33,7 @@ class OperateElement():
                 if operate.get('element_info', 0) == 0: # 如果没有页面元素，就不检测是页面元素，可能是滑动等操作
                     return {'result': True}
                 t = operate['check_time'] if operate.get('check_time', 0) != 0 else ep.WAIT_TIME
-                el = WebDriverWait(self.driver, t).until(lambda x: self.element_by(operate))
+                el = WebDriverWait(self.driver, t, 0.2).until(lambda x: self.element_by(operate))
                 print('找到了element：', operate['info'])
                 print(el)
                 return {'result': True}
@@ -191,13 +191,13 @@ class OperateElement():
     def get_value(self, operate):
         if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
             operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
-            re_value = re.findall(r'[a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate).get_attribute('value'))
+            re_value = re.findall(r'[:.\-_a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate).get_attribute('value'))
             value = ''.join(re_value)
             print('获取到的值为：', value)
             return {'result': True, 'text': value}
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
-            re_value = re.findall(r'[a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate)[operate['index']].get_attribute('value'))
+            re_value = re.findall(r'[:.\-_a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate)[operate['index']].get_attribute('value'))
             value = ''.join(re_value)
             print('获取到的值为：', value)
             return {'result': True, 'text': value}
@@ -206,13 +206,13 @@ class OperateElement():
     def get_text(self, operate):
         if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
             operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
-            re_reulst = re.findall(r'[-_a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate).text)
+            re_reulst = re.findall(r'[:.\-_a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate).text)
             text = ''.join(re_reulst)
             print('获取到的值为：', text)
             return {'result': True, 'text': text}
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
-            re_reulst = re.findall(r'[-_a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate)[operate['index']].text)
+            re_reulst = re.findall(r'[:.\-_a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate)[operate['index']].text)
             text = ''.join(re_reulst)
             print('获取到的值为：', text)
             return {'result': True, 'text': text}
@@ -243,7 +243,7 @@ class OperateElement():
                 elif operate['find_type2'] == ep.find_elements_by_id or operate['find_type2'] == ep.find_elements_by_xpath or \
             operate['find_type2'] == ep.find_elements_by_name or operate['find_type2'] == ep.find_elements_by_class_name:
                     result = self.element_by2(operate)[operate['index']].text
-                re_reulst = re.findall(r'[-_a-zA-Z\d+\u4e00-\u9fa5]', result)
+                re_reulst = re.findall(r'[:.\-_a-zA-Z\d+\u4e00-\u9fa5]', result)
                 text = ''.join(re_reulst)
                 print('33333333333::::::::',text)
                 if text == operate["find_v"]:
@@ -263,7 +263,7 @@ class OperateElement():
                 elif operate['find_type2'] == ep.find_elements_by_id or operate['find_type2'] == ep.find_elements_by_xpath or \
             operate['find_type2'] == ep.find_elements_by_name or operate['find_type2'] == ep.find_elements_by_class_name:
                     result = self.element_by2(operate)[operate['index2']].text
-                re_reulst = re.findall(r'[-_a-zA-Z\d+\u4e00-\u9fa5]', result)
+                re_reulst = re.findall(r'[:.\-_a-zA-Z\d+\u4e00-\u9fa5]', result)
                 text = ''.join(re_reulst)
                 print('33333333333::::::::',text)
                 if text == operate["find_v"]:
