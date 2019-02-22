@@ -49,11 +49,11 @@ check:
   find_type: xpath
   v_index: 0
   check: displayed
-  info: 断言“新建的数据导入任务存在”
+  info: 断言“复制的数据导入任务存在”
 - element_info: //*[@id="bm-ch-syschronization-table"]/div[3]/table/tbody//a[contains(text(), %s)]/ancestor::td/following-sibling::td[6]/div/div+随机数
   find_type: xpath
   operate_type: get_text
   v_index: 0
   check: expect_value_equal
   expect_value: 已创建
-  info: 断言“新建的数据导入任务的状态”为 已创建
+  info: 断言“复制的数据导入任务的状态”为 已创建
