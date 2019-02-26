@@ -17,8 +17,8 @@ testcase:
   info: 移送鼠标到0,0像素
 check:
 - operate_type: get_current_url
-  check: url_inequality_error
-  url: /#/hippo/index
+  check: current_equal_expect
+  expect_value: /#/hippo/index拼接值后+前host+拼接
   info: 检查"运维管控的URL"是否正确
 - element_info: //div[contains(text(), '系统组件监控') and @class='title']
   find_type: xpath

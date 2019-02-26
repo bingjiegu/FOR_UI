@@ -17,8 +17,8 @@ testcase:
   info: 移送鼠标到0,0像素
 check:
 - operate_type: get_current_url
-  check: url_inequality_error
-  url: /#/hippo/taskControl
+  check: current_equal_expect
+  expect_value: /#/hippo/taskControl拼接值后+前host+拼接
   info: 检查"任务监控"的URL是否正确
 - element_info: //*[text()='任务完成情况监控' and @class="title"]
   find_type: xpath

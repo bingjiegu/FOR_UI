@@ -17,8 +17,8 @@ testcase:
   info: 移送鼠标到0,0像素
 check:
 - operate_type: get_current_url
-  check: url_inequality_error
-  url: /#/resourceManProject
+  check: current_equal_expect
+  expect_value: /#/resourceManProject拼接值后+前host+拼接
   info: 检查"项目目录的URL"是否正确
 - element_info: //button/span[contains(text(), '目录')]
   find_type: xpath

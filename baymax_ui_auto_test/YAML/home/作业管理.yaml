@@ -17,8 +17,8 @@ testcase:
   info: 移送鼠标到0,0像素
 check:
 - operate_type: get_current_url
-  check: url_inequality_error
-  url: /#/jobManage
+  check: current_equal_expect
+  expect_value: /#/jobManage拼接值后+前host+拼接
   info: 检查"作业管理"的URL是否正确
 - element_info: //button/span[text()='创建']
   find_type: xpath

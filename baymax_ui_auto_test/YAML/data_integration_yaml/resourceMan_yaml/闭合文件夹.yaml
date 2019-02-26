@@ -19,17 +19,17 @@ testcase:
   attr: class
   info: 获取点击‘数据标准’文件夹图标之前 的class属性值
 check:
-- check: attr_contain
-  attr_value: fa-folder-open
-  attr_index: 0
+- check: vessel_contain_expect
+  expect_value: fa-folder-open
+  expect_index: 0
   info: 断言 点击文件夹按钮之前 元素的属性值class包含fa-folder-open
-- check: attr_not_contain
-  attr_value: fa-folder-open
-  attr_index: 1
+- check: vessel_not_contain_expect
+  expect_value: fa-folder-open
+  expect_index: 1
   info: 断言 点击文件夹按钮后 元素的属性值class不包含fa-folder-open
-- check: attr_contain
-  attr_value: close
-  attr_index: 1
+- check: vessel_contain_expect
+  expect_value: close
+  expect_index: 1
   info: 断言 点击文件夹按钮后 元素的属性值class包含close
 - element_info: a
   find_type: name

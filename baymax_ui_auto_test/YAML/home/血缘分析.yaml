@@ -18,8 +18,8 @@ testcase:
   info: 移送鼠标到0,0像素
 check:
 - operate_type: get_current_url
-  check: url_inequality_error
-  url: /#/kinship/:id/
+  check: current_equal_expect
+  expect_value: /#/kinship/:id/拼接值后+前host+拼接
   info: 检查"血缘分析的URL"是否正确
 - element_info: //*[@id="bm-main"]//input[@placeholder="请选择内容" and @autocomplete="off"]
   find_type: xpath

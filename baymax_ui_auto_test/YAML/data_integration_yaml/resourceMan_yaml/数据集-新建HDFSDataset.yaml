@@ -79,7 +79,7 @@ check:
   find_type: xpath
   operate_type: get_text
   v_index: 0
-  attr_index: 1
-  check: compare
+  expect_index: 1
+  check: vessel_contain_current
   info: 断言“新建的HDFSdataset存在”出现
 

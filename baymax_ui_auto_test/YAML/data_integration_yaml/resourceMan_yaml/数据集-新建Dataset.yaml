@@ -17,10 +17,10 @@ testcase:
   operate_type: click
   info: 点击‘新建’按钮
   is_time: 0.8
-- element_info:  //ul//*[contains(text(), "DB")]
-  find_type: xpath
+- element_info: bm-ch-resMan-resourceman-DBdataset-dropdown-menu
+  find_type: id
   operate_type: click
-  info: 点击‘DB’按钮
+  info: 点击‘数据库’按钮
   is_time: 1
 - element_info: bm-sh-r-data-db1-name-input
   find_type: name

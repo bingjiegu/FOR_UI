@@ -24,6 +24,6 @@ check:
   check: displayed
   info: 断言“返回”按钮显示存在
 - operate_type: get_current_url
-  check: url_contain
-  url: /#/synchronization/executeList/
-  info: 断言“新建的数据导入任务的状态”为 已创建
+  check: current_contain_expect
+  expect_value: /#/synchronization/executeList/拼接值后+前host+拼接
+  info: 断言"url与预期相符"

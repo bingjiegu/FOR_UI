@@ -23,6 +23,6 @@ check:
   find_type: xpath
   info: 检查“此任务是否存在”
 - operate_type: get_current_url
-  check: url_inequality_error
-  url: /#/fileSynchronization
+  check: current_equal_expect
+  expect_value: /#/fileSynchronization拼接值后+前host+拼接
   info: 检查"文件导入的URL"是否正确

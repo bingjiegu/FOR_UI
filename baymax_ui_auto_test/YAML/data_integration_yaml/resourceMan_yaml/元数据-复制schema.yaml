@@ -17,6 +17,7 @@ testcase:
   index: 0
   operate_type: get_text
   info: 获取列表中第一条'schema_'是title
+  is_time: 1
 - element_info: //*[contains(text(), '%s')]/ancestor::td/preceding-sibling::td[1]+随机数
   find_type: xpath
   v_index: 0

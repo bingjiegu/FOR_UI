@@ -27,7 +27,7 @@ testcase:
   operate_type: send_keys
   msg: schema_+随机数
   info: 输入schema名称
-- element_info: //div[@aria-label="提示"]//button/span[contains(text(), "确定")]
+- element_info: //body/div[@aria-label="提示"]//button/span[contains(text(), "确定")]
   find_type: xpath
   operate_type: click
   info: 点击“确定”按钮
@@ -52,17 +52,11 @@ testcase:
   operate_type: click
   is_time: 0.3
   info: 点击‘保存’按钮
-- element_info: //ul[@name="Schemas"]//em[@name="auto_schema"]
-  find_type: xpath
-  operate_type: click
-  info: 点击‘auto_schema'的文字 获取列表
-  is_time: 0.7
 check:
-- element_info: bm-ch-5-el-pagination
-  find_type: name
-  check: displayed
-  info: 断言‘分页器’是显示状态
-- element_info: //*[@id="bm-ch-resourceMan-table"]//table/tbody//*[contains(text(), "%s")]+随机数
+- element_info: //*[contains(text(), "保存失败 schemas 下，字段不能为空")]
   find_type: xpath
-  v_index: 0
-  info: 断言“新建的schema存在”出现
+  check: contrary
+  info: 断言“没有异常的吐词”出现
+- element_info: //*[contains(text(), "保存成功")]
+  find_type: xpath
+  info: 断言“没有异常的吐词”出现

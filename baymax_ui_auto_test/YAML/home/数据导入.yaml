@@ -23,6 +23,6 @@ check:
   find_type: xpath
   info: 检查“执行列表按钮是否存在”
 - operate_type: get_current_url
-  check: url_inequality_error
-  url: /#/synchronization
+  check: current_equal_expect
+  expect_value: /#/synchronization拼接值后+前host+拼接
   info: 检查"数据导入的URL"是否正确

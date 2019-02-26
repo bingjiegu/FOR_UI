@@ -23,8 +23,8 @@ check:
   find_type: xpath
   info: 检查“采集器按钮是否存在”
 - operate_type: get_current_url
-  check: url_inequality_error
-  url: /#/collector/collectorTemplate
+  check: current_equal_expect
+  expect_value: /#/collector/collectorTemplate拼接值后+前host+拼接
   info: 检查"采集器的URL"是否正确
 - element_info: //*[contains(text(),'主键')]
   find_type: xpath

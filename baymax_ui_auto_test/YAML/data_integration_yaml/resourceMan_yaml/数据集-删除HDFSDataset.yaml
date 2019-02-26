@@ -17,7 +17,8 @@ testcase:
   index: -1
   operate_type: get_text
   info: 获取列表中最后一条'HDFSdataset_'是title
-- element_info:  //div[3]//*[text()='%s']/ancestor::td/preceding-sibling::td[1]+随机数
+  is_time: 1
+- element_info: //div[3]//*[text()='%s']/ancestor::td/preceding-sibling::td[1]+随机数
   find_type: xpath
   v_index: 0
   operate_type: click

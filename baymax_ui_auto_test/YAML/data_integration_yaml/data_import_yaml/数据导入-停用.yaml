@@ -23,6 +23,6 @@ check:
 - element_info:  //*[@id="bm-ch-syschronization-table"]/div[3]//tr[1]/td[8]/div/div
   find_type: xpath
   operate_type: get_text
-  check: expect_value_equal
+  check: current_equal_expect
   expect_value: 已停止
   info: 断言“启动后的数据导入任务的状态”为 已停止

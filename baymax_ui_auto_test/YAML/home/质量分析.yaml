@@ -17,8 +17,8 @@ testcase:
   info: 移送鼠标到0,0像素
 check:
 - operate_type: get_current_url
-  check: url_inequality_error
-  url: /#/qualityAnalysis/analysisTemplate
+  check: current_equal_expect
+  expect_value: /#/qualityAnalysis/analysisTemplate拼接值后+前host+拼接
   info: 检查"质量分析的URL"是否正确
 - element_info: //button/span[contains(text(), '分析模板')]
   find_type: xpath
