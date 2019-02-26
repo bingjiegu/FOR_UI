@@ -33,7 +33,7 @@ class OperateElement():
                 if operate.get('element_info', 0) == 0: # 如果没有页面元素，就不检测是页面元素，可能是滑动等操作
                     return {'result': True}
                 t = operate['check_time'] if operate.get('check_time', 0) != 0 else ep.WAIT_TIME
-                el = WebDriverWait(self.driver, t, 0.2).until(lambda x: self.element_by(operate))
+                el = WebDriverWait(self.driver, t, 1).until(lambda x: self.element_by(operate))
                 print('找到了element：', operate['info'])
                 print(el)
                 return {'result': True}
@@ -145,7 +145,7 @@ class OperateElement():
     # 获取当前的URL
     def get_current_url(self, operate):
         url = self.driver.current_url
-        return {'result': True, 'url': url}
+        return {'result': True, 'text': url}
 
     # 移动鼠标到某个像素
     def move_mouse(self, operate):

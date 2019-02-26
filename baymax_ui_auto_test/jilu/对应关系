@@ -63,6 +63,14 @@ v_index: get_value容器中的位置 用于 随机数定位 # send_keys 方法�
 join_value: 拼接字符串 值
 url: 对比url值
 
+- 预期值拼接:
+expect_value:
+    XXX拼接值前+后XXX拼接
+    XXX拼接值后+前host+拼接
+    # host 写法
+    XXX拼接值后+前host+拼接
+
+
 - 容器:
 - get_value:
    - 写入:

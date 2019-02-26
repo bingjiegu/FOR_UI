@@ -33,21 +33,25 @@ class ElementParam(object):
     INDEX_ERROR = "index_error"
     STALE_ELEMENT_REFERENCE_EXCEPTION = "StaleElementReferenceException"
     DEFAULT_ERROR = "default_error"
-    URL_INEQUALITY_ERROR = "url_inequality_error"  # URL不相等错误
+    VALUE_ERROR = "value_error"  # YAML给出的value不合法
+    # URL_INEQUALITY_ERROR = "url_inequality_error"  # URL不相等错误
 
 
     # 检查点
     CONTRARY = "contrary"  # 相反检查点，表示如果检查元素存在就说明失败，如删除后，此元素依然存在
-    CONTRARY_GETVAL = "contrary_getval"  # 检查点关键字contrary_getval: 相反值检查点，如果对比成功，说明失败
     DEFAULT_CHECK = "default_check"  # 默认检查点，查找页面元素是否存在
-    COMPARE = "compare"  # 历史数据和实际数据对比
-    ATTR_NOT_CONTAIN = "attr_not_contain"  # 历史属性值不包含某值
-    ATTR_CONTAIN = "attr_contain"  # 历史属性值包含某值
+    VESSEL_CONTAIN_CURRENT = "vessel_contain_current"  # 容器  包含  当前值
+    VESSEL_NOT_CONTAIN_CURRENT = "vessel_not_contain_current"  # 容器  不包含  当前值
+    VESSEL_CONTAIN_EXPECT = "vessel_contain_expect"  # 容器 包含 预期值
+    VESSEL_NOT_CONTAIN_EXPECT = "vessel_not_contain_expect"  # 容器 不包含 预期值
+    CURRENT_CONTAIN_EXPECT = "current_contain_expect"  # 当前值 包含 预期值
+    CURRENT_EQUAL_EXPECT = "current_equal_expect"  # 当前值 等于 预期值
+
+
     DISPLAYED = "displayed"  # 检查元素显示
     NOT_DISPLAYED = "not_displayed"  # 检查元素不显示
-    EXPECT_VALUE_EQUAL = "expect_value_equal" #当前页面的任意类型（text\value\其他属性）的属性值 是否符合预期值
     IS_DOWNLOAD = 'is_download'  # 检查是否成下载了任务
-    URL_CONTAIN = "url_contain"  # 获取的url包含预期的url
+
 
     # 文件名字
     INFO_FILE = "info.pickle"

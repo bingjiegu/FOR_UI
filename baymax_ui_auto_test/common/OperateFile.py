@@ -30,7 +30,7 @@ def new_download_file_mtime():
     L = [i for i in lists if re.findall(r'(download_.*?\.zip)', i)]
     if not L:
         return False
-    L.sort(key=lambda fn:os.path.getmtime(directory + "\\" + fn))#按时间排序
-    file_new = os.path.join(directory,L[-1])                     #获取最新的文件保存到file_new
+    L.sort(key=lambda fn:os.path.getmtime(directory + "\\" + fn))  # 按时间排序
+    file_new = os.path.join(directory,L[-1])                      # 获取最新的文件保存到file_new
     print('最新的文件为：',file_new)
     return os.path.getmtime(file_new)

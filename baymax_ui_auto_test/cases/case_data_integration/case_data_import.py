@@ -23,37 +23,37 @@ class DataImportTest(ParametrizedTestCase):
         page.operate()
 
     # 校验“数据导入-创建”任务
-    # def test_a043_create_data_import(self):
-    #     self.to_resource_dir()
-    #     app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-创建.yaml"),
-    #            "caseName": sys._getframe().f_code.co_name}
-    #     page = DataImportPage(app)
-    #     page.operate()
-    #     page.check_point()
-    #
-    # # 校验“数据导入-复制”任务
-    # def test_a044_copy_data_import(self):
-    #     app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-复制.yaml"),
-    #            "caseName": sys._getframe().f_code.co_name}
-    #     page = DataImportPage(app)
-    #     page.operate()
-    #     page.check_point()
-    #
-    # # 校验“数据导入-启用”任务
-    # def test_a053_start_data_import(self):
-    #     app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-启用.yaml"),
-    #            "caseName": sys._getframe().f_code.co_name}
-    #     page = DataImportPage(app)
-    #     page.operate()
-    #     page.check_point()
-    #
-    # # 校验“数据导入-停用”任务
-    # def test_a056_stop_data_import(self):
-    #     app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-停用.yaml"),
-    #            "caseName": sys._getframe().f_code.co_name}
-    #     page = DataImportPage(app)
-    #     page.operate()
-    #     page.check_point()
+    def test_a043_create_data_import(self):
+        self.to_resource_dir()
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-创建.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = DataImportPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“数据导入-复制”任务
+    def test_a044_copy_data_import(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-复制.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = DataImportPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“数据导入-启用”任务
+    def test_a053_start_data_import(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-启用.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = DataImportPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“数据导入-停用”任务
+    def test_a056_stop_data_import(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-停用.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = DataImportPage(app)
+        page.operate()
+        page.check_point()
 
     # 校验“数据导入-删除”任务
     def test_a057_delete_data_import(self):

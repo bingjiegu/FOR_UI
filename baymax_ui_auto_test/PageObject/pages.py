@@ -7,6 +7,7 @@ import os
 from common.Operate_str import *
 import time
 from common.OperateFile import new_download_file_mtime
+import re
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
@@ -19,6 +20,7 @@ class PagesObjects:
         if kwargs['testmsg'][1]['testinfo'][0].get('launch', 0) == 0:           # 刷新当前页面
             print('=======================================刷新了页面========================================')
             self.driver.refresh()
+            # time.sleep(1.5)
 
         self.operateElement = ""   # 操作元素的手柄
         self.isOperate = True     # 一个开关  默认为True operate失败时改为False  结果校验时 判断这个值为True就进行判断， 是False就不用校验结果
@@ -37,21 +39,7 @@ class PagesObjects:
             return False
         self.operateElement = OperateElement(self.driver)
         for i in self.testcase:
-            # 生成随机的send_keys的值
-            if str(i.get('msg', 'aaaaaaa'))[-4:] == '+随机数':
-                i['msg'] = random_str(i['msg'])
-                self.get_value.append(i['msg'])
-            if i.get('element_info', 'aaaaaa')[-4:] == '+随机数':
-                if i['find_type'] == 'name':
-                    i['element_info'] = self.get_value[int(i['v_index'])]
-                if i['find_type'] == 'xpath':
-                    i['element_info'] = i['element_info'][: -4] % self.get_value[int(i['v_index'])]
-            if i.get('element_info', 'aaaaaa')[-3:] == '+拼接':
-                if i['find_type'] == 'name':
-                    i['element_info'] = self.get_value[int(i['v_index'])] + i['join_value']
-                if i['find_type'] == 'xpath':
-                    i['element_info'] = i['element_info'][: -3] % (self.get_value[int(i['v_index'])] + i['join_value'])
-
+            self.rw_get_value(i)  # 读写容器操作
             result = self.operateElement.operate(i, self.testInfo, self.logTest)
             if not result['result']:
                 msg = get_error_info({'type': ElementParam.DEFAULT_ERROR, 'element_info': i['element_info']})
@@ -60,9 +48,7 @@ class PagesObjects:
                 return False
             if i.get('is_time', 0) != 0:
                 sleep(i['is_time'])
-            if i.get('operate_type', 0) == ElementParam.GET_TEXT or i.get('operate_type', 0) == ElementParam.GET_VALUE or i.get('operate_type', 0) == ElementParam.GET_ATTR:
-                self.get_value.append(result['text'])
-                self.is_get = True
+            self.rw_get_value(i, result)  # 读写容器操作 并且打开开关
         return True
 
     def checkPoint(self):
@@ -74,16 +60,26 @@ class PagesObjects:
         result = True
         if self.isOperate:
             for i in self.testcheck:
-                if i.get('element_info', 'aaaaaa')[-4:] == '+随机数':
-                    if i['find_type'] == 'name':
-                        i['element_info'] = self.get_value[int(i['v_index'])]
-                    if i['find_type'] == 'xpath':
-                        i['element_info'] = i['element_info'][: -4] % self.get_value[int(i['v_index'])]
-                if i.get('element_info', 'aaaaaa')[-3:] == '+拼接':
-                    if i['find_type'] == 'name':
-                        i['element_info'] = self.get_value[int(i['v_index'])] + i['join_value']
-                    if i['find_type'] == 'xpath':
-                        i['element_info'] = i['element_info'][: -3] % (self.get_value[int(i['v_index'])] + i['join_value'])
+                self.rw_get_value(i)  # 执行读写容器操作
+
+                if i.get('expect_value', '')[-3:] == '+拼接':
+                    regex =".*拼接值(.*)\+拼.*"
+                    matches = re.findall(regex, i['expect_value'])
+                    if len(matches) == 1:
+                        for match in matches:
+                            print(match)
+                            if match[:3] == "前+后":
+                                i['expect_value'] = i['expect_value'].split("拼接值")[0] + match[3:]
+                            elif match[:3] == "后+前":
+                                if match == '后+前host':
+                                    i['expect_value'] = ElementParam.HOST + i['expect_value'].split("拼接值")[0]
+                                else:
+                                    i['expect_value'] = match[3:] + i['expect_value'].split("拼接值")[0]
+                    else:
+                        print('expect_value值没有被正则表达式匹配到，正则表达式匹配到的值为：', matches)
+                        result = False
+                        break
+
                 op_re = self.operateElement.operate(i, self.testInfo, self.logTest)
                 # 默认检查点，检查元素存在
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.DEFAULT_CHECK and not op_re['result']:
@@ -91,53 +87,56 @@ class PagesObjects:
                     self.testInfo[0]['msg'] = msg
                     result = False
                     return result
+
+                L = [ElementParam.CONTRARY, ElementParam.VESSEL_CONTAIN_CURRENT, ElementParam.VESSEL_NOT_CONTAIN_CURRENT, ElementParam.CURRENT_CONTAIN_EXPECT, ElementParam.CURRENT_EQUAL_EXPECT,
+                    ElementParam.VESSEL_NOT_CONTAIN_EXPECT, ElementParam.VESSEL_CONTAIN_EXPECT, ElementParam.DISPLAYED, ElementParam.NOT_DISPLAYED, ElementParam.IS_DOWNLOAD]
+                if i.get("check", 'ooo') not in L and i.get('check', ElementParam.DEFAULT_CHECK) != ElementParam.DEFAULT_CHECK:
+                    msg = get_error_info({'type': ElementParam.VALUE_ERROR, 'value': i['check'], 'info': i['info']})
+                    self.testInfo[0]['msg'] = msg
+                    result = False
+                    break
+
                 # 检查 元素不存在
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.CONTRARY and op_re['result']:
                     msg = get_error_info({'type': ElementParam.CONTRARY, 'element': i['element_info'], 'info': i['info']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
-                # 检查前面页面的值 与后面页面某值相等
-                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.COMPARE and self.is_get and op_re['text'] not in self.get_value[i['attr_index']]:
-                    msg = get_error_info({'type': ElementParam.COMPARE, 'history': self.get_value, 'info': i['info'], 'current': op_re['text']})
+                # 容器  包含  当前值
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.VESSEL_CONTAIN_CURRENT and self.is_get and op_re['text'] not in self.get_value[i['expect_index']]:
+                    msg = get_error_info({'type': ElementParam.VESSEL_CONTAIN_CURRENT, 'history': self.get_value, 'info': i['info'], 'current': op_re['text']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
-                 # 检查前面页面的值 与后面页面某值不相等
-                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.CONTRARY_GETVAL and self.is_get and op_re['text'] in self.get_value[i['attr_index']]:
-                    msg = get_error_info({'type': ElementParam.CONTRARY_GETVAL, 'history': self.get_value, 'info': i['info'], 'current': op_re['text']})
+                 # 容器 不包含 当前值
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.VESSEL_NOT_CONTAIN_CURRENT and self.is_get and op_re['text'] in self.get_value[i['expect_index']]:
+                    msg = get_error_info({'type': ElementParam.VESSEL_NOT_CONTAIN_CURRENT, 'history': self.get_value, 'info': i['info'], 'current': op_re['text']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
-                # 检查当前页面的URL与预期的地址相等
-                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.URL_INEQUALITY_ERROR and op_re['url'] != ElementParam.HOST + i.get('url', 'ooo'):
-                    msg = get_error_info({'type': ElementParam.URL_INEQUALITY_ERROR, 'info': i['info'], 'get_url': op_re['url'], 'expect_url': ElementParam.HOST + i.get('url', 'ooo')})
+                # 当前值 包含 预期值
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.CURRENT_CONTAIN_EXPECT and i.get('expect_value', 'ooo') not in op_re['text']:
+                    msg = get_error_info({'type': ElementParam.CURRENT_CONTAIN_EXPECT, 'info': i['info'], 'get_url': op_re['text'], 'expect_url': i.get('expect_value', 'ooo')})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
-                # 检查当前页面的URL是否包含预期的url
-                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.URL_CONTAIN and (ElementParam.HOST + i.get('url', 'ooo')) not in op_re['url']:
-                    msg = get_error_info({'type': ElementParam.URL_CONTAIN, 'info': i['info'], 'get_url': op_re['url'], 'expect_url': ElementParam.HOST + i.get('url', 'ooo')})
+                # 当前值 等于 预期值
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.CURRENT_EQUAL_EXPECT and op_re['text'] != i.get('expect_value', 'ooo'):
+                    msg = get_error_info({'type': ElementParam.CURRENT_EQUAL_EXPECT, 'info': i['info'], 'get_attr': op_re['text'], 'expect_value': i.get('expect_value', 'ooo')})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
-                # 检查当前页面的属性值等于预期的值 如果不相等就返回False
-                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.EXPECT_VALUE_EQUAL and op_re['text'] != i.get('expect_value', 'ooo'):
-                    msg = get_error_info({'type': ElementParam.EXPECT_VALUE_EQUAL, 'info': i['info'], 'get_attr': op_re['text'], 'expect_value': i.get('expect_value', 'ooo')})
+                # 容器 不包含 预期值
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.VESSEL_NOT_CONTAIN_EXPECT and self.is_get \
+                        and contain_str(i['expect_value'], self.get_value, i.get('expect_index', 0)):
+                    msg = get_error_info({'type': ElementParam.VESSEL_NOT_CONTAIN_EXPECT, 'history': self.get_value, 'info': i['info'], 'current': i['expect_value']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
-                # 检查前面页面是属性值不包含预期的属性值 如果包含就返回False
-                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.ATTR_NOT_CONTAIN and self.is_get \
-                        and contain_str(i['attr_value'], self.get_value, i.get('attr_index', 0)):
-                    msg = get_error_info({'type': ElementParam.ATTR_NOT_CONTAIN, 'history': self.get_value, 'info': i['info'], 'current': i['attr_value']})
-                    self.testInfo[0]['msg'] = msg
-                    result = False
-                    break
-                # 检查前面页面获取的属性值 包含预期的属性值  如果不包含就返回False
-                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.ATTR_CONTAIN and self.is_get \
-                        and contain_not_str(i['attr_value'], self.get_value, i.get('attr_index', 0)):
-                    msg = get_error_info({'type': ElementParam.ATTR_CONTAIN, 'history': self.get_value, 'info': i['info'], 'current': i['attr_value']})
+                # 容器 包含 预期值
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.VESSEL_CONTAIN_EXPECT and self.is_get \
+                        and contain_not_str(i['expect_value'], self.get_value, i.get('expect_index', 0)):
+                    msg = get_error_info({'type': ElementParam.VESSEL_CONTAIN_EXPECT, 'history': self.get_value, 'info': i['info'], 'current': i['expect_value']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
@@ -155,13 +154,40 @@ class PagesObjects:
                     break
                 # 检查有没有成功下载文件
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.IS_DOWNLOAD and (time.time() - new_download_file_mtime()) > 5:
-                    msg = get_error_info({'type': ElementParam.IS_DOWNLOAD,  'info': i['info'], 'd_timeout': i['d_timeout']})
+                    msg = get_error_info({'type': ElementParam.IS_DOWNLOAD,  'info': i['info']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
         else:
             result = False
         return result
+
+    # 读写容器
+    def rw_get_value(self, i, result={}):
+        '''
+        :param i:  YAML文件传入的参数
+        :param result:  是否执行的开关
+        :return:
+        '''
+        if str(i.get('msg', ''))[-4:] == '+随机数':
+                i['msg'] = random_str(i['msg'])
+                self.get_value.append(i['msg'])
+        if i.get('element_info', '')[-4:] == '+随机数':
+            if i['find_type'] == 'name':
+                i['element_info'] = self.get_value[int(i['v_index'])]
+            if i['find_type'] == 'xpath':
+                i['element_info'] = i['element_info'][: -4] % self.get_value[int(i['v_index'])]
+        if i.get('element_info', '')[-3:] == '+拼接':
+            if i['find_type'] == 'name':
+                i['element_info'] = self.get_value[int(i['v_index'])] + i['join_value']
+            if i['find_type'] == 'xpath':
+                i['element_info'] = i['element_info'][: -3] % (self.get_value[int(i['v_index'])] + i['join_value'])
+        # result 开关被打开
+        if (i.get('operate_type', 0) == ElementParam.GET_TEXT or i.get('operate_type', 0) == ElementParam.GET_VALUE or \
+                                i.get('operate_type', 0) == ElementParam.GET_ATTR) and result.get('result', False):
+            self.get_value.append(result['text'])
+            self.is_get = True
+
 
 
 if __name__ == "__main__":
