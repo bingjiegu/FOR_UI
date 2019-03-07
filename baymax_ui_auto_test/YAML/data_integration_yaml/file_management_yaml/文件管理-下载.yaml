@@ -34,5 +34,5 @@ testcase:
   info: 点击“下载”按钮
   is_time: 2
 check:
-- check: is_download
-  info: 断言“本地的下载目录”有新下载的文件
+- check: time_difference
+  info: 断言“本地的下载目录”最新下载的文件的创建时间小于现在5秒
