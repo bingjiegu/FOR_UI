@@ -1,0 +1,28 @@
+testinfo:
+- id: test073
+  title: 校验“采集器-资源目录-同步”
+  launch: 0
+  info: 先进入"采集器"
+testcase:
+- is_time: 1
+  info: 刷新页面后等待1秒
+- element_info: //td/div[text()="dbs_collector_orcl_info3"]/ancestor::td/preceding-sibling::td[1]//label
+  find_type: xpath
+  operate_type: click
+  info: 勾选数据源“dbs_collector_orcl_info3”
+- element_info: //td/div[text()="dbs_collector_orcl_info3"]/ancestor::td/following-sibling::td[7]/div
+  find_type: xpath
+  operate_type: get_text
+  info: 获取数据源“dbs_collector_orcl_info3” 最后同步时间
+- element_info: bm-ch-col-detailDir-meta-button
+  find_type: id
+  operate_type: click
+  info: 点击“同步” 按钮
+check:
+- element_info: //td/div[text()="dbs_collector_orcl_info3"]/ancestor::td/following-sibling::td[7]/div
+  find_type: xpath
+  operate_type: refresh_get_text
+  time_out: 60
+  check: vessel_not_contain_current
+  expect_index: 0
+  info: 断言：‘最后同步时间’有更新
