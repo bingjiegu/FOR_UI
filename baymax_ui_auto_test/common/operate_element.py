@@ -77,7 +77,8 @@ class OperateElement():
                 ep.IS_DISPLAYED: lambda: self.displayed(operate),
                 ep.FIND_DOWN: lambda: self.find_element_down(operate),
                 ep.MOVE_SCROLLBAR_BOTTOM: lambda: self.move_scrollbar_bottom(operate),
-                ep.UPLOAD_FILE: lambda: self.upload_file(operate)
+                ep.UPLOAD_FILE: lambda: self.upload_file(operate),
+                ep.REFRESH_GET_TEXT: lambda: self.refresh_get_text(operate),
             }
             return elements[operate['operate_type']]()
 
@@ -113,6 +114,21 @@ class OperateElement():
                 operate["element_info"] +"__" + '没定位的错误' + msg
             )
             return {'result': False}
+
+    def refresh_get_text(self, operate):
+        old_text =self.get_text(operate)["text"]
+        time_out = int(operate["time_out"])
+        cs_time = 0
+        s_time = time.time()
+        while time_out > cs_time:
+            self.driver.refresh()
+            self.driver.implicitly_wait(3)
+            new_text =self.get_text(operate)["text"]
+            if new_text != old_text:
+                return {'result': True, 'text': new_text}
+            time.sleep(1)
+            cs_time = int(time.time() - s_time)
+        return {'result': False, 'text': new_text}
 
     # 上传文件 使用autoit可执行文件
     def upload_file(self, operate):

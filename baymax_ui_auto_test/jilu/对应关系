@@ -43,18 +43,21 @@ find_type: xpath  意思查找element的方式，如id,ids,xpath等
 operate_type: get_text  对element的操作类型 如 click，send_keys 等
               ####：operate_type： 如果填入的值 以‘+随机数’结尾， 会从 get_value容器取值  配合 index：使用
 check: compare       检查的方法 contrary default_check compare contrary_getval
-   - url_inequality_error:  检查当前URL是否符合预期
-   - url_contain:   获取的url包含预期的url
    - default_check: 检查  断言元素存在
    - contrary:   检查  断言元素不存在
-   - compare: 检查 断言前面页面的值 与后面页面某值相等       ---针对 get_text和get_value方法
-   - contrary_getval: 检查 断言前面页面的值 与后面页面某值不相等       ---针对 get_text和get_value方法
-   - attr_not_contain: 检查 断言前面获取属性值 不包含预期的属性值
-   - attr_contain: 检查 断言前面获取属性值 包含预期的属性值
+   - current_equal_expect: 当前值 等于 预期值
+   - current_contain_expect:  当前值 包含 预期值
+   - vessel_not_contain_expect: 容器 不包含 预期值
+   - vessel_contain_expect: 容器 包含 预期值
+   - vessel_contain_current: 容器  包含  当前值      ---针对 get_text和get_value方法
+   - vessel_not_contain_current: 容器 不包含 当前值     ---针对 get_text和get_value方法
    - displayed:  检查元素显示
    - not_displayed: 检查元素显示
    - expect_value_equal: 检查当前页面的属性值等于预期的值
-   - is_download: 文件有没有下载成功
+   - time_difference: 时间差
+        max_time:    容忍最大时间差 时间为秒 默认为5秒
+   - refrech_get_text: 刷新页面 并获取最新值
+        time_out: 超时时间
 expect_value: 输入预期的值 配合check  的expect_value方法使用
 attr_index: 配合 operate_type的get_attr、get_text、get_value使用  # get_text get_value get_attr方法存放属性值的位置
 attr_value: 此字段配合 check里的attr_not_contain，attr_contain使用 填入预期的属性值
@@ -69,7 +72,6 @@ expect_value:
     XXX拼接值后+前host+拼接
     # host 写法
     XXX拼接值后+前host+拼接
-
 
 - 容器:
 - get_value:

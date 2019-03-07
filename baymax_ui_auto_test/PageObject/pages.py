@@ -6,7 +6,7 @@ from time import sleep
 import os
 from common.Operate_str import *
 import time
-from common.OperateFile import new_download_file_mtime
+from common.operate_time import to_time_stamp
 import re
 
 PATH = lambda p: os.path.abspath(
@@ -89,7 +89,7 @@ class PagesObjects:
                     return result
 
                 L = [ElementParam.CONTRARY, ElementParam.VESSEL_CONTAIN_CURRENT, ElementParam.VESSEL_NOT_CONTAIN_CURRENT, ElementParam.CURRENT_CONTAIN_EXPECT, ElementParam.CURRENT_EQUAL_EXPECT,
-                    ElementParam.VESSEL_NOT_CONTAIN_EXPECT, ElementParam.VESSEL_CONTAIN_EXPECT, ElementParam.DISPLAYED, ElementParam.NOT_DISPLAYED, ElementParam.IS_DOWNLOAD]
+                    ElementParam.VESSEL_NOT_CONTAIN_EXPECT, ElementParam.VESSEL_CONTAIN_EXPECT, ElementParam.DISPLAYED, ElementParam.NOT_DISPLAYED, ElementParam.TIME_DIFFERENCE]
                 if i.get("check", 'ooo') not in L and i.get('check', ElementParam.DEFAULT_CHECK) != ElementParam.DEFAULT_CHECK:
                     msg = get_error_info({'type': ElementParam.VALUE_ERROR, 'value': i['check'], 'info': i['info']})
                     self.testInfo[0]['msg'] = msg
@@ -108,7 +108,7 @@ class PagesObjects:
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
-                 # 容器 不包含 当前值
+                # 容器 不包含 当前值
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.VESSEL_NOT_CONTAIN_CURRENT and self.is_get and op_re['text'] in self.get_value[i['expect_index']]:
                     msg = get_error_info({'type': ElementParam.VESSEL_NOT_CONTAIN_CURRENT, 'history': self.get_value, 'info': i['info'], 'current': op_re['text']})
                     self.testInfo[0]['msg'] = msg
@@ -153,8 +153,9 @@ class PagesObjects:
                     result = False
                     break
                 # 检查有没有成功下载文件
-                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.IS_DOWNLOAD and (time.time() - new_download_file_mtime()) > 5:
-                    msg = get_error_info({'type': ElementParam.IS_DOWNLOAD,  'info': i['info']})
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.TIME_DIFFERENCE and (time.time() - to_time_stamp(f_time=op_re.get("text", 0))) > i.get('max_time', 5):
+                    print(time.time() - to_time_stamp(f_time=op_re.get("text", 0)))
+                    msg = get_error_info({'type': ElementParam.TIME_DIFFERENCE,  'info': i['info']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
@@ -187,7 +188,6 @@ class PagesObjects:
                                 i.get('operate_type', 0) == ElementParam.GET_ATTR) and result.get('result', False):
             self.get_value.append(result['text'])
             self.is_get = True
-
 
 
 if __name__ == "__main__":

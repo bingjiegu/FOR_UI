@@ -17,6 +17,6 @@ def get_error_info(kw):
         ElementParam.DEFAULT_ERROR: lambda: '请检查%s是否存在' % kw['element_info'],
         ElementParam.VALUE_ERROR: lambda: '用例info：%s, YAML给出的value不合法值为：%s' % (kw["info"], kw['value']),
         ElementParam.CURRENT_EQUAL_EXPECT: lambda: '==检查点____info: %s___ 预期的属性值: %s 不等于获取的属性值: %s'% (kw["info"], kw['expect_value'], kw['get_attr']),
-        ElementParam.IS_DOWNLOAD: lambda: '==检查点____info: %s___ 文件没有下载' % kw["info"],
+        ElementParam.TIME_DIFFERENCE: lambda: '==检查点____info: %s__时间差不符合预期' % kw["info"],
     }
     return elements[kw['type']]()
