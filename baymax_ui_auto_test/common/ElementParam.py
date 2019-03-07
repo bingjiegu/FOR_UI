@@ -24,6 +24,7 @@ class ElementParam(object):
     FIND_DOWN = "find_down"  # 下拉菜单中向下查找元素
     MOVE_SCROLLBAR_BOTTOM = "move_scrollbar_bottom"  # 移动滚动条到某元素底部
     UPLOAD_FILE = "upload_file"  # 上传文件 使用autoit可执行文件
+    REFRESH_GET_TEXT = "refresh_get_text"  # 刷新页面获取数据
 
 
     # 错误日志
@@ -36,7 +37,6 @@ class ElementParam(object):
     VALUE_ERROR = "value_error"  # YAML给出的value不合法
     # URL_INEQUALITY_ERROR = "url_inequality_error"  # URL不相等错误
 
-
     # 检查点
     CONTRARY = "contrary"  # 相反检查点，表示如果检查元素存在就说明失败，如删除后，此元素依然存在
     DEFAULT_CHECK = "default_check"  # 默认检查点，查找页面元素是否存在
@@ -47,11 +47,9 @@ class ElementParam(object):
     CURRENT_CONTAIN_EXPECT = "current_contain_expect"  # 当前值 包含 预期值
     CURRENT_EQUAL_EXPECT = "current_equal_expect"  # 当前值 等于 预期值
 
-
     DISPLAYED = "displayed"  # 检查元素显示
     NOT_DISPLAYED = "not_displayed"  # 检查元素不显示
-    IS_DOWNLOAD = 'is_download'  # 检查是否成下载了任务
-
+    TIME_DIFFERENCE = 'time_difference'  # 检查是否成下载了任务
 
     # 文件名字
     INFO_FILE = "info.pickle"
@@ -59,9 +57,21 @@ class ElementParam(object):
     REPORT_FILE = "Report.xlsx"
 
 
-    URL = 'http://192.168.1.189:8515/#/login'
 
-    HOST = 'http://192.168.1.189:8515'
+
+    URL = 'http://192.168.1.83:8515/#/login'
+    HOST = 'http://192.168.1.83:8515'
+
+    # 页面url
+    #采集器页面
+    IMPORT_DATA_URL = HOST + "/#/collector/importData"  # 导入任务页
+    VIEW_URL = HOST + "/#/collector/autoui83/view/edb0d32c-1af9-4d6b-9534-4a7f7ea9da0b"  #采集器autoui83 详细信息页
+    TASK_LIST_URL = HOST + "/#/collector/autoui83/taskList/edb0d32c-1af9-4d6b-9534-4a7f7ea9da0b"  #采集器autoui83 任务列表页
+    DIR_URL = HOST + "/#/collector/autoui83/dir/edb0d32c-1af9-4d6b-9534-4a7f7ea9da0b"      #采集器autoui83 资源目录页
+
+
+
+
     #脚本版本
     VERSION = '2019-02-21'
 
