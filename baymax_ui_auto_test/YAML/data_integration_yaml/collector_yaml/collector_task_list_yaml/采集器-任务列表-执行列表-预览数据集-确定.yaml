@@ -1,0 +1,24 @@
+testinfo:
+- id: test088
+  title: 校验“采集器-任务列表-预览数据集-确定”页面校验
+  launch: 0
+  info: 先进入"采集器任务列表"目录
+testcase:
+- is_time: 1
+  info: 刷新页面后等待1秒
+- element_info: //*[@id="bm-ch-collector-detailTaskList-table"]/div[4]//table/tbody/tr[1]/td/div/a[contains(text(), '预览数据集')]
+  find_type: xpath
+  operate_type: click
+  info: 点击‘第一行导入任务'的预览
+  is_time: 0.5
+- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[3]/button/span[text()='确定']
+  find_type: xpath
+  operate_type: click
+  info: 点击‘数据集预览’确定按钮
+  is_time: 0.5
+check:
+- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[1]/h3[text()='数据集预览']
+  find_type: xpath
+  check: contrary
+  check_time: 2
+  info: ‘数据集预览’被关闭

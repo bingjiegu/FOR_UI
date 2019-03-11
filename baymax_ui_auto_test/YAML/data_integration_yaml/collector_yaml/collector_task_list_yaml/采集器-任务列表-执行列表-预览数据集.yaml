@@ -1,12 +1,12 @@
 testinfo:
-- id: test066
-  title: 校验“采集器-导入任务-预览”页面校验
+- id: test086
+  title: 校验“采集器-任务列表-预览”页面校验
   launch: 0
-  info: 先进入"采集器"目录
+  info: 先进入"采集器任务列表"目录
 testcase:
 - is_time: 1
   info: 刷新页面后等待1秒
-- element_info: //*[@id="bm-ch-collector-importDatas-table"]/div[3]/table/tbody/tr[1]/td/div/a[contains(text(), '预览')]
+- element_info: //*[@id="bm-ch-collector-detailTaskList-table"]/div[4]//table/tbody/tr[1]/td/div/a[contains(text(), '预览数据集')]
   find_type: xpath
   operate_type: click
   info: 点击‘第一行导入任务'的预览
@@ -19,21 +19,15 @@ check:
   find_type: xpath
   operate_type: get_text
   check: current_equal_expect
-  expect_value: 详情
-  info: 按钮"详情"存在
-- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[3]/button[2]/span
-  find_type: xpath
-  operate_type: get_text
-  check: current_equal_expect
   expect_value: 刷新
   info: 按钮"刷新"存在
-- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[3]/button[3]/span
+- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[3]/button[2]/span
   find_type: xpath
   operate_type: get_text
   check: current_equal_expect
   expect_value: 确定
   info: 按钮"确定"存在
-- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[3]/button[4]/span
+- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[3]/button[3]/span
   find_type: xpath
   operate_type: get_text
   check: current_equal_expect

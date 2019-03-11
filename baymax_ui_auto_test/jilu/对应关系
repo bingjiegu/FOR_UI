@@ -52,7 +52,7 @@ check: compare       检查的方法 contrary default_check compare contrary_get
    - vessel_contain_current: 容器  包含  当前值      ---针对 get_text和get_value方法
    - vessel_not_contain_current: 容器 不包含 当前值     ---针对 get_text和get_value方法
    - displayed:  检查元素显示
-   - not_displayed: 检查元素显示
+   - not_displayed: 检查元素不显示
    - expect_value_equal: 检查当前页面的属性值等于预期的值
    - time_difference: 时间差
         max_time:    容忍最大时间差 时间为秒 默认为5秒

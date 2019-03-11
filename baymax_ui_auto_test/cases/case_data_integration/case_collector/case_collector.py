@@ -206,7 +206,7 @@ class CollectorTaskListTest(ParametrizedTestCase):
             return wrapper
         return decorator
 
-    # 校验“校验导入任务-执行列表-查看日志”
+    # 校验“校验采集器-资源目录-页面校验”
     def test_a072_collector_dir(self):
         self.to_resource_dir()
         app = {"logTest": self.logTest, "driver": self.driver,
@@ -216,7 +216,7 @@ class CollectorTaskListTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
-    # 校验“校验导入任务-执行列表-查看日志”
+    # 校验“校验采集器-资源目录-同步”
     @get_url(dir_url)
     def test_a073_collector_dir_sync(self):
         app = {"logTest": self.logTest, "driver": self.driver,
@@ -225,6 +225,149 @@ class CollectorTaskListTest(ParametrizedTestCase):
         page = CollectorPage(app)
         page.operate()
         page.check_point()
+
+    # 校验“校验采集器-详细信息-页面校验”
+    @get_url(view_url)
+    def test_a074_collector_detail(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-详细信息-页面校验.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-页面校验”
+    def test_a075_collector_task_list(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-页面校验.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-新建任务”
+    def test_a076_collector_task_list_create(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-新建任务.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-复制”
+    @get_url(taskList_url)
+    def test_a077_collector_task_list_copy(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-复制.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-启动”
+    @get_url(taskList_url)
+    def test_a078_collector_task_list_start(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-启动.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-停用”
+    def test_a079_collector_task_list_stop(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-停用.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-删除”
+    def test_a080_collector_task_list_delete(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-删除.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-同步任务信息”
+    def test_a081_collector_task_list_sync(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-同步任务信息.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+     # 校验“校验采集器-任务列表-数据源表预览”
+    def test_a082_collector_task_list_view(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-数据源表预览.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-执行列表”
+    def test_a083_collector_task_list_execute(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-执行列表.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-执行列表-查看日志”
+    @get_url(taskList_url)
+    def test_a084_collector_task_list_execute_view_log(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-执行列表-查看日志.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-执行列表-查看错误日志”
+    @get_url(taskList_url)
+    def test_a085_collector_task_list_execute_view_err_log(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-执行列表-查看错误日志.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-执行列表-预览数据集”
+    @get_url(taskList_url)
+    def test_a086_collector_task_list_execute_preview(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-执行列表-预览数据集.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-执行列表-预览数据集-关闭”
+    def test_a087_collector_task_list_execute_preview_close(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-执行列表-预览数据集-关闭.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-执行列表-预览数据集-确定”
+    def test_a088_collector_task_list_execute_preview_ok(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-执行列表-预览数据集-确定.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+
 
     @classmethod
     def setUpClass(cls):
