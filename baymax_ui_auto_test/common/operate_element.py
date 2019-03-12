@@ -79,6 +79,8 @@ class OperateElement():
                 ep.MOVE_SCROLLBAR_BOTTOM: lambda: self.move_scrollbar_bottom(operate),
                 ep.UPLOAD_FILE: lambda: self.upload_file(operate),
                 ep.REFRESH_GET_TEXT: lambda: self.refresh_get_text(operate),
+                ep.TO_IFRAME: lambda: self.to_iframe(operate),
+                ep.DEFAULT_CONTENT: lambda: self.switch_default_content()
             }
             return elements[operate['operate_type']]()
 
@@ -114,7 +116,23 @@ class OperateElement():
                 operate["element_info"] +"__" + '没定位的错误' + msg
             )
             return {'result': False}
+    #  切换到iframe
+    def to_iframe(self, operate):
+        if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
+            operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
+            self.driver.switch_to.frame(self.element_by(operate))
+        elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
+            operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
+            self.driver.switch_to.frame(self.element_by(operate)[operate["index"]])
+        return {'result': True}
 
+    # 从iframe切换回当前content
+    def switch_default_content(self):
+        self.driver.switch_to.default_content()
+        return {'result': True}
+
+
+    # 刷新页面 直到页面变化或超时 返回最后的text
     def refresh_get_text(self, operate):
         old_text =self.get_text(operate)["text"]
         time_out = int(operate["time_out"])
