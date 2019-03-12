@@ -25,6 +25,8 @@ class ElementParam(object):
     MOVE_SCROLLBAR_BOTTOM = "move_scrollbar_bottom"  # 移动滚动条到某元素底部
     UPLOAD_FILE = "upload_file"  # 上传文件 使用autoit可执行文件
     REFRESH_GET_TEXT = "refresh_get_text"  # 刷新页面获取数据
+    TO_IFRAME = "to_iframe"  # 切换到iframe
+    DEFAULT_CONTENT = "default_content"  # 从iframe 切换到当前
 
 
     # 错误日志
@@ -68,6 +70,10 @@ class ElementParam(object):
     VIEW_URL = HOST + "/#/collector/autoui83/view/edb0d32c-1af9-4d6b-9534-4a7f7ea9da0b"  #采集器autoui83 详细信息页
     TASK_LIST_URL = HOST + "/#/collector/autoui83/taskList/edb0d32c-1af9-4d6b-9534-4a7f7ea9da0b"  #采集器autoui83 任务列表页
     DIR_URL = HOST + "/#/collector/autoui83/dir/edb0d32c-1af9-4d6b-9534-4a7f7ea9da0b"      #采集器autoui83 资源目录页
+
+    # 数据监控
+    # 运维管控
+    OPERATIONAL_URL = HOST + "/#/hippo/index"
 
 
 
