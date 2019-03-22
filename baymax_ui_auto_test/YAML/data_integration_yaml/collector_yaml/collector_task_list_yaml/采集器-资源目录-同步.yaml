@@ -14,10 +14,10 @@ testcase:
   find_type: xpath
   operate_type: get_text
   info: 获取数据源“dbs_collector_orcl_info3” 最后同步时间
-- element_info: bm-ch-col-detailDir-meta-button
-  find_type: id
+- element_info: //*[@id="bm-ch-collector-detailDir-table"]/div[4]//td/div[text()="dbs_collector_orcl_info3"]//ancestor::td/following-sibling::td//button/span
+  find_type: xpath
   operate_type: click
-  info: 点击“同步” 按钮
+  info: 点击“元数据同步” 按钮
 check:
 - element_info: //td/div[text()="dbs_collector_orcl_info3"]/ancestor::td/following-sibling::td[7]/div
   find_type: xpath

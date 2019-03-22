@@ -284,6 +284,16 @@ class TaskControlTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
+    # 校验“任务警告-详情列表-告警规则-删除”
+    @get_url(task_control_url)
+    def test_a120_taskWarning_detail_warning_rule_delete(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_monitor_yaml/task_control_yaml/任务警告-详情列表-告警规则-删除.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = TaskControlPage(app)
+        page.operate()
+        page.check_point()
+
     @classmethod
     def setUpClass(cls):
         super(TaskControlTest, cls).setUpClass()

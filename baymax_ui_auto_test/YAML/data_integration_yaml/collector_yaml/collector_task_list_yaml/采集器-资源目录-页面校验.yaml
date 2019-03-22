@@ -22,9 +22,12 @@ testcase:
   info: 点击"采集器资源目录"按钮 进入 采集器资源目录
   is_time: 0.5
 check:
-- element_info: bm-ch-col-detailDir-meta-button
-  find_type: id
-  info: 断言“同步”按钮存在
-- element_info: //td/div[text()="dbs_collector_orcl_info3"]
+- element_info: //*[@id="bm-ch-collector-detailDir-table"]/div[4]//td/div[text()="dbs_collector_orcl_info3"]//ancestor::td/following-sibling::td//button/span
+  find_type: xpath
+  operate_type: get_text
+  check: current_equal_expect
+  expect_value: 元数据同步
+  info: 断言“元数据同步”按钮存在
+- element_info: //*[@id="bm-ch-collector-detailDir-table"]/div[3]//td/div[text()="dbs_collector_orcl_info3"]
   find_type: xpath
   info: 存在数据源‘dbs_collector_orcl_info3’

@@ -1,6 +1,6 @@
 testinfo:
 - id: test079
-  title: 校验“采集器任务”停用任务
+  title: 校验“采集器-任务列表-停用”任务
   launch: 0
   info: 先进入"采集器任务列表"
 testcase:

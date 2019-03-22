@@ -81,6 +81,13 @@ class PagesObjects:
                         break
 
                 op_re = self.operateElement.operate(i, self.testInfo, self.logTest)
+
+                if not op_re['result'] and (i.get('check', ElementParam.DEFAULT_CHECK) != ElementParam.CONTRARY):
+                    msg = get_error_info({'type': ElementParam.DEFAULT_ERROR, 'element_info': i['element_info']})
+                    self.testInfo[0]['msg'] = msg
+                    return False
+
+
                 # 默认检查点，检查元素存在
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.DEFAULT_CHECK and not op_re['result']:
                     msg = get_error_info({"type": ElementParam.DEFAULT_CHECK, "element_info": i['element_info'], "info": i['info']})
@@ -103,8 +110,8 @@ class PagesObjects:
                     result = False
                     break
                 # 容器  包含  当前值
-                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.VESSEL_CONTAIN_CURRENT and self.is_get and op_re['text'] not in self.get_value[i['expect_index']]:
-                    msg = get_error_info({'type': ElementParam.VESSEL_CONTAIN_CURRENT, 'history': self.get_value, 'info': i['info'], 'current': op_re['text']})
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.VESSEL_CONTAIN_CURRENT and self.is_get and op_re.get("text", "ooooooo没获取到textoooooooo") not in self.get_value[i['expect_index']]:
+                    msg = get_error_info({'type': ElementParam.VESSEL_CONTAIN_CURRENT, 'history': self.get_value, 'info': i['info'], 'current': op_re.get("text", "ooooooo没获取到textoooooooo")})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
