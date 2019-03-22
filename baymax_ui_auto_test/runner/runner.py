@@ -10,6 +10,7 @@ from cases.case_data_integration.case_file_management import FileManagementTest
 from cases.case_data_integration.case_collector.case_collector import CollectorTemplateTest, CollectorimportDataTest, CollectorTaskListTest
 from cases.case_data_integration.case_file_import.case_file_import import FileImportTest
 from cases.case_data_monitor.case_operational_monitoring.case_operational_monitoring import OperationalMonitoringTest
+from cases.case_data_monitor.case_task_control.case_task_control import TaskControlTest
 import unittest
 from datetime import datetime
 from common.TearDown import mk_file
@@ -31,6 +32,7 @@ def runnerCaseApp():
     suite.addTest(ParametrizedTestCase.parametrize(CollectorimportDataTest))
     suite.addTest(ParametrizedTestCase.parametrize(CollectorTaskListTest))
     suite.addTest(ParametrizedTestCase.parametrize(OperationalMonitoringTest))
+    suite.addTest(ParametrizedTestCase.parametrize(TaskControlTest))
     unittest.TextTestRunner(verbosity=2).run(suite)
     end_time = datetime.now()
     countDate(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), str((end_time - start_time).seconds) + "秒")

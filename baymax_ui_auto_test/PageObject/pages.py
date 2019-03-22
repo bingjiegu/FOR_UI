@@ -152,13 +152,15 @@ class PagesObjects:
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
-                # 检查有没有成功下载文件
+                # 检查有时间差小于预期时间
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.TIME_DIFFERENCE and (time.time() - to_time_stamp(f_time=op_re.get("text", 0))) > i.get('max_time', 5):
                     print(time.time() - to_time_stamp(f_time=op_re.get("text", 0)))
                     msg = get_error_info({'type': ElementParam.TIME_DIFFERENCE,  'info': i['info']})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break
+                if i.get('is_time', 0) != 0:
+                    sleep(i['is_time'])
         else:
             result = False
         return result

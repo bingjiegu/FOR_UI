@@ -2,7 +2,7 @@ from PageObject.pages import PagesObjects
 from common.operate_yaml import getYaml
 
 # 数据监控--运维管控页面
-class OperationalMonitoringPage:
+class TaskControlPage:
 
     def __init__(self, kwargs):
         _kwargs = {'driver': kwargs['driver'], 'logTest': kwargs['logTest'],

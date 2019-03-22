@@ -27,6 +27,8 @@ class ElementParam(object):
     REFRESH_GET_TEXT = "refresh_get_text"  # 刷新页面获取数据
     TO_IFRAME = "to_iframe"  # 切换到iframe
     DEFAULT_CONTENT = "default_content"  # 从iframe 切换到当前
+    REFRESH = "refresh"  # 刷新当前页面
+    CLEAR = "clear"  # 清楚输入框
 
 
     # 错误日志
@@ -51,20 +53,20 @@ class ElementParam(object):
 
     DISPLAYED = "displayed"  # 检查元素显示
     NOT_DISPLAYED = "not_displayed"  # 检查元素不显示
-    TIME_DIFFERENCE = 'time_difference'  # 检查是否成下载了任务
+    TIME_DIFFERENCE = 'time_difference'  # 检查时间差
 
     # 文件名字
     INFO_FILE = "info.pickle"
     SUM_FILE = "sum.pickle"
     REPORT_FILE = "Report.xlsx"
 
-
-
-
     URL = 'http://192.168.1.83:8515/#/login'
     HOST = 'http://192.168.1.83:8515'
 
     # 页面url
+    #资源目录
+    RESOURCE_MEN_URL = HOST + "/#/resourceMan"
+
     #采集器页面
     IMPORT_DATA_URL = HOST + "/#/collector/importData"  # 导入任务页
     VIEW_URL = HOST + "/#/collector/autoui83/view/edb0d32c-1af9-4d6b-9534-4a7f7ea9da0b"  #采集器autoui83 详细信息页
@@ -72,10 +74,8 @@ class ElementParam(object):
     DIR_URL = HOST + "/#/collector/autoui83/dir/edb0d32c-1af9-4d6b-9534-4a7f7ea9da0b"      #采集器autoui83 资源目录页
 
     # 数据监控
-    # 运维管控
-    OPERATIONAL_URL = HOST + "/#/hippo/index"
-
-
+    OPERATIONAL_URL = HOST + "/#/hippo/index"  # 运维管控
+    TASK_CONTROL_URL = HOST + "/#/hippo/taskControl"  # 任务监控
 
 
     #脚本版本

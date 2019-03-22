@@ -80,7 +80,9 @@ class OperateElement():
                 ep.UPLOAD_FILE: lambda: self.upload_file(operate),
                 ep.REFRESH_GET_TEXT: lambda: self.refresh_get_text(operate),
                 ep.TO_IFRAME: lambda: self.to_iframe(operate),
-                ep.DEFAULT_CONTENT: lambda: self.switch_default_content()
+                ep.DEFAULT_CONTENT: lambda: self.switch_default_content(),
+                ep.REFRESH: lambda: self.refresh(),
+                ep.CLEAR: lambda: self.clear(operate)
             }
             return elements[operate['operate_type']]()
 
@@ -116,6 +118,17 @@ class OperateElement():
                 operate["element_info"] +"__" + '没定位的错误' + msg
             )
             return {'result': False}
+
+    # 清除输入框
+    def clear(self, operate):
+        if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
+            operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
+            self.element_by(operate).clear()
+        elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
+            operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
+            self.element_by(operate)[operate["index"]].clear()
+        return {'result': True}
+
     #  切换到iframe
     def to_iframe(self, operate):
         if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
@@ -131,6 +144,10 @@ class OperateElement():
         self.driver.switch_to.default_content()
         return {'result': True}
 
+    # 刷新当前页面
+    def refresh(self):
+        self.driver.refresh()
+        return {'result': True}
 
     # 刷新页面 直到页面变化或超时 返回最后的text
     def refresh_get_text(self, operate):
