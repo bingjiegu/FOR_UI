@@ -37,6 +37,8 @@ testcase  操作=== 结构分解:  # 操作类型
  - index: 3 配合find_type使用 当find_type 为复数是 填写位置 如配合find_type为ids时
  - is_time: 5 如果有值 那么操作完此element后会等待 N 秒
  - attr:  配合 operate_type的get_attr使用 获取属性的属性字段 如name， class
+ - refresh_get_text:  # 刷新页面获取数据
+ - refresh: # 刷新当前页面
 
 检查信息
 字段：check
@@ -61,6 +63,7 @@ check: compare       检查的方法 contrary default_check compare contrary_get
    - refrech_get_text: 刷新页面 并获取最新值
         time_out: 超时时间
 expect_value: 输入预期的值 配合check  的expect_value方法使用
+expect_index: 容器中的位置，配合vessel_not_contain_expect等方法使用 为了获取容器中某位置的值
 attr_index: 配合 operate_type的get_attr、get_text、get_value使用  # get_text get_value get_attr方法存放属性值的位置
 attr_value: 此字段配合 check里的attr_not_contain，attr_contain使用 填入预期的属性值
 info: 详情页的标题和历史标题相等   检查的信息或者叫检查点的名字

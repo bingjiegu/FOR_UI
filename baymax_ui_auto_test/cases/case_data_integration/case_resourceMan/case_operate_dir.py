@@ -3,12 +3,15 @@ import unittest, os, sys
 from PageObject.data_integration_page.resourceMan_page.resourceMan_page import ResourceManPage
 from PageObject.home.home_page import HomePage
 from PageObject.login.login_page import LoginTestPage
+from common.ElementParam import ElementParam
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), p)
 )
 
 class OperateDirTest(ParametrizedTestCase):
+    resourceMan_url = ElementParam.RESOURCE_MEN_URL
+
     def login(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
                "caseName": sys._getframe().f_code.co_name}
@@ -21,6 +24,15 @@ class OperateDirTest(ParametrizedTestCase):
                "caseName": sys._getframe().f_code.co_name}
         page = HomePage(app)
         page.operate()
+
+    #链接到某url装饰器
+    def get_url(to_url):
+        def decorator(func):
+            def wrapper(self, *args, **kwargs):
+                self.driver.get(to_url)
+                func(self, *args, **kwargs)
+            return wrapper
+        return decorator
 
     # 校验“打开数据标准文件夹”
     def test_a017_open_dir(self):
@@ -71,6 +83,96 @@ class OperateDirTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
+    # 校验“创建jdbc_oracle数据源”
+    @get_url(resourceMan_url)
+    def test_b002_create_dbsource_jdbc_oracle(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建JDBC_oracle数据源.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“创建jdbc_hive数据源”
+    @get_url(resourceMan_url)
+    def test_b003_create_dbsource_jdbc_hive(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建JDBC_hive数据源.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“创建_http_数据源”
+    @get_url(resourceMan_url)
+    def test_b004_create_source_http(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建_http_数据源.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“创建_ftp_数据源”
+    @get_url(resourceMan_url)
+    def test_b005_create_source_ftp(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建_ftp_数据源.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“创建_socket_数据源”
+    @get_url(resourceMan_url)
+    def test_b006_create_source_socket(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建_SOCKET_数据源.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“创建_mongodb_数据源”
+    @get_url(resourceMan_url)
+    def test_b007_create_source_mongodb(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建_mongodb_数据源.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“创建_ElasticSearch_数据源”
+    @get_url(resourceMan_url)
+    def test_b008_create_source_ElasticSearch(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建_ElasticSearch_数据源.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“创建jdbc_oracle数据源_链接测试”
+    @get_url(resourceMan_url)
+    def test_b009_create_dbsource_jdbc_oracle_connect(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建JDBC_oracle数据源_链接测试.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
+
+
+
+
+    # # 校验“创建jdbc_hive数据源_链接测试”
+    # @get_url(resourceMan_url)
+    # def test_b010_create_dbsource_jdbc_hive_connect(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建JDBC_hive数据源_链接测试.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = ResourceManPage(app)
+    #     page.operate()
+    #     page.check_point()
+
+
+
+
+
+
     # 校验“创建jdbc数据源-链接测试”
     def test_a023_create_dbsource_jdbc_connect(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建JDBC数据源-链接测试.yaml"),
@@ -120,9 +222,18 @@ class OperateDirTest(ParametrizedTestCase):
         page.check_point()
 
 
-    # 校验“数据集-新建Dataset”
+    # 校验“数据集-新建_mysql_Dataset”
     def test_a030_create_Dataset(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据集-新建Dataset.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“数据集-新建_Oracle_Dataset”
+    @get_url(resourceMan_url)
+    def test_b001_create_Oracle_Dataset(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据集-新建-Oracle-Dataset.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = ResourceManPage(app)
         page.operate()
@@ -184,7 +295,6 @@ class OperateDirTest(ParametrizedTestCase):
         page = ResourceManPage(app)
         page.operate()
         page.check_point()
-
 
     # 校验“数据标准-新建standard”
     def test_a040_create_standard(self):
