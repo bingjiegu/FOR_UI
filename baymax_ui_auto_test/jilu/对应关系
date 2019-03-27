@@ -29,6 +29,8 @@ testcase  操作=== 结构分解:  # 操作类型
                 index2:  第二元素的位置 配合find_type使用 当find_type 为复数是 填写位置 如配合find_type为ids时
                 find_v:  要查找的值
                 find_time_out: 查找的超时时间时间为秒
+        - refresh_get_text: 刷新页面 并获取最新值
+            time_out: 超时时间
  - to_iframe:  # 切换到iframe
  - default_content:  # 从iframe 切换到当前
  - info: 此元素的基本信息 比如 登录按钮， 输入密码框等
@@ -40,6 +42,8 @@ testcase  操作=== 结构分解:  # 操作类型
  - refresh_get_text:  # 刷新页面获取数据
  - refresh: # 刷新当前页面
  - clear:  # 清楚输入框
+ - to_url:  # 跳转到某链接
+        url: # 要填写的url
 
 检查信息
 字段：check
@@ -51,6 +55,7 @@ check: compare       检查的方法 contrary default_check compare contrary_get
    - default_check: 检查  断言元素存在
    - contrary:   检查  断言元素不存在
    - current_equal_expect: 当前值 等于 预期值
+   - current_not_equal_expect: 当前值 不等于 预期值
    - current_contain_expect:  当前值 包含 预期值
    - vessel_not_contain_expect: 容器 不包含 预期值
    - vessel_contain_expect: 容器 包含 预期值
@@ -61,8 +66,7 @@ check: compare       检查的方法 contrary default_check compare contrary_get
    - expect_value_equal: 检查当前页面的属性值等于预期的值
    - time_difference: 时间差
         max_time:    容忍最大时间差 时间为秒 默认为5秒
-   - refrech_get_text: 刷新页面 并获取最新值
-        time_out: 超时时间
+
 expect_value: 输入预期的值 配合check  的expect_value方法使用
 expect_index: 容器中的位置，配合vessel_not_contain_expect等方法使用 为了获取容器中某位置的值
 attr_index: 配合 operate_type的get_attr、get_text、get_value使用  # get_text get_value get_attr方法存放属性值的位置

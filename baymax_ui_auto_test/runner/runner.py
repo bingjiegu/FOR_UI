@@ -11,6 +11,7 @@ from cases.case_data_integration.case_collector.case_collector import CollectorT
 from cases.case_data_integration.case_file_import.case_file_import import FileImportTest
 from cases.case_data_monitor.case_operational_monitoring.case_operational_monitoring import OperationalMonitoringTest
 from cases.case_data_monitor.case_task_control.case_task_control import TaskControlTest
+from cases.cases_data_govern.case_quality_analyze.case_quality_analyze import QualityAnalyzeTest
 import unittest
 from datetime import datetime
 from common.TearDown import mk_file
@@ -33,6 +34,7 @@ def runnerCaseApp():
     suite.addTest(ParametrizedTestCase.parametrize(CollectorTaskListTest))
     suite.addTest(ParametrizedTestCase.parametrize(OperationalMonitoringTest))
     suite.addTest(ParametrizedTestCase.parametrize(TaskControlTest))
+    suite.addTest(ParametrizedTestCase.parametrize(QualityAnalyzeTest))
     unittest.TextTestRunner(verbosity=2).run(suite)
     end_time = datetime.now()
     countDate(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), str((end_time - start_time).seconds) + "秒")
@@ -41,4 +43,4 @@ if __name__ == '__main__':
     mk_file()
     runnerCaseApp()
     writeExcel()
-    send()
+    # send()
