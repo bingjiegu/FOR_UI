@@ -29,6 +29,7 @@ class ElementParam(object):
     DEFAULT_CONTENT = "default_content"  # 从iframe 切换到当前
     REFRESH = "refresh"  # 刷新当前页面
     CLEAR = "clear"  # 清楚输入框
+    TO_URL = "to_url" # 跳转到某链接
 
 
     # 错误日志
@@ -50,6 +51,7 @@ class ElementParam(object):
     VESSEL_NOT_CONTAIN_EXPECT = "vessel_not_contain_expect"  # 容器 不包含 预期值
     CURRENT_CONTAIN_EXPECT = "current_contain_expect"  # 当前值 包含 预期值
     CURRENT_EQUAL_EXPECT = "current_equal_expect"  # 当前值 等于 预期值
+    CURRENT_NOT_EQUAL_EXPECT = "current_not_equal_expect"  # 当前值 不等于 预期值
 
     DISPLAYED = "displayed"  # 检查元素显示
     NOT_DISPLAYED = "not_displayed"  # 检查元素不显示
@@ -76,6 +78,10 @@ class ElementParam(object):
     # 数据监控
     OPERATIONAL_URL = HOST + "/#/hippo/index"  # 运维管控
     TASK_CONTROL_URL = HOST + "/#/hippo/taskControl"  # 任务监控
+
+    # 质量分析
+    EXECUTE_INFO_URL = HOST + "/#/qualityAnalysis/teInformation"   #  任务执行信息
+    ANALYZE_TEMPLATE_URL = HOST + "/#/qualityAnalysis/analysisTemplate"  # 分析模板URL
 
 
     #脚本版本

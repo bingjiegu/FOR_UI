@@ -62,23 +62,26 @@ class PagesObjects:
             for i in self.testcheck:
                 self.rw_get_value(i)  # 执行读写容器操作
 
-                if i.get('expect_value', '')[-3:] == '+拼接':
-                    regex =".*拼接值(.*)\+拼.*"
-                    matches = re.findall(regex, i['expect_value'])
-                    if len(matches) == 1:
-                        for match in matches:
-                            print(match)
-                            if match[:3] == "前+后":
-                                i['expect_value'] = i['expect_value'].split("拼接值")[0] + match[3:]
-                            elif match[:3] == "后+前":
-                                if match == '后+前host':
-                                    i['expect_value'] = ElementParam.HOST + i['expect_value'].split("拼接值")[0]
-                                else:
-                                    i['expect_value'] = match[3:] + i['expect_value'].split("拼接值")[0]
-                    else:
-                        print('expect_value值没有被正则表达式匹配到，正则表达式匹配到的值为：', matches)
-                        result = False
-                        break
+                try:
+                    if i.get('expect_value', '888')[-3:] == '+拼接':
+                        regex =".*拼接值(.*)\+拼.*"
+                        matches = re.findall(regex, i['expect_value'])
+                        if len(matches) == 1:
+                            for match in matches:
+                                print(match)
+                                if match[:3] == "前+后":
+                                    i['expect_value'] = i['expect_value'].split("拼接值")[0] + match[3:]
+                                elif match[:3] == "后+前":
+                                    if match == '后+前host':
+                                        i['expect_value'] = ElementParam.HOST + i['expect_value'].split("拼接值")[0]
+                                    else:
+                                        i['expect_value'] = match[3:] + i['expect_value'].split("拼接值")[0]
+                        else:
+                            print('expect_value值没有被正则表达式匹配到，正则表达式匹配到的值为：', matches)
+                            result = False
+                            break
+                except TypeError as msg:
+                    print(msg)
 
                 op_re = self.operateElement.operate(i, self.testInfo, self.logTest)
 
@@ -96,7 +99,8 @@ class PagesObjects:
                     return result
 
                 L = [ElementParam.CONTRARY, ElementParam.VESSEL_CONTAIN_CURRENT, ElementParam.VESSEL_NOT_CONTAIN_CURRENT, ElementParam.CURRENT_CONTAIN_EXPECT, ElementParam.CURRENT_EQUAL_EXPECT,
-                    ElementParam.VESSEL_NOT_CONTAIN_EXPECT, ElementParam.VESSEL_CONTAIN_EXPECT, ElementParam.DISPLAYED, ElementParam.NOT_DISPLAYED, ElementParam.TIME_DIFFERENCE]
+                    ElementParam.VESSEL_NOT_CONTAIN_EXPECT, ElementParam.VESSEL_CONTAIN_EXPECT, ElementParam.DISPLAYED, ElementParam.NOT_DISPLAYED, ElementParam.TIME_DIFFERENCE,
+                    ElementParam.CURRENT_NOT_EQUAL_EXPECT]
                 if i.get("check", 'ooo') not in L and i.get('check', ElementParam.DEFAULT_CHECK) != ElementParam.DEFAULT_CHECK:
                     msg = get_error_info({'type': ElementParam.VALUE_ERROR, 'value': i['check'], 'info': i['info']})
                     self.testInfo[0]['msg'] = msg
@@ -130,6 +134,12 @@ class PagesObjects:
                 # 当前值 等于 预期值
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.CURRENT_EQUAL_EXPECT and op_re['text'] != i.get('expect_value', 'ooo'):
                     msg = get_error_info({'type': ElementParam.CURRENT_EQUAL_EXPECT, 'info': i['info'], 'get_attr': op_re['text'], 'expect_value': i.get('expect_value', 'ooo')})
+                    self.testInfo[0]['msg'] = msg
+                    result = False
+                    break
+                # 当前值 不等于 预期值
+                if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.CURRENT_NOT_EQUAL_EXPECT and op_re['text'] == i.get('expect_value', 'ooo'):
+                    msg = get_error_info({'type': ElementParam.CURRENT_NOT_EQUAL_EXPECT, 'info': i['info'], 'get_attr': op_re['text'], 'expect_value': i.get('expect_value', 'ooo')})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break

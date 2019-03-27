@@ -82,7 +82,8 @@ class OperateElement():
                 ep.TO_IFRAME: lambda: self.to_iframe(operate),
                 ep.DEFAULT_CONTENT: lambda: self.switch_default_content(),
                 ep.REFRESH: lambda: self.refresh(),
-                ep.CLEAR: lambda: self.clear(operate)
+                ep.CLEAR: lambda: self.clear(operate),
+                ep.TO_URL: lambda: self.to_url(operate),
             }
             return elements[operate['operate_type']]()
 
@@ -118,6 +119,13 @@ class OperateElement():
                 operate["element_info"] +"__" + '没定位的错误' + msg
             )
             return {'result': False}
+
+    # 跳转到某URL
+    def to_url(self, operate):
+        url = ep.HOST + operate["url"]
+        self.driver.get(url)
+        self.driver.implicitly_wait(10)
+        return {'result': True}
 
     # 清除输入框
     def clear(self, operate):
@@ -260,12 +268,19 @@ class OperateElement():
             re_reulst = re.findall(r'[:.\-_a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate).text)
             text = ''.join(re_reulst)
             print('获取到的值为：', text)
+            if text == "":
+                text = "None"
+                print('text是none类型转化的值为：', text)
             return {'result': True, 'text': text}
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
             re_reulst = re.findall(r'[:.\-_a-zA-Z\d+\u4e00-\u9fa5]', self.element_by(operate)[operate['index']].text)
             text = ''.join(re_reulst)
             print('获取到的值为：', text)
+            print(type(text))
+            if text == "":
+                text = "None"
+                print('text是none类型转化的值为：', text)
             return {'result': True, 'text': text}
 
     def get_attr(self, operate):
@@ -273,11 +288,13 @@ class OperateElement():
             operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
             text = self.element_by(operate).get_attribute(operate['attr'])
             print('获取到的值为：', text)
+            text = str(text)
             return {'result': True, 'text': text}
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
             text =  self.element_by(operate)[operate['index']].get_attribute(operate['attr'])
             print('获取到的值为：', text)
+            text = str(text)
             return {'result': True, 'text': text}
 
     # 在下拉菜单中 向下查找元素 直到元素出现
