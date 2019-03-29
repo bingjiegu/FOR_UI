@@ -44,6 +44,11 @@ testcase  操作=== 结构分解:  # 操作类型
  - clear:  # 清楚输入框
  - to_url:  # 跳转到某链接
         url: # 要填写的url
+ - to_window:  # 切换到某个窗口
+      w_index:  # 第几个窗口
+ - close_window:  # 关闭当前窗口
+
+
 
 检查信息
 字段：check
@@ -75,6 +80,7 @@ info: 详情页的标题和历史标题相等   检查的信息或者叫检查�
 v_index: get_value容器中的位置 用于 随机数定位 # send_keys 方法存放属性值的位置
 join_value: 拼接字符串 值
 url: 对比url值
+
 
 - 预期值拼接:
 expect_value:

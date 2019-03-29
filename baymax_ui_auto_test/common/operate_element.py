@@ -84,6 +84,8 @@ class OperateElement():
                 ep.REFRESH: lambda: self.refresh(),
                 ep.CLEAR: lambda: self.clear(operate),
                 ep.TO_URL: lambda: self.to_url(operate),
+                ep.TO_WINDOW: lambda: self.to_window(operate),
+                ep.CLOSE_WINDOW: lambda: self.close_window(),
             }
             return elements[operate['operate_type']]()
 
@@ -135,6 +137,17 @@ class OperateElement():
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
             self.element_by(operate)[operate["index"]].clear()
+        return {'result': True}
+
+    # 切换window
+    def to_window(self, operate):
+        windows = self.driver.window_handles
+        self.driver.switch_to.window(windows[operate['w_index']])
+        return {'result': True}
+
+    # 关闭window
+    def close_window(self):
+        self.driver.close()
         return {'result': True}
 
     #  切换到iframe

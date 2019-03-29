@@ -70,6 +70,14 @@ class HomePageTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
+    # 校验 “数据治理--血缘分析”
+    def test_ba009_schema_analyze(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/元数据分析.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = HomePage(app)
+        page.operate()
+        page.check_point()
+
     # 校验 “数据治理--流程管理”
     def test_a009_flow_manage(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/流程管理.yaml"),

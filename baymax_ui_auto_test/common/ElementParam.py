@@ -29,7 +29,9 @@ class ElementParam(object):
     DEFAULT_CONTENT = "default_content"  # 从iframe 切换到当前
     REFRESH = "refresh"  # 刷新当前页面
     CLEAR = "clear"  # 清楚输入框
-    TO_URL = "to_url" # 跳转到某链接
+    TO_URL = "to_url"  # 跳转到某链接
+    TO_WINDOW = "to_window"  # 切换到某个窗口
+    CLOSE_WINDOW = "close_window"  # 关闭当前窗口
 
 
     # 错误日志
@@ -82,6 +84,14 @@ class ElementParam(object):
     # 质量分析
     EXECUTE_INFO_URL = HOST + "/#/qualityAnalysis/teInformation"   #  任务执行信息
     ANALYZE_TEMPLATE_URL = HOST + "/#/qualityAnalysis/analysisTemplate"  # 分析模板URL
+    ANALYZE_RULES_URL = HOST + "/#/qualityAnalysis/analysisRules"   # 分析规则URL
+    ER_STATISTICS_URL = HOST + "/#/qualityAnalysis/erStatistics"        # 评估结果统计
+
+    # 血缘分析
+    BLOOD_ANALYZE_URL = HOST + "/#/kinship/:id/"
+
+    # 元数据分析
+    SCHEMA_ANALYZE_URL = HOST + "/#/schemaAnalysis/:id/"
 
 
     #脚本版本

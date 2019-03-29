@@ -13,6 +13,8 @@ PATH = lambda p: os.path.abspath(
 class QualityAnalyzeTest(ParametrizedTestCase):
     execute_info_url = ElementParam.EXECUTE_INFO_URL
     analysis_template_url = ElementParam.ANALYZE_TEMPLATE_URL
+    analyze_rules_url = ElementParam.ANALYZE_RULES_URL
+    er_statistics_url = ElementParam.ER_STATISTICS_URL
 
     def login(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
@@ -32,6 +34,7 @@ class QualityAnalyzeTest(ParametrizedTestCase):
         def decorator(func):
             def wrapper(self, *args, **kwargs):
                 self.driver.get(to_url)
+                self.driver.implicitly_wait(8)
                 func(self, *args, **kwargs)
             return wrapper
         return decorator
@@ -316,6 +319,137 @@ class QualityAnalyzeTest(ParametrizedTestCase):
         page = QualityAnalyzaPage(app)
         page.operate()
         page.check_point()
+
+    # 校验“质量分析-分析模板-启动周期任务”
+    @get_url(analysis_template_url)
+    def test_a148_qualityanalyze_analyzetemplate_cycle(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-启动周期任务.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-分析模板-删除”
+    @get_url(analysis_template_url)
+    def test_a149_qualityanalyze_analyzetemplate_delete(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-删除.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-分析模板-编辑规则”
+    @get_url(analysis_template_url)
+    def test_a150_qualityanalyze_analyzetemplate_edit_rule(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-进入编辑规则.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-分析模板-任务页面”
+    @get_url(analysis_template_url)
+    def test_a151_qualityanalyze_analyzetemplate_task(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-任务页面.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-分析模板-分析规则-新建-EL规则”
+    @get_url(analyze_rules_url)
+    def test_a152_qualityanalyze_analyzetemplate_analyzerule_create_el(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-分析规则-新建-EL规则.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-分析模板-分析规则-删除-EL规则”
+    @get_url(analyze_rules_url)
+    def test_a153_qualityanalyze_analyzetemplate_analyzerule_delete_el(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-分析规则-删除-EL规则.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-分析模板-分析规则-新建-Extend规则”
+    @get_url(analyze_rules_url)
+    def test_a154_qualityanalyze_analyzetemplate_analyzerule_create_Extend(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-分析规则-新建-Extend规则.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-分析模板-分析规则-删除-Extend规则”
+    @get_url(analyze_rules_url)
+    def test_a155_qualityanalyze_analyzetemplate_analyzerule_delete_Extend(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-分析规则-删除-Extend规则.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-分析模板-分析规则-新建-sql规则”
+    @get_url(analyze_rules_url)
+    def test_a156_qualityanalyze_analyzetemplate_analyzerule_sql_Extend(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-分析规则-新建-sql规则.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-分析模板-分析规则-删除-sql规则”
+    @get_url(analyze_rules_url)
+    def test_a157_qualityanalyze_analyzetemplate_analyzerule_delete_sql(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-分析规则-删除-sql规则.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-评估结果统计-页面检查”
+    @get_url(er_statistics_url)
+    def test_a158_qualityanalyze_statistics_page(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-评估结果统计-页面检查.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-评估结果统计-取消勾选-质量评价-坏数据占比”
+    @get_url(er_statistics_url)
+    def test_a159_qualityanalyze_statistics_cancel_rate_bad(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-评估结果统计-取消勾选-质量评价-坏数据占比.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-评估结果统计-图形”
+    @get_url(er_statistics_url)
+    def test_a160_qualityanalyze_statistics_graph(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-评估结果统计-图形.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
 
     @classmethod
     def setUpClass(cls):
