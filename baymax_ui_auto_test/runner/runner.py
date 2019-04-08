@@ -14,6 +14,7 @@ from cases.case_data_monitor.case_task_control.case_task_control import TaskCont
 from cases.cases_data_govern.case_quality_analyze.case_quality_analyze import QualityAnalyzeTest
 from cases.cases_data_govern.case_blood_analyze.case_blood_analyze import BloodAnalyzeTest
 from cases.cases_data_govern.case_schema_analyze.case_schema_analyze import SchemaAnalyzeTest
+from cases.case_data_analyze.case_flow_management.case_flow_management import FlowManagementTest
 import unittest
 from datetime import datetime
 from common.TearDown import mk_file
@@ -39,6 +40,7 @@ def runnerCaseApp():
     suite.addTest(ParametrizedTestCase.parametrize(QualityAnalyzeTest))
     suite.addTest(ParametrizedTestCase.parametrize(BloodAnalyzeTest))
     suite.addTest(ParametrizedTestCase.parametrize(SchemaAnalyzeTest))
+    suite.addTest(ParametrizedTestCase.parametrize(FlowManagementTest))
     unittest.TextTestRunner(verbosity=2).run(suite)
     end_time = datetime.now()
     countDate(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), str((end_time - start_time).seconds) + "秒")

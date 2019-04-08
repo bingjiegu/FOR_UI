@@ -20,7 +20,7 @@ class PagesObjects:
         if kwargs['testmsg'][1]['testinfo'][0].get('launch', 0) == 0:           # 刷新当前页面
             print('=======================================刷新了页面========================================')
             self.driver.refresh()
-            # time.sleep(1.5)
+            time.sleep(0.6)
 
         self.operateElement = ""   # 操作元素的手柄
         self.isOperate = True     # 一个开关  默认为True operate失败时改为False  结果校验时 判断这个值为True就进行判断， 是False就不用校验结果
@@ -127,7 +127,7 @@ class PagesObjects:
                     break
                 # 当前值 包含 预期值
                 if i.get('check', ElementParam.DEFAULT_CHECK) == ElementParam.CURRENT_CONTAIN_EXPECT and i.get('expect_value', 'ooo') not in op_re['text']:
-                    msg = get_error_info({'type': ElementParam.CURRENT_CONTAIN_EXPECT, 'info': i['info'], 'get_url': op_re['text'], 'expect_url': i.get('expect_value', 'ooo')})
+                    msg = get_error_info({'type': ElementParam.CURRENT_CONTAIN_EXPECT, 'info': i['info'], 'get_value': op_re['text'], 'expect_value': i.get('expect_value', 'ooo')})
                     self.testInfo[0]['msg'] = msg
                     result = False
                     break

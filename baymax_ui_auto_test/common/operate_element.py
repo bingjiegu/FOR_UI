@@ -79,6 +79,7 @@ class OperateElement():
                 ep.MOVE_SCROLLBAR_BOTTOM: lambda: self.move_scrollbar_bottom(operate),
                 ep.UPLOAD_FILE: lambda: self.upload_file(operate),
                 ep.REFRESH_GET_TEXT: lambda: self.refresh_get_text(operate),
+                ep.REFRESH_GET_ATTR: lambda: self.refresh_get_attr(operate),
                 ep.TO_IFRAME: lambda: self.to_iframe(operate),
                 ep.DEFAULT_CONTENT: lambda: self.switch_default_content(),
                 ep.REFRESH: lambda: self.refresh(),
@@ -86,6 +87,8 @@ class OperateElement():
                 ep.TO_URL: lambda: self.to_url(operate),
                 ep.TO_WINDOW: lambda: self.to_window(operate),
                 ep.CLOSE_WINDOW: lambda: self.close_window(),
+                ep.DRAG_EL: lambda: self.drag_el(operate),
+                ep.DOUBLE_CLICK: lambda: self.double_click_opetate(operate),
             }
             return elements[operate['operate_type']]()
 
@@ -178,8 +181,26 @@ class OperateElement():
         s_time = time.time()
         while time_out > cs_time:
             self.driver.refresh()
-            self.driver.implicitly_wait(3)
+            time.sleep(2)
+            # self.driver.implicitly_wait(3)
             new_text =self.get_text(operate)["text"]
+            if new_text != old_text:
+                return {'result': True, 'text': new_text}
+            time.sleep(1)
+            cs_time = int(time.time() - s_time)
+        return {'result': False, 'text': new_text}
+
+     # 刷新页面 直到页面属性变化或超时 返回最后的text
+    def refresh_get_attr(self, operate):
+        old_text =self.get_attr(operate)["text"]
+        time_out = int(operate["time_out"])
+        cs_time = 0
+        s_time = time.time()
+        while time_out > cs_time:
+            self.driver.refresh()
+            time.sleep(2)
+            # self.driver.implicitly_wait(3)
+            new_text =self.get_attr(operate)["text"]
             if new_text != old_text:
                 return {'result': True, 'text': new_text}
             time.sleep(1)
@@ -219,6 +240,33 @@ class OperateElement():
         url = self.driver.current_url
         return {'result': True, 'text': url}
 
+    # 拖拽元素
+    def drag_el(self, operate):
+        action_chains = ActionChains(self.driver)
+        if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
+            operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
+            A = self.element_by(operate)
+        elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
+            operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
+            A = self.element_by(operate)[operate['index']]
+        if operate.get('find_type2') and operate.get('element_info2'):
+            if operate['find_type2'] == ep.find_element_by_id or operate['find_type2'] == ep.find_element_by_xpath or \
+                operate['find_type2'] == ep.find_element_by_name or operate['find_type2'] == ep.find_element_by_class_name:
+                B = self.element_by2(operate)
+            elif operate['find_type2'] == ep.find_elements_by_id or operate['find_type2'] == ep.find_elements_by_xpath or \
+                operate['find_type2'] == ep.find_elements_by_name or operate['find_type2'] == ep.find_elements_by_class_name:
+                B = self.element_by2(operate)[operate['index2']]
+            # 将元素A 拖拽到 元素B
+            action_chains.drag_and_drop(A, B).perform()
+            return {'result': True}
+        elif operate.get("move_to"):
+            # 元素A 拖拽到某个像素
+            action_chains.drag_and_drop_by_offset(self.element_by(operate), *tuple(eval(operate['move_to']))).perform()
+            return {'result': True}
+        print("缺少find_type2 或者 element_info2 或者 move_to")
+        return {'result': False}
+
+
     # 移动鼠标到某个像素
     def move_mouse(self, operate):
         ActionChains(self.driver).move_by_offset(*tuple(eval(operate['move_to']))).perform()
@@ -245,6 +293,18 @@ class OperateElement():
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
             self.element_by(operate)[operate['index']].click()
+            return {'result': True}
+
+    # 双击操作
+    def double_click_opetate(self, operate):
+        action_chains = ActionChains(self.driver)
+        if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
+            operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
+            action_chains.double_click(self.element_by(operate)).perform()
+            return {'result': True}
+        elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
+            operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
+            action_chains.double_click(self.element_by(operate)[operate['index']]).perform()
             return {'result': True}
 
     #鼠标悬停事件

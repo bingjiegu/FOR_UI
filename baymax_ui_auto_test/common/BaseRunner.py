@@ -2,8 +2,24 @@ import unittest, os
 from common.Logger import myLog
 from selenium import webdriver
 from common.ElementParam import ElementParam
+from selenium.webdriver.chrome.options import Options
 
 PATH = lambda p: os.path.abspath(os.path.join(os.path.dirname(__file__), p))
+
+# def get_driver():
+#     chromedriver = PATH("../exe/chromedriver.exe")
+#     os.environ["webdriver.chrome.driver"] = chromedriver
+#     chrome_options = Options()
+#     chrome_options.add_argument('--headless')
+#     driver = webdriver.Chrome(chromedriver, chrome_options=chrome_options)
+#     driver.maximize_window()  # 将浏览器最大化
+#     # driver = webdriver.Chrome()
+#     driver.get(ElementParam.URL)
+#     return driver
+
+# chrome_options = Options()
+# chrome_options.add_argument('--headless')
+# driver = webdriver.Chrome(chrome_options=chrome_options)
 
 def get_driver():
     chromedriver = PATH("../exe/chromedriver.exe")

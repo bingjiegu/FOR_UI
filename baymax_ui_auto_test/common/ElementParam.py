@@ -25,6 +25,7 @@ class ElementParam(object):
     MOVE_SCROLLBAR_BOTTOM = "move_scrollbar_bottom"  # 移动滚动条到某元素底部
     UPLOAD_FILE = "upload_file"  # 上传文件 使用autoit可执行文件
     REFRESH_GET_TEXT = "refresh_get_text"  # 刷新页面获取数据
+    REFRESH_GET_ATTR = "refresh_get_attr"  # 刷新页面获取属性
     TO_IFRAME = "to_iframe"  # 切换到iframe
     DEFAULT_CONTENT = "default_content"  # 从iframe 切换到当前
     REFRESH = "refresh"  # 刷新当前页面
@@ -32,6 +33,8 @@ class ElementParam(object):
     TO_URL = "to_url"  # 跳转到某链接
     TO_WINDOW = "to_window"  # 切换到某个窗口
     CLOSE_WINDOW = "close_window"  # 关闭当前窗口
+    DRAG_EL = "drag_el"  # 拖拽元素 到第二元素 或者 某个 像素
+    DOUBLE_CLICK = "double_click"  # 双击
 
 
     # 错误日志
@@ -88,10 +91,14 @@ class ElementParam(object):
     ER_STATISTICS_URL = HOST + "/#/qualityAnalysis/erStatistics"        # 评估结果统计
 
     # 血缘分析
-    BLOOD_ANALYZE_URL = HOST + "/#/kinship/:id/"
+    BLOOD_ANALYZE_URL = HOST + "/#/kinship/:id/"  # 血缘分析 url
 
     # 元数据分析
-    SCHEMA_ANALYZE_URL = HOST + "/#/schemaAnalysis/:id/"
+    SCHEMA_ANALYZE_URL = HOST + "/#/schemaAnalysis/:id/"   # 元数据分析 url
+
+    # 数据分析
+    FLOW_MANAGEMENT_URL = HOST + "/#/design"  # 流程管理 url
+
 
 
     #脚本版本

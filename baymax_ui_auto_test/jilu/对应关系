@@ -31,6 +31,17 @@ testcase  操作=== 结构分解:  # 操作类型
                 find_time_out: 查找的超时时间时间为秒
         - refresh_get_text: 刷新页面 并获取最新值
             time_out: 超时时间
+        - refresh_get_attr:   刷新页面获取属性
+            time_out: 超时时间
+            attr: 属性值 class  等
+        - drag_el:  # 拖拽元素 到第二元素 或者 某个 像素
+            需要第二个元素:
+                element_info2: 第二元素的 的路径或者id等信息 与find_type2方式对应
+                find_type2: 第二元素的 的路径或者id等信息 与find_type方式对应
+                index2:  第二元素的位置 配合find_type使用 当find_type 为复数是 填写位置 如配合find_type为ids时
+            移动到某个像素:
+                move_to: (0, 0) 元组型
+
  - to_iframe:  # 切换到iframe
  - default_content:  # 从iframe 切换到当前
  - info: 此元素的基本信息 比如 登录按钮， 输入密码框等
@@ -47,6 +58,7 @@ testcase  操作=== 结构分解:  # 操作类型
  - to_window:  # 切换到某个窗口
       w_index:  # 第几个窗口
  - close_window:  # 关闭当前窗口
+ - double_click:  # 双击
 
 
 

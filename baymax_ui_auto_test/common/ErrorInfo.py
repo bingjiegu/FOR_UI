@@ -13,7 +13,7 @@ def get_error_info(kw):
         ElementParam.DISPLAYED: lambda: "==检查点____info:_%s___element:__%s__没有在页面显示" % (kw["info"], kw["element"]),
         ElementParam.NOT_DISPLAYED: lambda: "==检查点____info:_%s___element:__%s__在页面显示了" % (kw["info"], kw["element"]),
         # ElementParam.URL_INEQUALITY_ERROR: lambda : '预期的URL: %s 不等于获取的URL: %s'% (kw['expect_url'], kw['get_url']),
-        ElementParam.CURRENT_CONTAIN_EXPECT: lambda: '预期的URL: %s 不被获取的URL包含: %s'% (kw['expect_url'], kw['get_url']),
+        ElementParam.CURRENT_CONTAIN_EXPECT: lambda: '预期的值: %s 不被获取的值包含: %s'% (kw['expect_value'], kw['get_value']),
         ElementParam.DEFAULT_ERROR: lambda: '请检查%s是否存在' % kw['element_info'],
         ElementParam.VALUE_ERROR: lambda: '用例info：%s, YAML给出的value不合法值为：%s' % (kw["info"], kw['value']),
         ElementParam.CURRENT_EQUAL_EXPECT: lambda: '==检查点____info: %s___ 预期的属性值: %s 不等于获取的属性值: %s'% (kw["info"], kw['expect_value'], kw['get_attr']),
