@@ -26,7 +26,7 @@ class OperateXls:
         define_format_H2.set_color("#ffffff")
 
         worksheet.merge_range('A1:D1', '测试报告总概况', define_format_H1)
-        worksheet.merge_range('A2:D2', 'Baymax_ui_aotutest项目', define_format_H2)
+        worksheet.merge_range('A2:D2', 'Baymax_ui_autotest项目', define_format_H2)
 
         _write_center(worksheet, "A3", '测试日期', self.wd)
         _write_center(worksheet, "A4", '耗时', self.wd)

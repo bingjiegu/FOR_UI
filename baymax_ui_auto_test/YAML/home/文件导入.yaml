@@ -16,12 +16,9 @@ testcase:
   move_to: (0, 0)
   info: 移送鼠标到0,0像素
 check:
-- element_info: //*[text()="创建"]
-  find_type: xpath
-  info: 检查“创建按钮是否存在”
-- element_info: //*[contains(text(),'文件导入任务_周期执行new')]
-  find_type: xpath
-  info: 检查“此任务是否存在”
+- element_info: bm-ch-col-filesys-create-button
+  find_type: id
+  info: 断言“创建按钮存在”
 - operate_type: get_current_url
   check: current_equal_expect
   expect_value: /#/fileSynchronization拼接值后+前host+拼接

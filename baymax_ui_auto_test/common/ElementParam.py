@@ -102,6 +102,6 @@ class ElementParam(object):
 
 
     #脚本版本
-    VERSION = '2019-02-21'
+    VERSION = '2019-04-09'
 
 
