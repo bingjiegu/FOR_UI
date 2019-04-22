@@ -20,13 +20,13 @@ def mk_file():
     3. 把data 写入sum.pickle文件
     '''
     destroy()
-    mkdir_file(PATH("../Log/"+ElementParam.INFO_FILE))
-    mkdir_file(PATH("../Log/"+ElementParam.SUM_FILE))
+    mkdir_file(PATH("../log/"+ElementParam.INFO_FILE))
+    mkdir_file(PATH("../log/"+ElementParam.SUM_FILE))
 
-    data = read(PATH("../Log/"+ElementParam.INFO_FILE))
+    data = read(PATH("../log/"+ElementParam.INFO_FILE))
 
     data["version"] = ElementParam.VERSION
     data["sum"] = 0
     data["pass"] = 0
     data["fail"] = 0
-    write(data=data, path=PATH("../Log/"+ElementParam.SUM_FILE))
+    write(data=data, path=PATH("../log/"+ElementParam.SUM_FILE))
