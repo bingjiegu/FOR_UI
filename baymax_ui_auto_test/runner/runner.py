@@ -11,11 +11,11 @@ from cases.case_data_integration.case_collector.case_collector import CollectorT
 from cases.case_data_integration.case_file_import.case_file_import import FileImportTest
 from cases.case_data_monitor.case_operational_monitoring.case_operational_monitoring import OperationalMonitoringTest
 from cases.case_data_monitor.case_task_control.case_task_control import TaskControlTest
-from cases.cases_data_govern.case_quality_analyze.case_quality_analyze import QualityAnalyzeTest
-from cases.cases_data_govern.case_blood_analyze.case_blood_analyze import BloodAnalyzeTest
-from cases.cases_data_govern.case_schema_analyze.case_schema_analyze import SchemaAnalyzeTest
-from cases.case_data_analyze.case_flow_management.case_flow_management import FlowManagementTest
-from cases.case_data_analyze.case_project_dir.case_project_dir import ProjectDirTest
+# from cases.cases_data_govern.case_quality_analyze.case_quality_analyze import QualityAnalyzeTest
+# from cases.cases_data_govern.case_blood_analyze.case_blood_analyze import BloodAnalyzeTest
+# from cases.cases_data_govern.case_schema_analyze.case_schema_analyze import SchemaAnalyzeTest
+# from cases.case_data_analyze.case_flow_management.case_flow_management import FlowManagementTest
+# from cases.case_data_analyze.case_project_dir.case_project_dir import ProjectDirTest
 import unittest
 from datetime import datetime
 from common.TearDown import mk_file
