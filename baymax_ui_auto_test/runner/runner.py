@@ -15,32 +15,35 @@ from cases.cases_data_govern.case_quality_analyze.case_quality_analyze import Qu
 from cases.cases_data_govern.case_blood_analyze.case_blood_analyze import BloodAnalyzeTest
 from cases.cases_data_govern.case_schema_analyze.case_schema_analyze import SchemaAnalyzeTest
 from cases.case_data_analyze.case_flow_management.case_flow_management import FlowManagementTest
+from cases.case_data_analyze.case_project_dir.case_project_dir import ProjectDirTest
 import unittest
 from datetime import datetime
 from common.TearDown import mk_file
 from common.Count import countDate,writeExcel
 from common.Email import send
 
+
 def runnerCaseApp():
     start_time = datetime.now()
     suite = unittest.TestSuite()
     suite.addTest(ParametrizedTestCase.parametrize(LoginTest))
-    suite.addTest(ParametrizedTestCase.parametrize(HomePageTest))
-    suite.addTest(ParametrizedTestCase.parametrize(OperateDirTest))
-    suite.addTest(ParametrizedTestCase.parametrize(OperateDirTest2))
-    suite.addTest(ParametrizedTestCase.parametrize(DataImportTest))
-    suite.addTest(ParametrizedTestCase.parametrize(DataImportTest2))
-    suite.addTest(ParametrizedTestCase.parametrize(FileManagementTest))
-    suite.addTest(ParametrizedTestCase.parametrize(FileImportTest))
-    suite.addTest(ParametrizedTestCase.parametrize(CollectorTemplateTest))
-    suite.addTest(ParametrizedTestCase.parametrize(CollectorimportDataTest))
-    suite.addTest(ParametrizedTestCase.parametrize(CollectorTaskListTest))
-    suite.addTest(ParametrizedTestCase.parametrize(OperationalMonitoringTest))
-    suite.addTest(ParametrizedTestCase.parametrize(TaskControlTest))
-    suite.addTest(ParametrizedTestCase.parametrize(QualityAnalyzeTest))
-    suite.addTest(ParametrizedTestCase.parametrize(BloodAnalyzeTest))
-    suite.addTest(ParametrizedTestCase.parametrize(SchemaAnalyzeTest))
-    suite.addTest(ParametrizedTestCase.parametrize(FlowManagementTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(HomePageTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(OperateDirTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(OperateDirTest2))
+    # suite.addTest(ParametrizedTestCase.parametrize(DataImportTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(DataImportTest2))
+    # suite.addTest(ParametrizedTestCase.parametrize(FileManagementTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(FileImportTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(CollectorTemplateTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(CollectorimportDataTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(CollectorTaskListTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(OperationalMonitoringTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(TaskControlTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(QualityAnalyzeTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(BloodAnalyzeTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(SchemaAnalyzeTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(FlowManagementTest))
+    # suite.addTest(ParametrizedTestCase.parametrize(ProjectDirTest))
     unittest.TextTestRunner(verbosity=2).run(suite)
     end_time = datetime.now()
     countDate(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), str((end_time - start_time).seconds) + "秒")
@@ -49,4 +52,4 @@ if __name__ == '__main__':
     mk_file()
     runnerCaseApp()
     writeExcel()
-    send()
+    # send()
