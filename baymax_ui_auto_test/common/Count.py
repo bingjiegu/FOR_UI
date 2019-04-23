@@ -51,17 +51,17 @@ def count_sum(result):
         data["pass"] += 1
     else:
         data["fail"] += 1
-    write(data=data, path="../Log/" + ElementParam.SUM_FILE)
+    write(data=data, path="../log/" + ElementParam.SUM_FILE)
 
 def countDate(testDate, testSumDate):
-    data = read(PATH("../Log/" + ElementParam.SUM_FILE))
+    data = read(PATH("../log/" + ElementParam.SUM_FILE))
     if data:
         data["testDate"] = testDate
         data["testSumDate"] = testSumDate
-        write(data=data, path=PATH("../Log/" + ElementParam.SUM_FILE))
+        write(data=data, path=PATH("../log/" + ElementParam.SUM_FILE))
     else:
         print("统计数据失败")
-    data = read(PATH("../Log/" + ElementParam.SUM_FILE))
+    data = read(PATH("../log/" + ElementParam.SUM_FILE))
     print("==统计数据：%s==" % data)
 
 def writeExcel():
