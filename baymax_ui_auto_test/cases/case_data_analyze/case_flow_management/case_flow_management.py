@@ -146,7 +146,7 @@ class FlowManagementTest(ParametrizedTestCase):
     @get_url(flow_management_url)
     def test_a178_flow_management_flow_import(self):
         app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-import.yaml"),
+               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-导出.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = FlowManagementPage(app)
         page.operate()

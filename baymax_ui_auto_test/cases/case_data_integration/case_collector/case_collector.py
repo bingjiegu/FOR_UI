@@ -94,6 +94,7 @@ class CollectorimportDataTest(ParametrizedTestCase):
         page.check_point()
 
      # 校验“校验导入任务-同步任务信息”
+    @get_url(importData_url)
     def test_a064_collector_import_data_sync(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_import_data_yaml/采集器-导入任务-同步任务信息.yaml"),
@@ -103,6 +104,7 @@ class CollectorimportDataTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“校验导入任务页-数据源表预览”
+    @get_url(importData_url)
     def test_a065_collector_import_data_source(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_import_data_yaml/采集器-导入任务-数据源表预览.yaml"),
@@ -112,6 +114,7 @@ class CollectorimportDataTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“校验导入任务页-预览”
+    @get_url(importData_url)
     def test_a066_collector_import_data_preview(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_import_data_yaml/采集器-导入任务-预览.yaml"),
@@ -119,7 +122,6 @@ class CollectorimportDataTest(ParametrizedTestCase):
         page = CollectorPage(app)
         page.operate()
         page.check_point()
-
 
     # 校验“校验导入任务页-预览-关闭”
     def test_a067_collector_import_data_close(self):

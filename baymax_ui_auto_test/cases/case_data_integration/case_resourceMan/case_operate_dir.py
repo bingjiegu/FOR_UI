@@ -159,14 +159,14 @@ class OperateDirTest(ParametrizedTestCase):
 
 
 
-    # # 校验“创建jdbc_hive数据源_链接测试”
-    # @get_url(resourceMan_url)
-    # def test_b010_create_dbsource_jdbc_hive_connect(self):
-    #     app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建JDBC_hive数据源_链接测试.yaml"),
-    #            "caseName": sys._getframe().f_code.co_name}
-    #     page = ResourceManPage(app)
-    #     page.operate()
-    #     page.check_point()
+    # 校验“创建jdbc_hive数据源_链接测试”
+    @get_url(resourceMan_url)
+    def test_b010_create_dbsource_jdbc_hive_connect(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建JDBC_hive数据源_链接测试.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
 
 
 

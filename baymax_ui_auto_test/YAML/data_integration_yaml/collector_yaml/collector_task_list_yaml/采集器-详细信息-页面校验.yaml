@@ -41,7 +41,7 @@ check:
   check: current_equal_expect
   expect_value: 工具包版本
   info: 断言有“工具包版本” 存在
-- element_info: //header[text()="日志信息--"]
+- element_info: //header[contains(text(), "日志信息--")]
   find_type: xpath
   check: displayed
   info: 断言‘日志信息--'存在

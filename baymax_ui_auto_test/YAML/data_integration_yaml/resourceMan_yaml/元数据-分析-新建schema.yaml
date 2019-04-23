@@ -56,6 +56,7 @@ check:
 - element_info: //*[contains(text(), "保存失败 schemas 下，字段不能为空")]
   find_type: xpath
   check: contrary
+  check_time: 0.7
   info: 断言“没有异常的吐词”出现
 - element_info: //*[contains(text(), "保存成功")]
   find_type: xpath

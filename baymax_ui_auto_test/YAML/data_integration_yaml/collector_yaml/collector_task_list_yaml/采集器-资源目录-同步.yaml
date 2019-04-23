@@ -4,22 +4,20 @@ testinfo:
   launch: 0
   info: 先进入"采集器"
 testcase:
-- is_time: 1
-  info: 刷新页面后等待1秒
-- element_info: //td/div[text()="dbs_collector_orcl_info3"]/ancestor::td/preceding-sibling::td[1]//label
-  find_type: xpath
-  operate_type: click
-  info: 勾选数据源“dbs_collector_orcl_info3”
-- element_info: //td/div[text()="dbs_collector_orcl_info3"]/ancestor::td/following-sibling::td[7]/div
+- element_info: //td[not(contains(@class,"hidden"))]/div[text()="dbs_collector_orcl_info3"]/ancestor::td/following-sibling::td[7]/div
   find_type: xpath
   operate_type: get_text
   info: 获取数据源“dbs_collector_orcl_info3” 最后同步时间
-- element_info: //*[@id="bm-ch-collector-detailDir-table"]/div[4]//td/div[text()="dbs_collector_orcl_info3"]//ancestor::td/following-sibling::td//button/span
+- element_info: //div[text()="dbs_collector_orcl_info3"]//ancestor::td/following-sibling::td[not(contains(@class,"hidden"))]//button/span
   find_type: xpath
   operate_type: click
   info: 点击“元数据同步” 按钮
+- element_info: bm-ch-col-dataStore-submitDatasetPara-button
+  find_type: name
+  operate_type: click
+  info: 点击“同步”按钮
 check:
-- element_info: //td/div[text()="dbs_collector_orcl_info3"]/ancestor::td/following-sibling::td[7]/div
+- element_info: //td[not(contains(@class,"hidden"))]/div[text()="dbs_collector_orcl_info3"]/ancestor::td/following-sibling::td[7]/div
   find_type: xpath
   operate_type: refresh_get_text
   time_out: 60

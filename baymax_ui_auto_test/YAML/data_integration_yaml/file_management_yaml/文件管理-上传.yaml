@@ -55,7 +55,8 @@ testcase:
   operate_type: click
   info: 点击“预览文件”tab
 - operate_type: upload_file
-  info: 点击“预览文件”按钮
+  file_name: '上传文件.exe'
+  info: 执行“上传文件脚本”
 - element_info: bm-ch-file-container-upload-button
   find_type: id
   operate_type: click

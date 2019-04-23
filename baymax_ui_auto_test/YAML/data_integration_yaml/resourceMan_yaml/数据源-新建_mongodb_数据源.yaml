@@ -27,19 +27,36 @@ testcase:
   operate_type: send_keys
   msg: mongodb_source_+随机数
   info: 输入mongodb_source名称
-
-
 - element_info: bm-ch-resourceMan-mongoDBsource-attributes-address-input
   find_type: name
   operate_type: send_keys
   msg: 192.168.1.189
   info: 输入"地址"
-- element_info: bm-ch-resourceMan-socketDBsource-attributes-port-input
+- element_info: bm-ch-resourceMan-mongoDBsource-attributes-port-input
+  find_type: name
+  operate_type: clear
+  info: 清除"端口号"
+- element_info: bm-ch-resourceMan-mongoDBsource-attributes-port-input
   find_type: name
   operate_type: send_keys
   msg: 456786
   info: 输入"端口号"
-- element_info: bm-ch-resourceMan-socketDBsource-save-ok
+- element_info: bm-ch-resourceMan-mongoDBsource-attributes-username-input
+  find_type: name
+  operate_type: send_keys
+  msg: 456786
+  info: 输入"用户名"
+- element_info: bm-ch-resourceMan-mongoDBsource-attributes-password-input
+  find_type: name
+  operate_type: send_keys
+  msg: 456786
+  info: 输入"密码"
+- element_info: bm-ch-resourceMan-mongoDBsource-attributes-database-input
+  find_type: name
+  operate_type: send_keys
+  msg: 456786
+  info: 输入"数据库"
+- element_info: bm-ch-resourceMan-mongoDBsource-save-ok
   find_type: name
   operate_type: click
   info: 点击‘确定’按钮

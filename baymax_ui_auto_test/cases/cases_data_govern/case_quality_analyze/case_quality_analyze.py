@@ -59,15 +59,6 @@ class QualityAnalyzeTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
-    # 校验“质量分析-任务执行信息-查看模板信息”
-    @get_url(execute_info_url)
-    def test_a122_qualityanalyze_taskeexecuteinfo_modeinfo(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-任务执行信息-查看模板信息.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = QualityAnalyzaPage(app)
-        page.operate()
-        page.check_point()
 
     # 校验“质量分析-任务执行信息-查看模板信息-返回”
     def test_a123_qualityanalyze_taskeexecuteinfo_modeinfo_back(self):

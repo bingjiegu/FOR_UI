@@ -23,8 +23,8 @@ testcase:
   find_type: xpath
   operate_type: click
   info:  勾选“数据集flow_to_id_name_age_gender”
-- element_info:  //*[@id="bm-main"]/section/div/div/section/div[1]/div/div[3]/div/div[3]/div/button/span[text()="确定"]
-  find_type: xpath
+- element_info: ze-kinship-ok-button
+  find_type: name
   operate_type: click
   info:  在“弹框中点击确定按钮”
   is_time: 0.5

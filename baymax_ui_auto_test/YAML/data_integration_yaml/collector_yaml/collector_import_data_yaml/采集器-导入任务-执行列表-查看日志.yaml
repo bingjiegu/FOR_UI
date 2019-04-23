@@ -4,9 +4,17 @@ testinfo:
   launch: 0
   info: 先进入"导入任务"目录
 testcase:
-- is_time: 1
-  info: 刷新页面后等待1秒
-- element_info: //*[@id="bm-ch-collector-detailTaskList-table"]/div[3]/table/tbody/tr/td/div/a[contains(text(), 'collector_orcl_to_wac4')]//ancestor::td/following-sibling::td//a[contains(text(), '执行')]
+- element_info: //*[@name="bm-ch-col-importData-collectorId-searchListTable-search-select"]/input
+  find_type: xpath
+  operate_type: send_keys
+  msg: collector_orcl_to_wac4
+  info: 输入框输入“collector_orcl_to_wac4”文字
+- element_info: //*[@name="bm-ch-col-importData-collectorId-searchListTable-search-select"]//button
+  find_type: xpath
+  operate_type: click
+  info: 点击“搜索”按钮
+  is_time: 1
+- element_info: //*[@id="bm-ch-collector-importDatas-table"]//*[contains(text(), 'collector_orcl_to_wac4')]//ancestor::td/following-sibling::td//a[contains(text(), '执行')]
   find_type: xpath
   operate_type: click
   info: 点击名称为“collector_orcl_to_wac4”任务的“执行”

@@ -1,6 +1,6 @@
 testinfo:
 - id: test069
-  title: 校验“采集器-导入任务-执行列表”页面校验
+  title: 校验“采集器-导入任务-执行”页面校验
   launch: 0
   info: 先进入"采集器"目录
 testcase:

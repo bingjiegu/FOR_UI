@@ -4,6 +4,8 @@ testinfo:
   launch: 0
   info: 先进入资源目录
 testcase:
+- info: 等待‘1’秒
+  is_time: 1
 - element_info: 数据标准
   find_type: name
   operate_type: click
@@ -64,9 +66,9 @@ testcase:
   info: 点击‘确定’按钮
   is_time: 1
 check:
-- element_info: dir+随机数
+- element_info: //em[@name="数据标准"]/following-sibling::ul/*[@name='%s']+随机数
   v_index: 0
-  find_type: name
-  operate_type: is_displayed
-  check: not_displayed
-  info: 断言“dir+随机数”文件夹不存在
+  find_type: xpath
+  check: contrary
+  check_time: 1
+  info: 断言“被移动的文件夹”再此页面不存在

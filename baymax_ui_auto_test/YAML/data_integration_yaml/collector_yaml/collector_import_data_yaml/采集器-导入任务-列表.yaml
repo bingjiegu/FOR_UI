@@ -19,6 +19,6 @@ check:
   check: current_equal_expect
   expect_value: /#/collector/importData拼接值后+前host+拼接
   info: url地址正确
-- element_info: //*[@id="bm-ch-collector-importDatas-table"]/div[3]/table/tbody/tr/td[4]/div/a[contains(text(), 'C_IN_1')]
-  find_type: xpath
-  info: 同步对象列有值“C_IN_1”存在
+- element_info: bm-ch-col-importData-collectorId-select
+  find_type: name
+  info: 采集器ID“筛选框”存在

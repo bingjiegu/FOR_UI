@@ -57,7 +57,6 @@ class DataImportTest(ParametrizedTestCase):
 
     # 校验“数据导入-删除”任务
     def test_a057_delete_data_import(self):
-        self.to_resource_dir()
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-删除.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = DataImportPage(app)

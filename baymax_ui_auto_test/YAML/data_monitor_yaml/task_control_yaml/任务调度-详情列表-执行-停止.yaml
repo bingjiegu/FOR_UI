@@ -61,7 +61,7 @@ check:
   operate_type: get_text
   check: vessel_not_contain_current
   expect_index: 2
-  info: 断言当前“第一条”流程名称不等于停止前的流程名称
+  info: 断言当前修改时间不等于停止前修改的时间
 - element_info: //*[@id="bm-hippo-execute-table"]/div[3]/table/tbody/tr[1]/td[6]/div
   find_type: xpath
   operate_type: get_text

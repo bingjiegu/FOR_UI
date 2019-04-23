@@ -30,7 +30,7 @@ def get_driver():
     # driver = webdriver.Chrome(chromedriver)
 
 
-    # firefox 普通模式
+    # # firefox 普通模式
     # driver = webdriver.Firefox()
 
 

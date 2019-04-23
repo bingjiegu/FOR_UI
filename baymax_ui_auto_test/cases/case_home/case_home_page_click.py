@@ -118,6 +118,9 @@ class HomePageTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
+
+
+
     # # 校验 “实时计算--作业管理.yaml”
     # def test_a014_work_manage(self):
     #     app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/作业管理.yaml"),

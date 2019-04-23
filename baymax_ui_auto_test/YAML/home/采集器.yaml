@@ -16,8 +16,8 @@ testcase:
   move_to: (0, 0)
   info: 移送鼠标到0,0像素
 check:
-- element_info: //*[text()="创建"]
-  find_type: xpath
+- element_info: bm-ch-col-template-create-button
+  find_type: id
   info: 检查“创建按钮是否存在”
 - element_info: //button/*[contains(text(),'采集器')]
   find_type: xpath

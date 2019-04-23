@@ -209,7 +209,7 @@ class OperateElement():
 
     # 上传文件 使用autoit可执行文件
     def upload_file(self, operate):
-        main = PATH("../exe/上传文件.exe")
+        main = PATH("../exe/" + operate["file_name"])
         print(main)
         if os.path.exists(main):
             rc,out= subprocess.getstatusoutput(main)

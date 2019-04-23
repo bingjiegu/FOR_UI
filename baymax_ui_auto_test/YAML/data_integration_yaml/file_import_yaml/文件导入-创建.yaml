@@ -53,7 +53,7 @@ testcase:
   operate_type: send_keys
   msg: /wac_for_ftp/file_import_dir_+随机数
   info: 输入HDFS地址
-  is_time: 5
+  is_time: 0.5
 - element_info: //*[text()="下一步"]
   find_type: xpath
   operate_type: click

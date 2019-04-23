@@ -20,7 +20,7 @@ class PagesObjects:
         if kwargs['testmsg'][1]['testinfo'][0].get('launch', 0) == 0:           # 刷新当前页面
             print('=======================================刷新了页面========================================')
             self.driver.refresh()
-            time.sleep(0.6)
+            time.sleep(1)
 
         self.operateElement = ""   # 操作元素的手柄
         self.isOperate = True     # 一个开关  默认为True operate失败时改为False  结果校验时 判断这个值为True就进行判断， 是False就不用校验结果
