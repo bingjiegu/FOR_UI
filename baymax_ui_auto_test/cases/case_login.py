@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from common.BaseRunner import ParametrizedTestCase
 import unittest, os, sys
 from PageObject.login.login_page import LoginTestPage

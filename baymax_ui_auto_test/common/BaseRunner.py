@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import unittest, os
 from common.Logger import myLog
 from selenium import webdriver

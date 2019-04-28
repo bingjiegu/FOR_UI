@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from common.OperateFile import remove_file, mkdir_file
 from common.ElementParam import ElementParam
 from common.Operate_pickle import read,write

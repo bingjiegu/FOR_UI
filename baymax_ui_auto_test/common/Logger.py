@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import logging
 import os, time
 import threading
@@ -18,7 +20,7 @@ class Log:
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.INFO)
 
-        file_h = logging.FileHandler(os.path.join(log_path, 'out_put.log'))
+        file_h = logging.FileHandler(os.path.join(log_path, 'out_put.log'), encoding='utf-8')
         formatter = logging.Formatter('%(asctime)s  - %(levelname)s - %(message)s')
         file_h.setFormatter(formatter)
 

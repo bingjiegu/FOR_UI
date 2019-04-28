@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from common.BaseRunner import ParametrizedTestCase
 import unittest, os, sys, time
 from PageObject.data_integration_page.collector_page.collector_page import CollectorPage

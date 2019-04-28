@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import yaml
 from yaml.scanner import ScannerError
 import os

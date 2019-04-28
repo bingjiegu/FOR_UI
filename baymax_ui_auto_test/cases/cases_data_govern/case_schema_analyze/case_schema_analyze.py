@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from PageObject.data_govern_page.schema_analyze_page.schema_analyze_page import SchemaAnalyzaPage
 from common.BaseRunner import ParametrizedTestCase
 from common.ElementParam import ElementParam

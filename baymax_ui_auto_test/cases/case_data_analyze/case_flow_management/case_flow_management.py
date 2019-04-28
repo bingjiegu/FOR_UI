@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from PageObject.data_analyze_page.flow_management_page.flow_management_page import FlowManagementPage
 from common.BaseRunner import ParametrizedTestCase
 from common.ElementParam import ElementParam

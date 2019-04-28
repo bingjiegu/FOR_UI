@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from PageObject.data_monitor_page.task_control_page.task_control_page import TaskControlPage
 from common.BaseRunner import ParametrizedTestCase
 from common.ElementParam import ElementParam

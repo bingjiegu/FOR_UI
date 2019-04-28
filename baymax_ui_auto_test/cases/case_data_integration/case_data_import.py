@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from common.BaseRunner import ParametrizedTestCase
 import unittest, os, sys
 from PageObject.data_integration_page.data_import_page.data_import_page import DataImportPage

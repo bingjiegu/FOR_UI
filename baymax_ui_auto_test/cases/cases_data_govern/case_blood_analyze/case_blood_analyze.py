@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from PageObject.data_govern_page.blood_analyze_page.blood_analyze_page import BloodAnalyzaPage
 from common.BaseRunner import ParametrizedTestCase
 from common.ElementParam import ElementParam

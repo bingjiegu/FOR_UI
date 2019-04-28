@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from common.Operate_pickle import writeInfo, read, write, readInfo
 from common.ElementParam import ElementParam
 import os
@@ -43,7 +45,7 @@ def count_info(**kwargs):
 
 def count_sum(result):
     data = {"sum": 0, "pass": 0, "fail": 0}
-    _read = read("../Log/" + ElementParam.SUM_FILE)
+    _read = read("../log/" + ElementParam.SUM_FILE)
     if _read:
         data = _read
     data["sum"] += 1

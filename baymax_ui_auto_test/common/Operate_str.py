@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import random
 
 # 字符串A 是否在字符串B 中 ，在 返回True

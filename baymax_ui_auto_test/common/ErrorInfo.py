@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from common.ElementParam import ElementParam
 
 def get_error_info(kw):

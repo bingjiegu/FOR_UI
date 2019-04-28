@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from PageObject.data_monitor_page.operational_monitoring_page.operational_monitoring_page import OperationalMonitoringPage
 from common.BaseRunner import ParametrizedTestCase
 from common.ElementParam import ElementParam

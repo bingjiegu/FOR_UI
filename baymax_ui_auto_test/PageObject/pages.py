@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from common.operate_element import OperateElement
 from common.ErrorInfo import get_error_info
 from common.ElementParam import ElementParam

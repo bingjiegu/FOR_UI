@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from PageObject.data_analyze_page.project_dir_page.project_dir_page import ProjectDirPage
 from common.BaseRunner import ParametrizedTestCase
 from common.ElementParam import ElementParam

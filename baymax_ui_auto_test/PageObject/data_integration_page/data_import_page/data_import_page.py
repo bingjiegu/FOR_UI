@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from PageObject.pages import PagesObjects
 from common.operate_yaml import getYaml
 
