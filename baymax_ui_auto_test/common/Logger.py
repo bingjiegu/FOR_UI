@@ -12,7 +12,7 @@ class Log:
     def __init__(self, name):
         global resultPath, log_path  # 创建三个全局变量
         resultPath = PATH("../log")
-        log_path = resultPath + '\\' + name + time.strftime('%Y%m%d_%H%M%S', time.localtime())
+        log_path = resultPath + '/' + name + time.strftime('%Y%m%d_%H%M%S', time.localtime())
         if not os.path.exists(log_path):
             os.mkdir(log_path)
 

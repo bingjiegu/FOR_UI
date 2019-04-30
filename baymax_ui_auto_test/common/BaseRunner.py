@@ -27,19 +27,19 @@ PATH = lambda p: os.path.abspath(os.path.join(os.path.dirname(__file__), p))
 def get_driver():
 
     # chrome 普通模式
-    # chromedriver = PATH("../exe/chromedriver.exe")
-    # os.environ["webdriver.chrome.driver"] = chromedriver
-    # driver = webdriver.Chrome(chromedriver)
+    chromedriver = PATH("../exe/chromedriver.exe")
+    os.environ["webdriver.chrome.driver"] = chromedriver
+    driver = webdriver.Chrome(chromedriver)
 
-
+    # #
     # # firefox 普通模式
     # driver = webdriver.Firefox()
 
 
-    # firefox headless 模式
-    options = webdriver.FirefoxOptions()
-    options.add_argument('--headless')
-    driver = webdriver.Firefox(options=options)
+    # # firefox headless 模式
+    # options = webdriver.FirefoxOptions()
+    # options.add_argument('--headless')
+    # driver = webdriver.Firefox(options=options)
 
 
     driver.maximize_window()  # 将浏览器最大化
