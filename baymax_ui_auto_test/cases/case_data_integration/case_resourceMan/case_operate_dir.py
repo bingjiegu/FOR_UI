@@ -158,9 +158,6 @@ class OperateDirTest(ParametrizedTestCase):
         page.check_point()
 
 
-
-
-
     # 校验“创建jdbc_hive数据源_链接测试”
     @get_url(resourceMan_url)
     def test_b010_create_dbsource_jdbc_hive_connect(self):
@@ -169,11 +166,6 @@ class OperateDirTest(ParametrizedTestCase):
         page = ResourceManPage(app)
         page.operate()
         page.check_point()
-
-
-
-
-
 
     # 校验“创建jdbc数据源-链接测试”
     def test_a023_create_dbsource_jdbc_connect(self):
@@ -386,6 +378,64 @@ class OperateDirTest2(ParametrizedTestCase):
     @classmethod
     def tearDownClass(cls):
         pass
+
+
+
+
+
+
+
+
+'''
+    ---------------------------------------                        调试                              --------------------------------------------------------------------------------------------
+'''
+class OperateDirTestSSSS(ParametrizedTestCase):
+    resourceMan_url = ElementParam.RESOURCE_MEN_URL
+
+    def login(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = LoginTestPage(app)
+        page.operate()
+
+    def to_resource_dir(self):
+        self.login()
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/资源目录.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = HomePage(app)
+        page.operate()
+
+    #链接到某url装饰器
+    def get_url(to_url):
+        def decorator(func):
+            def wrapper(self, *args, **kwargs):
+                self.driver.get(to_url)
+                func(self, *args, **kwargs)
+            return wrapper
+        return decorator
+
+    # 校验“打开数据标准文件夹”
+    def test_a017_open_dir(self):
+        self.to_resource_dir()
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/展开文件夹.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
+
+    @classmethod
+    def setUpClass(cls):
+        super(OperateDirTestSSSS, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(OperateDirTestSSSS, cls).tearDownClass()
+
+
+
+
+
 
 if __name__ == "__main__":
     unittest.main()
