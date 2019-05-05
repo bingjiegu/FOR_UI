@@ -902,3 +902,77 @@ class ProjectDirTest(ParametrizedTestCase):
     @classmethod
     def tearDownClass(cls):
         super(ProjectDirTest, cls).tearDownClass()
+
+
+
+
+
+
+
+
+#### --------------------------------------=========================调试区====================================-------------------------------------------------------------
+
+
+# 项目目录页面测试
+class ProjectDirTest_SSSS(ParametrizedTestCase):
+    '''
+    flow_management_url = ElementParam.FLOW_MANAGEMENT_URL
+    project_dir_url = ElementParam.HOST + "/#/resourceManProject"
+    workflow_plan_url = ElementParam.HOST + "/#/design/plan/84a1f206-1a0c-4e26-93c0-8606548b3309?type=workflow"
+    '''
+    project_dir_url = ElementParam.HOST + "/#/resourceManProject"
+    project_dir_dataflow_plan_url = ElementParam.HOST + "/#/project/design/plan/c35f48e7-6c51-4fba-969e-294f43755a6d?type=dataflow"
+    project_dir_workflow_plan_url = ElementParam.HOST + "/#/project/design/plan/4dc7fed8-be31-4ba5-8a13-ecdcb81c396a?type=workflow"
+
+
+    def login(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = LoginTestPage(app)
+        page.operate()
+
+    def to_project_dir(self):
+        self.login()
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/项目目录.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = HomePage(app)
+        page.operate()
+
+    #链接到某url装饰器
+    def get_url(to_url):
+        def decorator(func):
+            def wrapper(self, *args, **kwargs):
+                self.driver.get(to_url)
+                # self.driver.implicitly_wait(8)
+                func(self, *args, **kwargs)
+            return wrapper
+        return decorator
+
+    # 校验“项目目录-新建项目”
+    def test_a241_project_dir_create_project(self):
+        self.to_project_dir()
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-新建项目.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ProjectDirPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“项目目录-flow-导入”
+    @get_url(project_dir_url)
+    def test_a257_project_dir_flow_import(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-flow-导入.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ProjectDirPage(app)
+        page.operate()
+        page.check_point()
+
+
+    @classmethod
+    def setUpClass(cls):
+        super(ProjectDirTest_SSSS, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(ProjectDirTest_SSSS, cls).tearDownClass()

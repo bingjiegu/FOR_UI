@@ -381,3 +381,83 @@ class CollectorTaskListTest(ParametrizedTestCase):
     def tearDownClass(cls):
         super(CollectorTaskListTest, cls).tearDownClass()
 
+
+###### ----------------------------------------------------------=========================调试区=======================---------------------------------------------------------
+
+# 采集器列表页
+class CollectorTemplateTest_SSSS(ParametrizedTestCase):
+    def login(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = LoginTestPage(app)
+        page.operate()
+
+    def to_resource_dir(self):
+        self.login()
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/采集器.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = HomePage(app)
+        page.operate()
+
+
+    @classmethod
+    def setUpClass(cls):
+        super(CollectorTemplateTest_SSSS, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(CollectorTemplateTest_SSSS, cls).tearDownClass()
+
+# 采集器 导入任务页测试
+class CollectorimportDataTest_SSSS(ParametrizedTestCase):
+    importData_url = ElementParam.IMPORT_DATA_URL
+    def login(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = LoginTestPage(app)
+        page.operate()
+
+    def to_resource_dir(self):
+        self.login()
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/采集器.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = HomePage(app)
+        page.operate()
+
+    #链接到某url装饰器
+    def get_url(url):
+        def decorator(func):
+            def wrapper(self, *args, **kwargs):
+                self.driver.get(url)
+                func(self, *args, **kwargs)
+            return wrapper
+        return decorator
+
+    # 校验“校验导入任务页”
+    def test_a063_collector_import_data(self):
+        self.to_resource_dir()
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_import_data_yaml/采集器-导入任务-列表.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验导入任务-执行列表-查看错误日志”
+    @get_url(importData_url)
+    def test_a071_collector_import_data_view_error_log(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_import_data_yaml/采集器-导入任务-执行列表-查看错误日志.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    @classmethod
+    def setUpClass(cls):
+        super(CollectorimportDataTest_SSSS, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(CollectorimportDataTest_SSSS, cls).tearDownClass()
+

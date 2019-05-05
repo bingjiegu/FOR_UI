@@ -303,3 +303,63 @@ class TaskControlTest(ParametrizedTestCase):
     @classmethod
     def tearDownClass(cls):
         super(TaskControlTest, cls).tearDownClass()
+
+
+
+
+############# -----------------------------------=====================调试区=============================----------------------------------------------------------------------
+
+# 任务监控页面测试
+class TaskControlTest_SSSS(ParametrizedTestCase):
+    task_control_url = ElementParam.TASK_CONTROL_URL
+
+    def login(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = LoginTestPage(app)
+        page.operate()
+
+    def to_resource_dir(self):
+        self.login()
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/任务监控.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = HomePage(app)
+        page.operate()
+
+    #链接到某url装饰器
+    def get_url(to_url):
+        def decorator(func):
+            def wrapper(self, *args, **kwargs):
+                self.driver.get(to_url)
+                func(self, *args, **kwargs)
+            return wrapper
+        return decorator
+
+    # 校验“任务监控-任务完成情况-详情”
+    def test_a095_taskControl_completion_detail(self):
+        self.to_resource_dir()
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_monitor_yaml/task_control_yaml/任务监控-任务完成情况-详情.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = TaskControlPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“任务调度-详情列表-执行-停止”
+    @get_url(task_control_url)
+    def test_a113_taskScheduler_detailList_execute_stop(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_monitor_yaml/task_control_yaml/任务调度-详情列表-执行-停止.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = TaskControlPage(app)
+        page.operate()
+        page.check_point()
+
+
+    @classmethod
+    def setUpClass(cls):
+        super(TaskControlTest_SSSS, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(TaskControlTest_SSSS, cls).tearDownClass()

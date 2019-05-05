@@ -12,30 +12,15 @@ testcase:
   info: 点击‘第一行导入任务'的预览
   is_time: 0.5
 check:
-- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[1]/h3[text()='数据集预览']
+- element_info: //*[@id="bm-com-collTask-dataset-dialog"]//*[text()='数据集预览']
   find_type: xpath
   info: ‘数据集预览’弹出被打开
-- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[3]/button[1]/span
-  find_type: xpath
-  operate_type: get_text
-  check: current_equal_expect
-  expect_value: 详情
-  info: 按钮"详情"存在
-- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[3]/button[2]/span
-  find_type: xpath
-  operate_type: get_text
-  check: current_equal_expect
-  expect_value: 刷新
+- element_info: bm-com-collTask-dataset-refresh-button
+  find_type: name
   info: 按钮"刷新"存在
-- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[3]/button[3]/span
-  find_type: xpath
-  operate_type: get_text
-  check: current_equal_expect
-  expect_value: 确定
-  info: 按钮"确定"存在
-- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[3]/button[4]/span
-  find_type: xpath
-  operate_type: get_text
-  check: current_equal_expect
-  expect_value: 取消
+- element_info: bm-com-collTask-dataset-cancle-button
+  find_type: name
   info: 按钮"取消"存在
+- element_info: bm-com-collTask-dataset-stop-refresh-button
+  find_type: name
+  info: 按钮"终止查询"存在

@@ -25,12 +25,6 @@ testcase:
   operate_type: click
   info: 点击第一条查看日志
   is_time: 0.5
-- element_info: //td/div/a[contains(text(), "查看日志")]
-  find_type: xpaths
-  index: 0
-  operate_type: click
-  info: 点击第一条查看日志
-  is_time: 0.5
 - element_info: //*[text()="错误日志"]
   find_type: xpath
   operate_type: click

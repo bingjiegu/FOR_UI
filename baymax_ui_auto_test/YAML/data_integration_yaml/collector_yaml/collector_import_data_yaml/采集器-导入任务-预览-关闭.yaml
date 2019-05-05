@@ -11,14 +11,16 @@ testcase:
   operate_type: click
   info: 点击‘第一行导入任务'的预览
   is_time: 0.5
-- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[1]/span
+- element_info: //*[@id="bm-com-collTask-dataset-dialog"]//*[text()='数据集预览']/following-sibling::button
   find_type: xpath
   operate_type: click
   info: 点击‘数据集预览’右上角的关闭按钮
   is_time: 0.5
 check:
-- element_info: //*[@id="bm-ch-taskDialog-dataSet-dialog-template"]/div[1]/h3[text()='数据集预览']
+- element_info: //*[@id="bm-com-collTask-dataset-dialog"]
   find_type: xpath
-  check: contrary
-  check_time: 2
+  operate_type: get_attr
+  attr: style
+  check: current_contain_expect
+  expect_value: "display: none"
   info: ‘数据集预览’被关闭

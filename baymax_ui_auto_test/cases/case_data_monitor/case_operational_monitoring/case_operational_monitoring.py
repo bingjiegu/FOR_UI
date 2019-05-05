@@ -103,3 +103,71 @@ class OperationalMonitoringTest(ParametrizedTestCase):
     @classmethod
     def tearDownClass(cls):
         super(OperationalMonitoringTest, cls).tearDownClass()
+
+
+
+
+###################  ----------------------------------------------------=========================调试区===========================--------------------------------------------------------------
+
+# 运维管控页 测试
+class OperationalMonitoringTest_SSSS(ParametrizedTestCase):
+    operational_url = ElementParam.OPERATIONAL_URL
+
+    def login(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = LoginTestPage(app)
+        page.operate()
+
+    def to_resource_dir(self):
+        self.login()
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/运维管控.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = HomePage(app)
+        page.operate()
+
+    #链接到某url装饰器
+    def get_url(to_url):
+        def decorator(func):
+            def wrapper(self, *args, **kwargs):
+                self.driver.get(to_url)
+                func(self, *args, **kwargs)
+            return wrapper
+        return decorator
+
+    # 校验“运维监控-集群详情-页面校验”
+    def test_a089_operational_monitoring_cluster_detail(self):
+        self.to_resource_dir()
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_monitor_yaml/operational_monitoring_yaml/运维监控-集群详情-页面校验.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = OperationalMonitoringPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“运维监控-数据源状态-查看全部”
+    @get_url(operational_url)
+    def test_a91_operational_monitoring_detail_view(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_monitor_yaml/operational_monitoring_yaml/运维监控-数据源状态-查看全部.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = OperationalMonitoringPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“运维监控-数据源状态-查看全部_详情”
+    def test_a92_operational_monitoring_detail_view_detail(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_monitor_yaml/operational_monitoring_yaml/运维监控-数据源状态-查看全部_详情.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = OperationalMonitoringPage(app)
+        page.operate()
+        page.check_point()
+
+    @classmethod
+    def setUpClass(cls):
+        super(OperationalMonitoringTest_SSSS, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(OperationalMonitoringTest_SSSS, cls).tearDownClass()
