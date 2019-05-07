@@ -22,8 +22,8 @@ testcase:
   v_index: 0
   operate_type: click
   info:  勾选“第一行的”flow
-- element_info: dropdown-toggle
-  find_type: name
+- element_info: //button/span[text()="操作"]
+  find_type: xpath
   operate_type: click
   info: 点击‘操作’按钮
   is_time: 0.5

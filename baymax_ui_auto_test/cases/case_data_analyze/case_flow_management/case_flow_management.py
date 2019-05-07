@@ -14,8 +14,8 @@ PATH = lambda p: os.path.abspath(
 # 流程管理页面测试
 class FlowManagementTest(ParametrizedTestCase):
     flow_management_url = ElementParam.FLOW_MANAGEMENT_URL
-    flow_plan_url = ElementParam.HOST + "/#/design/plan/36a372dd-4449-45a8-8c57-6e79cf2f96f7?type=dataflow"
-    workflow_plan_url = ElementParam.HOST + "/#/design/plan/84a1f206-1a0c-4e26-93c0-8606548b3309?type=workflow"
+    flow_plan_url = ElementParam.HOST + "/#/design/plan/d1942b2c-c78b-479c-9a75-65561b3381bf?type=dataflow"
+    workflow_plan_url = ElementParam.HOST + "/#/design/plan/698098e2-73ec-4f0b-9f43-54043e8cbaae?type=workflow"
 
 
     def login(self):
@@ -752,7 +752,6 @@ class FlowManagementTest(ParametrizedTestCase):
         page.check_point()
 
 
-
     @classmethod
     def setUpClass(cls):
         super(FlowManagementTest, cls).setUpClass()
@@ -760,3 +759,61 @@ class FlowManagementTest(ParametrizedTestCase):
     @classmethod
     def tearDownClass(cls):
         super(FlowManagementTest, cls).tearDownClass()
+
+
+
+# -----------------------------------------------------------===========================调试区====================================-----------------------------------------------------------
+
+# 流程管理页面测试
+class FlowManagementTest_SSSS(ParametrizedTestCase):
+    flow_management_url = ElementParam.FLOW_MANAGEMENT_URL
+    flow_plan_url = ElementParam.HOST + "/#/design/plan/d1942b2c-c78b-479c-9a75-65561b3381bf?type=dataflow"
+    # flow_plan_url = ElementParam.HOST + "/#/design/plan/36a372dd-4449-45a8-8c57-6e79cf2f96f7?type=dataflow"
+    # workflow_plan_url = ElementParam.HOST + "/#/design/plan/84a1f206-1a0c-4e26-93c0-8606548b3309?type=workflow"
+    workflow_plan_url = ElementParam.HOST + "/#/design/plan/698098e2-73ec-4f0b-9f43-54043e8cbaae?type=workflow"
+
+
+    def login(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = LoginTestPage(app)
+        page.operate()
+
+    def to_resource_dir(self):
+        self.login()
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/流程管理.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = HomePage(app)
+        page.operate()
+
+    #链接到某url装饰器
+    def get_url(to_url):
+        def decorator(func):
+            def wrapper(self, *args, **kwargs):
+                self.driver.get(to_url)
+                # self.driver.implicitly_wait(8)
+                func(self, *args, **kwargs)
+            return wrapper
+        return decorator
+
+    # 校验“流程管理-新建-dataflow”
+    def test_a167_flow_management_create_dataflow(self):
+        self.to_resource_dir()
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-新建-dataflow.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = FlowManagementPage(app)
+        page.operate()
+        page.check_point()
+
+
+
+
+    @classmethod
+    def setUpClass(cls):
+        super(FlowManagementTest_SSSS, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(FlowManagementTest_SSSS, cls).tearDownClass()
+

@@ -35,6 +35,7 @@ class ElementParam(object):
     CLOSE_WINDOW = "close_window"  # 关闭当前窗口
     DRAG_EL = "drag_el"  # 拖拽元素 到第二元素 或者 某个 像素
     DOUBLE_CLICK = "double_click"  # 双击
+    KEY_OPETATE = "key_operate" # 键盘操作
 
 
     # 错误日志

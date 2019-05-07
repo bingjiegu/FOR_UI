@@ -21,11 +21,24 @@ testcase:
   find_type: name
   operate_type: click
   info: 点击‘项目改名'的文字
-  is_time: 0.3
+  is_time: 3
 - element_info: bm-adddir-dialog-name-input
   find_type: name
-  operate_type: clear
-  info: 清除‘项目名称’按钮
+  operate_type: click
+  info: 点击弹框中的‘项目名称’
+  is_time: 0.2
+- element_info: bm-adddir-dialog-name-input
+  find_type: name
+  operate_type: key_operate
+  key_s: CONTROL
+  key_c: a
+  info: 键盘操作 control+a 全选输入框
+  is_time: 0.2
+- element_info: bm-adddir-dialog-name-input
+  find_type: name
+  operate_type: key_operate
+  key_s: DELETE
+  info: 键盘操作 DELETE删除输入框
   is_time: 0.2
 - element_info: bm-adddir-dialog-name-input
   find_type: name

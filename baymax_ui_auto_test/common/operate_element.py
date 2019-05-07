@@ -89,6 +89,7 @@ class OperateElement():
                 ep.CLOSE_WINDOW: lambda: self.close_window(),
                 ep.DRAG_EL: lambda: self.drag_el(operate),
                 ep.DOUBLE_CLICK: lambda: self.double_click_opetate(operate),
+                ep.KEY_OPETATE: lambda: self.key_operate(operate)
             }
             return elements[operate['operate_type']]()
 
@@ -140,6 +141,50 @@ class OperateElement():
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
             self.element_by(operate)[operate["index"]].clear()
+        return {'result': True}
+
+    # 键盘操作
+    def key_operate(self, operate):
+        if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
+            operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
+            if operate.get('key_c', 'aaaaaaaaaaaaaaaa') !=  'aaaaaaaaaaaaaaaa':
+                keys = {
+                    "CONTROL": lambda: self.element_by(operate).send_keys(Keys.CONTROL, operate['key_c']),
+                }
+                try:
+                    keys[operate['key_s']]()
+                except KeyError:
+                    print('==================key不对哦！=====================================')
+                    return {'result': False}
+            else:
+                keys = {
+                    "DELETE": lambda: self.element_by(operate).send_keys(Keys.DELETE),
+                }
+                try:
+                    keys[operate['key_s']]()
+                except KeyError:
+                    print('==================key不对哦！=====================================')
+                    return {'result': False}
+        elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
+            operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
+            if operate.get('key_c', 'aaaaaaaaaaaaaaaa') !=  'aaaaaaaaaaaaaaaa':
+                keys = {
+                    "CONTROL": lambda: self.element_by(operate)[operate["index"]].send_keys(Keys.CONTROL, operate['key_c']),
+                }
+                try:
+                    keys[operate['key_s']]()
+                except KeyError:
+                    print('==================key不对哦！=====================================')
+                    return {'result': False}
+            else:
+                keys = {
+                    "DELETE": lambda: self.element_by(operate)[operate["index"]].send_keys(Keys.DELETE),
+                }
+                try:
+                    keys[operate['key_s']]()
+                except KeyError:
+                    print('==================key不对哦！=====================================')
+                    return {'result': False}
         return {'result': True}
 
     # 切换window

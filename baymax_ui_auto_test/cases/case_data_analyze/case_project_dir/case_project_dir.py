@@ -948,21 +948,10 @@ class ProjectDirTest_SSSS(ParametrizedTestCase):
             return wrapper
         return decorator
 
-    # 校验“项目目录-新建项目”
-    def test_a241_project_dir_create_project(self):
-        self.to_project_dir()
+    # 校验“项目目录-项目删除”
+    def test_a243_project_dir_delete_project(self):
         app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-新建项目.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ProjectDirPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“项目目录-flow-导入”
-    @get_url(project_dir_url)
-    def test_a257_project_dir_flow_import(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-flow-导入.yaml"),
+               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-项目删除.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = ProjectDirPage(app)
         page.operate()

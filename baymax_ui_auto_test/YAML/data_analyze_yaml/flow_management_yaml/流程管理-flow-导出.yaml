@@ -1,5 +1,5 @@
 testinfo:
-- id: test_a177
+- id: test_a178
   title: 校验“流程管理-flow-导出”
   launch: 0
   info: 先进入流程管理
@@ -23,7 +23,7 @@ testcase:
   operate_type: click
   info: 点击‘目录’按钮
   is_time: 0.5
-- element_info: //li[@name="flowExport"]
+- element_info: //i[@name="flowExport"]/ancestor::li
   find_type: xpath
   operate_type: click
   info: 点击‘导出流程’按钮
