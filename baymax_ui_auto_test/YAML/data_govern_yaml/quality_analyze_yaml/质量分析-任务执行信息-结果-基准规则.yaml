@@ -15,7 +15,7 @@ testcase:
   find_type: xpath
   operate_type: move_scrollbar_bottom
   info: 移动进度条到模板规则“model-rule-字段不能为空”
-  is_time: 0.2
+  is_time: 0.8
 - element_info: //*[@id="bm-qa-tasks-taskResult-table"]/div[3]//a[contains(text(), "字段不能为空")]
   find_type: xpaths
   index: -1

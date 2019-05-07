@@ -15,7 +15,7 @@ testcase:
   find_type: xpath
   operate_type: move_scrollbar_bottom
   info: 移动进度条到模板规则“model-rule-字段不能为空”
-  is_time: 0.2
+  is_time: 0.7
 - element_info: //*[@id="bm-qa-tasks-taskResult-table"]//td/div/a[text()="model-rule-字段不能为空"]
   find_type: xpath
   operate_type: click
@@ -25,7 +25,7 @@ testcase:
   find_type: name
   operate_type: move_scrollbar_bottom
   info: 移动进度条到“取消”按钮
-  is_time: 0.2
+  is_time: 0.5
 - element_info: bm-qa-template-rules-rulebind-cancle
   find_type: name
   operate_type: click
