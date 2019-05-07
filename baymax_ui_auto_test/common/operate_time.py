@@ -16,7 +16,8 @@ def to_time_stamp(f_time=0):
         # L = [i for i in lists if re.findall(r'(download_.*?\.zip)', i)]  # 匹配以download开头 已经zip结尾的字符串
         L = [i for i in lists if re.findall(r'^(download||woven_qaoutput_qa_sink)_.*?\.zip$', i)]  # 匹配以download或woven_qaoutput_qa_sink开头 已经zip结尾的字符串
         L1 = [i for i in lists if re.findall(r'^(dir1-.*?\.woven$)', i)]
-        L = L + L1
+        L3 = [i for i in lists if re.findall(r'^(data.*?\.csv$)', i)]
+        L = L + L1 + L3
         if not L:
             return False
         L.sort(key=lambda fn:os.path.getmtime(directory + "\\" + fn))  # 按时间排序

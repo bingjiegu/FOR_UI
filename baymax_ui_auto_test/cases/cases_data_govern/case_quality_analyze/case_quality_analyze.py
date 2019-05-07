@@ -207,7 +207,7 @@ class QualityAnalyzeTest(ParametrizedTestCase):
     @get_url(execute_info_url)
     def test_a137_qualityanalyze_taskeexecuteinfo_result_view_back(self):
         app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-任务执行信息-结果-查看-返回.yaml"),
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-任务执行信息-结果-查看-取消.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = QualityAnalyzaPage(app)
         page.operate()
@@ -451,3 +451,107 @@ class QualityAnalyzeTest(ParametrizedTestCase):
     @classmethod
     def tearDownClass(cls):
         super(QualityAnalyzeTest, cls).tearDownClass()
+
+
+
+
+
+################ --------------------------------------------------===================调试区=====================------------------------------------------------------------------------------
+
+
+# 质量分析页面测试
+class QualityAnalyzeTest_SSSS(ParametrizedTestCase):
+    execute_info_url = ElementParam.EXECUTE_INFO_URL
+    analysis_template_url = ElementParam.ANALYZE_TEMPLATE_URL
+    analyze_rules_url = ElementParam.ANALYZE_RULES_URL
+    er_statistics_url = ElementParam.ER_STATISTICS_URL
+
+    def login(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = LoginTestPage(app)
+        page.operate()
+
+    def to_resource_dir(self):
+        self.login()
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/质量分析.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = HomePage(app)
+        page.operate()
+
+    #链接到某url装饰器
+    def get_url(to_url):
+        def decorator(func):
+            def wrapper(self, *args, **kwargs):
+                self.driver.get(to_url)
+                self.driver.implicitly_wait(8)
+                func(self, *args, **kwargs)
+            return wrapper
+        return decorator
+
+    # 校验“质量分析-分析模板-运行”
+    def test_a121_qualityanalyze_mode_run(self):
+        self.to_resource_dir()
+
+    # 校验“质量分析-分析模板-新建”
+    @get_url(analysis_template_url)
+    def test_a139_qualityanalyze_analyzetemplate_create(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-新建.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-分析模板-规则-新建”
+    @get_url(analysis_template_url)
+    def test_a140_qualityanalyze_analyzetemplate_rule_create(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-规则-新建.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+
+    # 校验“质量分析-分析模板-分析规则-新建-EL规则”
+    @get_url(analyze_rules_url)
+    def test_a152_qualityanalyze_analyzetemplate_analyzerule_create_el(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-分析规则-新建-EL规则.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-分析模板-分析规则-新建-Extend规则”
+    @get_url(analyze_rules_url)
+    def test_a154_qualityanalyze_analyzetemplate_analyzerule_create_Extend(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-分析规则-新建-Extend规则.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+        # 校验“质量分析-分析模板-分析规则-新建-sql规则”
+    @get_url(analyze_rules_url)
+    def test_a156_qualityanalyze_analyzetemplate_analyzerule_sql_Extend(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-分析规则-新建-sql规则.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+
+
+
+
+    @classmethod
+    def setUpClass(cls):
+        super(QualityAnalyzeTest_SSSS, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(QualityAnalyzeTest_SSSS, cls).tearDownClass()

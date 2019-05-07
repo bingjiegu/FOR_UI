@@ -6,10 +6,20 @@ testinfo:
 testcase:
 - info: “等待1秒”
   is_time: 1
-- element_info: //*[@id="bm-qa-analysisTemplate-table"]/div[3]/table/tbody/tr/td[2]/div/span[contains(text(), "auto_analyze_template_")]
+- element_info: bm-qa-analysisTemplate-search-input
+  find_type: name
+  operate_type: send_keys
+  msg: mode_test_initial
+  info: 在搜索框中输入“mode_test_initial”
+- element_info: bm-qa-analysisTemplate-search-btn
+  find_type: name
+  operate_type: click
+  info:  点击“数据集查询输入框后的”搜索按钮
+  is_time: 1
+- element_info: //*[@id="bm-qa-analysisTemplate-table"]/div[3]/table/tbody/tr/td/div/span[text()="mode_test_initial"]
   find_type: xpath
   operate_type: click
-  info: 点击“auto_analyze_template_”开头的分析模板
+  info: 点击“mode_test_initial”分析模板
   is_time: 0.5
 - element_info: template-edit-unlock
   find_type: name
