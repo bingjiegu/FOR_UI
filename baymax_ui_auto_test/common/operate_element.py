@@ -333,12 +333,28 @@ class OperateElement():
     def click_opetate(self, operate):
         if operate['find_type'] == ep.find_element_by_id or operate['find_type'] == ep.find_element_by_xpath or \
             operate['find_type'] == ep.find_element_by_name or operate['find_type'] == ep.find_element_by_class_name:
-            self.element_by(operate).click()
-            return {'result': True}
+            # self.element_by(operate).click()
+            # return {'result': True}
+            try:
+                self.element_by(operate).click()
+                return {'result': True}
+            except selenium.common.exceptions.ElementClickInterceptedException:
+                print('抓到了这个错：is not clickable at point')
+                time.sleep(1)
+                self.element_by(operate).click()
+                return {'result': True}
         elif operate['find_type'] == ep.find_elements_by_id or operate['find_type'] == ep.find_elements_by_xpath or \
             operate['find_type'] == ep.find_elements_by_name or operate['find_type'] == ep.find_elements_by_class_name:
-            self.element_by(operate)[operate['index']].click()
-            return {'result': True}
+            # self.element_by(operate)[operate['index']].click()
+            # return {'result': True}
+            try:
+                self.element_by(operate)[operate['index']].click()
+                return {'result': True}
+            except selenium.common.exceptions.ElementClickInterceptedException:
+                print('抓到了这个错：is not clickable at point')
+                time.sleep(1)
+                self.element_by(operate)[operate['index']].click()
+                return {'result': True}
 
     # 双击操作
     def double_click_opetate(self, operate):

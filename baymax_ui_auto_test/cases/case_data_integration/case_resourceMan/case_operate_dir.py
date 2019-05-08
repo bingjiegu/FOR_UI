@@ -381,11 +381,6 @@ class OperateDirTest2(ParametrizedTestCase):
 
 
 
-
-
-
-
-
 '''
     ---------------------------------------                        调试                              --------------------------------------------------------------------------------------------
 '''
@@ -417,7 +412,34 @@ class OperateDirTestSSSS(ParametrizedTestCase):
     # 校验“打开数据标准文件夹”
     def test_a017_open_dir(self):
         self.to_resource_dir()
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/展开文件夹.yaml"),
+
+    # 校验“新建数据标准文件夹”
+    def test_a019_create_dir(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/新建文件夹.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
+     # 校验“删除数据标准文件夹”
+    def test_a020_delete_dir(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/删除文件夹.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“移动数据标准文件夹”
+    def test_a021_move_dir(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/移动文件夹.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“创建jdbc数据源”
+    def test_a022_create_dbsource_jdbc(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建JDBC数据源.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = ResourceManPage(app)
         page.operate()

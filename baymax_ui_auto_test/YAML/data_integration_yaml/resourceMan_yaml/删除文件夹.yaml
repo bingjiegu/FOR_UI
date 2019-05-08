@@ -23,6 +23,7 @@ testcase:
   index: 0
   operate_type: click
   info: 点击第一个包含dir的文件夹名字
+  is_time: 1
 - element_info: //button/span[contains(text(), '目录')]
   find_type: xpath
   operate_type: click

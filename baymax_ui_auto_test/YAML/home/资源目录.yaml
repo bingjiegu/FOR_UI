@@ -16,6 +16,7 @@ testcase:
 - operate_type: move_by_offset
   move_to: (0, 0)
   info: 移送鼠标到0,0像素
+  is_time: 1
 check:
 - element_info: 数据源
   find_type: name
