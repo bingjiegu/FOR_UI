@@ -41,6 +41,10 @@ testcase  操作=== 结构分解:  # 操作类型
                 index2:  第二元素的位置 配合find_type使用 当find_type 为复数是 填写位置 如配合find_type为ids时
             移动到某个像素:
                 move_to: (0, 0) 元组型
+        - key_operate: #键盘操作
+            key_c: 组合键值 比如“a”
+            key_s: 键盘值比如 “CONTROL”控制 "DELETE"删除
+
 
  - to_iframe:  # 切换到iframe
  - default_content:  # 从iframe 切换到当前
