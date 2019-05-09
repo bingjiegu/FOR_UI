@@ -380,7 +380,6 @@ class OperateDirTest2(ParametrizedTestCase):
         pass
 
 
-
 '''
     ---------------------------------------                        调试                              --------------------------------------------------------------------------------------------
 '''
@@ -413,33 +412,19 @@ class OperateDirTestSSSS(ParametrizedTestCase):
     def test_a017_open_dir(self):
         self.to_resource_dir()
 
-    # 校验“新建数据标准文件夹”
-    def test_a019_create_dir(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/新建文件夹.yaml"),
+    # 校验“数据集-新建_Oracle_Dataset”
+    @get_url(resourceMan_url)
+    def test_b001_create_Oracle_Dataset(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据集-新建-Oracle-Dataset.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = ResourceManPage(app)
         page.operate()
         page.check_point()
 
-     # 校验“删除数据标准文件夹”
-    def test_a020_delete_dir(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/删除文件夹.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ResourceManPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“移动数据标准文件夹”
-    def test_a021_move_dir(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/移动文件夹.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ResourceManPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“创建jdbc数据源”
-    def test_a022_create_dbsource_jdbc(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建JDBC数据源.yaml"),
+    # 校验“创建jdbc_oracle数据源_链接测试”
+    @get_url(resourceMan_url)
+    def test_b009_create_dbsource_jdbc_oracle_connect(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建JDBC_oracle数据源_链接测试.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = ResourceManPage(app)
         page.operate()
@@ -453,10 +438,6 @@ class OperateDirTestSSSS(ParametrizedTestCase):
     @classmethod
     def tearDownClass(cls):
         super(OperateDirTestSSSS, cls).tearDownClass()
-
-
-
-
 
 
 if __name__ == "__main__":

@@ -250,6 +250,7 @@ class CollectorTaskListTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“校验采集器-任务列表-新建任务”
+    @get_url(view_url)
     def test_a076_collector_task_list_create(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-新建任务.yaml"),
@@ -371,8 +372,6 @@ class CollectorTaskListTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
-
-
     @classmethod
     def setUpClass(cls):
         super(CollectorTaskListTest, cls).setUpClass()
@@ -380,6 +379,9 @@ class CollectorTaskListTest(ParametrizedTestCase):
     @classmethod
     def tearDownClass(cls):
         super(CollectorTaskListTest, cls).tearDownClass()
+
+
+
 
 
 ###### ----------------------------------------------------------=========================调试区=======================---------------------------------------------------------
@@ -399,6 +401,31 @@ class CollectorTemplateTest_SSSS(ParametrizedTestCase):
         page = HomePage(app)
         page.operate()
 
+
+        # 校验“注册采集器”
+    def test_a060_create_collector(self):
+        self.to_resource_dir()
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_template_yaml/采集器-注册.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“编辑采集器”
+    def test_a061_edit_collector(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_template_yaml/采集器-编辑.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+     # 校验“删除采集器”
+    def test_a062_delete_collector(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_template_yaml/采集器-删除.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
 
     @classmethod
     def setUpClass(cls):
@@ -460,4 +487,114 @@ class CollectorimportDataTest_SSSS(ParametrizedTestCase):
     @classmethod
     def tearDownClass(cls):
         super(CollectorimportDataTest_SSSS, cls).tearDownClass()
+
+
+# 采集器 任务页测试
+class CollectorTaskListTest_SSSS(ParametrizedTestCase):
+    view_url = ElementParam.VIEW_URL  # 详细信息页
+    taskList_url = ElementParam.TASK_LIST_URL  # 任务列表页
+    dir_url = ElementParam.DIR_URL     # 资源目录页
+
+    def login(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = LoginTestPage(app)
+        page.operate()
+
+    def to_resource_dir(self):
+        self.login()
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/采集器.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = HomePage(app)
+        page.operate()
+
+    #链接到某url装饰器
+    def get_url(to_url):
+        def decorator(func):
+            def wrapper(self, *args, **kwargs):
+                self.driver.get(to_url)
+                func(self, *args, **kwargs)
+            return wrapper
+        return decorator
+
+    # 校验“校验采集器-资源目录-页面校验”
+    def test_a072_collector_dir(self):
+        self.to_resource_dir()
+
+    #     # 校验“校验采集器-详细信息-页面校验”
+    # @get_url(view_url)
+    # def test_a074_collector_detail(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver,
+    #            "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-详细信息-页面校验.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = CollectorPage(app)
+    #     page.operate()
+    #     page.check_point()
+    #
+    # # 校验“校验采集器-任务列表-页面校验”
+    # def test_a075_collector_task_list(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver,
+    #            "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-页面校验.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = CollectorPage(app)
+    #     page.operate()
+    #     page.check_point()
+
+    # 校验“校验采集器-任务列表-新建任务”
+    @get_url(view_url)
+    def test_a076_collector_task_list_create(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-新建任务.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+
+    # 校验“校验采集器-任务列表-复制”
+    @get_url(taskList_url)
+    def test_a077_collector_task_list_copy(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-复制.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-启动”
+    @get_url(taskList_url)
+    def test_a078_collector_task_list_start(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-启动.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-停用”
+    def test_a079_collector_task_list_stop(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-停用.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“校验采集器-任务列表-删除”
+    def test_a080_collector_task_list_delete(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-任务列表-删除.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
+
+    @classmethod
+    def setUpClass(cls):
+        super(CollectorTaskListTest_SSSS, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(CollectorTaskListTest_SSSS, cls).tearDownClass()
 

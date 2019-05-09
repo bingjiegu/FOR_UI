@@ -338,12 +338,6 @@ class TaskControlTest_SSSS(ParametrizedTestCase):
     # 校验“任务监控-任务完成情况-详情”
     def test_a095_taskControl_completion_detail(self):
         self.to_resource_dir()
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_monitor_yaml/task_control_yaml/任务监控-任务完成情况-详情.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = TaskControlPage(app)
-        page.operate()
-        page.check_point()
 
     # 校验“任务调度-详情列表-执行-停止”
     @get_url(task_control_url)

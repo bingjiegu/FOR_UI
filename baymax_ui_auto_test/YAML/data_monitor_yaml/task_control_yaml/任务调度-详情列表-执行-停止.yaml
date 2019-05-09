@@ -16,6 +16,17 @@ testcase:
   operate_type: click
   info: 点击“执行” tab
   is_time: 0.5
+- element_info: //*[@id="bm-hippo-execute-table"]/div[3]/table/tbody/tr[1]/td[1]/div/label
+  find_type: xpath
+  operate_type: click
+  info: 勾选第一个执行任务
+- element_info: bm-hippo-execute-rerun
+  find_type: id
+  operate_type: click
+  info: 点击“重启”按钮
+- operate_type: refresh
+  info: 刷新“当前页面”
+  is_time: 1
 - element_info: //*[@id="bm-hippo-execute-table"]/div[3]/table/tbody/tr[1]/td[2]/div/a
   find_type: xpath
   operate_type: get_text
@@ -41,6 +52,7 @@ check:
   find_type: xpath
   check: displayed
   info: 断言"恭喜你，重启已成功！"吐词出现
+  is_time: 2
 - operate_type: refresh
   info: 刷新“当前页面”
   is_time: 1

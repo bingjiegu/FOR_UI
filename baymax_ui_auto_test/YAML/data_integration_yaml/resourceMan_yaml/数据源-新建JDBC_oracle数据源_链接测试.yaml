@@ -61,6 +61,7 @@ testcase:
   operate_type: send_keys
   msg: CARPO
   info: 输入schema
+  is_time: 0.8
 - element_info: bm-ch-resMan-dbsource-testConnection-button
   find_type: id
   operate_type: click

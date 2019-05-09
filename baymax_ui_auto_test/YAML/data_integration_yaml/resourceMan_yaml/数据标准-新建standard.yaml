@@ -22,13 +22,13 @@ testcase:
   operate_type: click
   info: 点击新建下拉菜单中的‘标准’按钮
   is_time: 1
-- element_info:  bm-ch-resourceMan-standard-name-input
+- element_info: name
   find_type: name
   operate_type: send_keys
   msg: Standard_+随机数
   info: 输入Standard名称
-- element_info: bm-ch-resourceMan-standard-append-button
-  find_type: name
+- element_info: //button/span[contains(text(), '增加')]
+  find_type: xpath
   operate_type: click
   info: 点击 新建Standard页面中的‘增加’按钮
 - element_info: //div[@aria-label="标准配置"]//input[@placeholder="Name"]
@@ -46,8 +46,8 @@ testcase:
   operate_type: click
   info: 在 标准配置 弹框 中 点击“确定”按钮
   is_time: 0.3
-- element_info: bm-ch-resourceMan-standard-save-ok
-  find_type: name
+- element_info: //*[@id="bm-ch-resMan-standard-tmp"]//section/button/span[contains(text(), "确定")]
+  find_type: xpath
   operate_type: click
   is_time: 2
   info: 点击 新建Standard页面中的‘确定’按钮

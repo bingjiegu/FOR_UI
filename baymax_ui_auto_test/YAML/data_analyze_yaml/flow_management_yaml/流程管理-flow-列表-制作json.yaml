@@ -18,7 +18,7 @@ testcase:
   operate_type: click
   info: 点击‘操作’按钮
   is_time: 0.5
-- element_info: //li[@name="flowJson"]
+- element_info: //i[@name="flowJson"]
   find_type: xpath
   operate_type: click
   info: 点击‘制作Json’按钮

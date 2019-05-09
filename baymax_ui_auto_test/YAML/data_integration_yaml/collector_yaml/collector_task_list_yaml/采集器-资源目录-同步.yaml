@@ -12,6 +12,7 @@ testcase:
   find_type: xpath
   operate_type: click
   info: 点击“元数据同步” 按钮
+  is_time: 1
 - element_info: bm-ch-col-dataStore-submitDatasetPara-button
   find_type: name
   operate_type: click

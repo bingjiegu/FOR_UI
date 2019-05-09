@@ -952,100 +952,15 @@ class ProjectDirTest_SSSS(ParametrizedTestCase):
     def test_a241_project_dir_create_project(self):
         self.to_project_dir()
 
-    # 校验“项目目录-dataflow-step-调度”
+    # 校验“项目目录-flow-导出”
     @get_url(project_dir_url)
-    def test_a282_project_dir_dataflow_schedule(self):
+    def test_a261_project_dir_flow_export(self):
         app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-dataflow-step-调度.yaml"),
+               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-flow-导出.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = ProjectDirPage(app)
         page.operate()
         page.check_point()
-
-    # 校验“项目目录-dataflow-step-计划-调度”
-    @get_url( project_dir_dataflow_plan_url)
-    def test_a283_project_dir_dataflow_plan_schedule(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-dataflow-step-计划-调度.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ProjectDirPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“项目目录-dataflow-step-执行明细-running详细信息-schedule”
-    def test_a284_project_dir_dataflow_step_detail_info_running_schedule(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-dataflow-step-执行明细-running详细信息-schedule.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ProjectDirPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“项目目录-dataflow-step-执行明细-running输出-schedule”
-    def test_a285_project_dir_dataflow_step_export_running_schedule(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-dataflow-step-执行明细-running输出-schedule.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ProjectDirPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“项目目录-dataflow-step-执行明细-running日志-schedule”
-    def test_a286_project_dir_dataflow_step_log_running_schedule(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-dataflow-step-执行明细-running日志-schedule.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ProjectDirPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“项目目录-dataflow-step-执行历史-schedule”
-    def test_a287_project_dir_dataflow_step_history_schedule(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-dataflow-step-执行历史-schedule.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ProjectDirPage(app)
-        page.operate()
-        page.check_point()
-
-        # 校验“项目目录-dataflow-step-执行明细-success详细信息-schedule”
-    def test_a288_project_dir_dataflow_detail_info_success_schedule(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-dataflow-step-执行明细-success详细信息-schedule.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ProjectDirPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“项目目录-dataflow-step-执行明细-success输出-schedule”
-    def test_a289_project_dir_dataflow_export_success_schedule(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-dataflow-step-执行明细-success输出-schedule.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ProjectDirPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“项目目录-dataflow-step-执行明细-success输出-预览-schedule”
-    def test_a290_project_dir_dataflow_export_success_preview_schedule(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-dataflow-step-执行明细-success输出-预览-schedule.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ProjectDirPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“项目目录-dataflow-step-执行明细-success日志-schedule”
-    def test_a291_project_dir_dataflow_log_success_schedule(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-dataflow-step-执行明细-success日志-schedule.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ProjectDirPage(app)
-        page.operate()
-        page.check_point()
-
-
-
 
 
     @classmethod
