@@ -6,6 +6,7 @@ from common.ElementParam import ElementParam
 from PageObject.login.login_page import LoginTestPage
 from PageObject.home.home_page import HomePage
 import sys, os, time
+from common.case_false_rerun import rerun
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), p)
@@ -36,17 +37,19 @@ class ProjectDirTest(ParametrizedTestCase):
         page = HomePage(app)
         page.operate()
 
-    #链接到某url装饰器
-    def get_url(to_url):
+    def get_url(to_url=""):
+        # 连接到某个url且失败重跑的装饰器
         def decorator(func):
             def wrapper(self, *args, **kwargs):
-                self.driver.get(to_url)
-                # self.driver.implicitly_wait(8)
-                func(self, *args, **kwargs)
+                if to_url != "":
+                    self.driver.get(to_url)
+                    time.sleep(1)
+                rerun(self, to_url, func)
             return wrapper
         return decorator
 
     # 校验“项目目录-新建项目”
+    @get_url()
     def test_a241_project_dir_create_project(self):
         self.to_project_dir()
         app = {"logTest": self.logTest, "driver": self.driver,
@@ -57,6 +60,7 @@ class ProjectDirTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“项目目录-项目改名”
+    @get_url()
     def test_a242_project_dir_rename_project(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-项目改名.yaml"),
@@ -66,6 +70,7 @@ class ProjectDirTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“项目目录-项目删除”
+    @get_url()
     def test_a243_project_dir_delete_project(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-项目删除.yaml"),
@@ -75,6 +80,7 @@ class ProjectDirTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“项目目录-无数据-数据集列表”
+    @get_url()
     def test_a244_project_dir_datasets_nodata(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-无数据-数据集列表.yaml"),
@@ -84,6 +90,7 @@ class ProjectDirTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“项目目录-无数据-元数据列表”
+    @get_url()
     def test_a245_project_dir_schemas_nodata(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-无数据-元数据列表.yaml"),
@@ -93,6 +100,7 @@ class ProjectDirTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“项目目录-无数据-Flows列表”
+    @get_url()
     def test_a246_project_dir_flows_nodata(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-无数据-Flows列表.yaml"),
@@ -102,6 +110,7 @@ class ProjectDirTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“项目目录-数据集-新建hdfs数据集”
+    @get_url()
     def test_a247_project_dir_datasets_create_hdfs(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_analyze_yaml/project_dir_yaml/项目目录-数据集-新建hdfs数据集.yaml"),

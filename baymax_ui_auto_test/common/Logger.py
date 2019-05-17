@@ -68,6 +68,10 @@ class Log:
         time.sleep(1)
         return os.path.join(log_path, screenshotName)
 
+    def checkPoint_false_cancel(self):
+        # case失败重跑前取消
+        self.checkNo -= 1
+
 class myLog:
     """
     This class is used to get log

@@ -5,7 +5,8 @@ from common.BaseRunner import ParametrizedTestCase
 from common.ElementParam import ElementParam
 from PageObject.login.login_page import LoginTestPage
 from PageObject.home.home_page import HomePage
-import sys, os
+import sys, os, time
+from common.case_false_rerun import rerun
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), p)
@@ -31,17 +32,19 @@ class QualityAnalyzeTest(ParametrizedTestCase):
         page = HomePage(app)
         page.operate()
 
-    #链接到某url装饰器
-    def get_url(to_url):
+    def get_url(to_url=""):
+        # 连接到某个url且失败重跑的装饰器
         def decorator(func):
             def wrapper(self, *args, **kwargs):
-                self.driver.get(to_url)
-                self.driver.implicitly_wait(8)
-                func(self, *args, **kwargs)
+                if to_url != "":
+                    self.driver.get(to_url)
+                    time.sleep(1)
+                rerun(self, to_url, func)
             return wrapper
         return decorator
 
     # 校验“质量分析-分析模板-运行”
+    @get_url()
     def test_a121_qualityanalyze_mode_run(self):
         self.to_resource_dir()
         app = {"logTest": self.logTest, "driver": self.driver,
@@ -63,6 +66,7 @@ class QualityAnalyzeTest(ParametrizedTestCase):
 
 
     # 校验“质量分析-任务执行信息-查看模板信息-返回”
+    @get_url()
     def test_a123_qualityanalyze_taskeexecuteinfo_modeinfo_back(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-任务执行信息-查看模板信息-返回.yaml"),
@@ -479,29 +483,89 @@ class QualityAnalyzeTest_SSSS(ParametrizedTestCase):
         page = HomePage(app)
         page.operate()
 
-    #链接到某url装饰器
-    def get_url(to_url):
+    def get_url(to_url=""):
+        # 连接到某个url且失败重跑的装饰器
         def decorator(func):
             def wrapper(self, *args, **kwargs):
-                self.driver.get(to_url)
-                self.driver.implicitly_wait(8)
-                func(self, *args, **kwargs)
+                if to_url != "":
+                    self.driver.get(to_url)
+                    time.sleep(1)
+                rerun(self, to_url, func)
             return wrapper
         return decorator
 
-    # 校验“质量分析-分析模板-运行”
-    def test_a001_qualityanalyze_mode_run(self):
-        self.to_resource_dir()
 
-    # 校验“质量分析-任务执行信息-查看日志-关闭”
-    @get_url(execute_info_url)
-    def test_a127_qualityanalyze_taskeexecuteinfo_loginfo_close(self):
+    # 校验“质量分析-分析模板-运行”
+    @get_url()
+    def test_a121_qualityanalyze_mode_run(self):
+        self.to_resource_dir()
+        # app = {"logTest": self.logTest, "driver": self.driver,
+        #        "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-运行.yaml"),
+        #        "caseName": sys._getframe().f_code.co_name}
+        # page = QualityAnalyzaPage(app)
+        # page.operate()
+        # page.check_point()
+
+    #  # 校验“质量分析-任务执行信息-结果-查看”
+    # @get_url(execute_info_url)
+    # def test_a136_qualityanalyze_taskeexecuteinfo_result_view(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver,
+    #            "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-任务执行信息-结果-查看.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = QualityAnalyzaPage(app)
+    #     page.operate()
+    #     page.check_point()
+    #
+    # # 校验“质量分析-任务执行信息-结果-查看-取消”
+    # @get_url(execute_info_url)
+    # def test_a137_qualityanalyze_taskeexecuteinfo_result_view_back(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver,
+    #            "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-任务执行信息-结果-查看-取消.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = QualityAnalyzaPage(app)
+    #     page.operate()
+    #     page.check_point()
+    #
+    # # 校验“质量分析-任务执行信息-结果-查看-下载”
+    # @get_url(execute_info_url)
+    # def test_a138_qualityanalyze_taskeexecuteinfo_result_download(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver,
+    #            "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-任务执行信息-结果-下载.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = QualityAnalyzaPage(app)
+    #     page.operate()
+    #     page.check_point()
+    #
+    # # 校验“质量分析-分析模板-新建”
+    # @get_url(analysis_template_url)
+    # def test_a139_qualityanalyze_analyzetemplate_create(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver,
+    #            "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-新建.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = QualityAnalyzaPage(app)
+    #     page.operate()
+    #     page.check_point()
+    #
+    # # 校验“质量分析-分析模板-规则-新建”
+    # @get_url(analysis_template_url)
+    # def test_a140_qualityanalyze_analyzetemplate_rule_create(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver,
+    #            "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-规则-新建.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = QualityAnalyzaPage(app)
+    #     page.operate()
+    #     page.check_point()
+
+    # 校验“质量分析-分析模板-规则-运行”
+    @get_url(analysis_template_url)
+    def test_a141_qualityanalyze_analyzetemplate_rule_run(self):
         app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-任务执行信息-查看日志-关闭.yaml"),
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-规则-运行.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = QualityAnalyzaPage(app)
         page.operate()
         page.check_point()
+
 
 
     @classmethod

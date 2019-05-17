@@ -6,6 +6,7 @@ from common.ElementParam import ElementParam
 from PageObject.login.login_page import LoginTestPage
 from PageObject.home.home_page import HomePage
 import sys, os, time
+from common.case_false_rerun import rerun
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), p)
@@ -31,17 +32,19 @@ class FlowManagementTest(ParametrizedTestCase):
         page = HomePage(app)
         page.operate()
 
-    #链接到某url装饰器
-    def get_url(to_url):
+    def get_url(to_url=""):
+        # 连接到某个url且失败重跑的装饰器
         def decorator(func):
             def wrapper(self, *args, **kwargs):
-                self.driver.get(to_url)
-                # self.driver.implicitly_wait(8)
-                func(self, *args, **kwargs)
+                if to_url != "":
+                    self.driver.get(to_url)
+                    time.sleep(1)
+                rerun(self, to_url, func)
             return wrapper
         return decorator
 
     # 校验“流程管理-新建-dataflow”
+    @get_url()
     def test_a167_flow_management_create_dataflow(self):
         self.to_resource_dir()
         app = {"logTest": self.logTest, "driver": self.driver,
@@ -52,6 +55,7 @@ class FlowManagementTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“流程管理-新建-workflow”
+    @get_url()
     def test_a168_flow_management_create_workflow(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-新建-workflow.yaml"),
@@ -61,6 +65,7 @@ class FlowManagementTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“流程管理-新建-streamflow”
+    @get_url()
     def test_a169_flow_management_create_streamflow(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-新建-streamflow.yaml"),
@@ -70,6 +75,7 @@ class FlowManagementTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“流程管理-flow-重命名”
+    @get_url()
     def test_a170_flow_management_flow_rename(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-重命名.yaml"),
@@ -79,6 +85,7 @@ class FlowManagementTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“流程管理-flow-复制”
+    @get_url()
     def test_a171_flow_management_flow_copy(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-复制.yaml"),
@@ -88,6 +95,7 @@ class FlowManagementTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“流程管理-flow-移动”
+    @get_url()
     def test_a172_flow_management_flow_move(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-移动.yaml"),
@@ -97,6 +105,7 @@ class FlowManagementTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“流程管理-flow-删除”
+    @get_url()
     def test_a173_flow_management_flow_delete(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-删除.yaml"),
@@ -106,6 +115,7 @@ class FlowManagementTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“流程管理-flow-页面查看”
+    @get_url()
     def test_a174_flow_management_flow_view(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-页面查看.yaml"),

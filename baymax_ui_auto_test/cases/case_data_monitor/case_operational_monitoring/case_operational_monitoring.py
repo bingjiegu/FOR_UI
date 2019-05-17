@@ -5,7 +5,8 @@ from common.BaseRunner import ParametrizedTestCase
 from common.ElementParam import ElementParam
 from PageObject.login.login_page import LoginTestPage
 from PageObject.home.home_page import HomePage
-import sys, os
+import sys, os, time
+from common.case_false_rerun import rerun
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), p)
@@ -28,16 +29,19 @@ class OperationalMonitoringTest(ParametrizedTestCase):
         page = HomePage(app)
         page.operate()
 
-    #链接到某url装饰器
-    def get_url(to_url):
+    def get_url(to_url=""):
+        # 连接到某个url且失败重跑的装饰器
         def decorator(func):
             def wrapper(self, *args, **kwargs):
-                self.driver.get(to_url)
-                func(self, *args, **kwargs)
+                if to_url != "":
+                    self.driver.get(to_url)
+                    time.sleep(1)
+                rerun(self, to_url, func)
             return wrapper
         return decorator
 
     # 校验“运维监控-集群详情-页面校验”
+    @get_url()
     def test_a089_operational_monitoring_cluster_detail(self):
         self.to_resource_dir()
         app = {"logTest": self.logTest, "driver": self.driver,
@@ -68,6 +72,7 @@ class OperationalMonitoringTest(ParametrizedTestCase):
         page.check_point()
 
     # 校验“运维监控-数据源状态-查看全部_详情”
+    @get_url()
     def test_a92_operational_monitoring_detail_view_detail(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_monitor_yaml/operational_monitoring_yaml/运维监控-数据源状态-查看全部_详情.yaml"),

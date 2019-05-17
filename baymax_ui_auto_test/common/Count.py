@@ -55,6 +55,13 @@ def count_sum(result):
         data["fail"] += 1
     write(data=data, path="../log/" + ElementParam.SUM_FILE)
 
+def count_sum_false_cancel(result):
+    # 失败后重跑 sum 减 1
+    data = read("../log/" + ElementParam.SUM_FILE)
+    data["sum"] -= 1
+    data["fail"] -= 1
+    write(data=data, path="../log/" + ElementParam.SUM_FILE)
+
 def countDate(testDate, testSumDate):
     data = read(PATH("../log/" + ElementParam.SUM_FILE))
     if data:
