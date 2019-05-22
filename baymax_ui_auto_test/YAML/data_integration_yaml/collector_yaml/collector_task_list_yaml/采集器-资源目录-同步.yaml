@@ -18,10 +18,19 @@ testcase:
   operate_type: click
   info: 点击“同步”按钮
 check:
+- element_info: //*[@name="bm-ch-col-dataStore-log-dialog"]//span[text()="同步进度展示"]
+  find_type: xpath
+  info: 断言‘同步进度展示’出现
+- element_info: //*[@name="bm-ch-col-dataStore-log-progress"]//div[text()="100%"]
+  find_type: xpath
+  check_time: 300
+  info: 断言‘5分钟内进度条能走到100%’
+- operate_type: refresh
+  info: 刷新当前页面
+  is_time: 1
 - element_info: //td[not(contains(@class,"hidden"))]/div[text()="dbs_collector_orcl_info3"]/ancestor::td/following-sibling::td[7]/div
   find_type: xpath
-  operate_type: refresh_get_text
-  time_out: 60
+  operate_type: get_text
   check: vessel_not_contain_current
   expect_index: 0
   info: 断言：‘最后同步时间’有更新
