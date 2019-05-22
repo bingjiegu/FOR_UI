@@ -40,7 +40,7 @@ testcase:
 - element_info: bm-ch-resMan-dbsource-attributes-host-input
   find_type: name
   operate_type: send_keys
-  msg: 192.168.1.83
+  msg: 192.168.1.199
   info: 输入“IP或服务器名”
 - element_info: bm-ch-resMan-dbsource-attributes-database-input
   find_type: name
@@ -55,7 +55,7 @@ testcase:
 - element_info: bm-ch-resMan-dbsource-attributes-password-input
   find_type: name
   operate_type: send_keys
-  msg: merce
+  msg: 123456
   info: 输入密码
 - element_info: bm-ch-resMan-dbsource--save-ok
   find_type: name

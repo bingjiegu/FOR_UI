@@ -6,12 +6,14 @@ from PageObject.data_integration_page.data_import_page.data_import_page import D
 from PageObject.home.home_page import HomePage
 from PageObject.login.login_page import LoginTestPage
 from common.case_false_rerun import rerun
+from common.ElementParam import ElementParam
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(__file__)), p)
 )
 
 class DataImportTest(ParametrizedTestCase):
+    data_import_url = ElementParam.HOST + '/#/synchronization'
     def login(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
                "caseName": sys._getframe().f_code.co_name}
@@ -64,8 +66,26 @@ class DataImportTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
+    # 校验“数据导入-执行列表”任务
+    @get_url(data_import_url)
+    def test_a054_execute_list_data_import(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-执行列表.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = DataImportPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“数据导入-预览数据集”任务
+    @get_url(data_import_url)
+    def test_a055_preview_data_import(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-预览数据集.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = DataImportPage(app)
+        page.operate()
+        page.check_point()
+
     # 校验“数据导入-停用”任务
-    @get_url()
+    @get_url(data_import_url)
     def test_a056_stop_data_import(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-停用.yaml"),
                "caseName": sys._getframe().f_code.co_name}
@@ -82,7 +102,17 @@ class DataImportTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
-class DataImportTest2(ParametrizedTestCase):
+    @classmethod
+    def setUpClass(cls):
+        super(DataImportTest, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(DataImportTest, cls).tearDownClass()
+
+# ---------------------------------------------------------------------- 调试区 --------------------------------------------------------------------------------
+class DataImportTest_SSSS(ParametrizedTestCase):
+    data_import_url = ElementParam.HOST + '/#/synchronization'
     def login(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
                "caseName": sys._getframe().f_code.co_name}
@@ -107,39 +137,24 @@ class DataImportTest2(ParametrizedTestCase):
             return wrapper
         return decorator
 
-    # 校验“数据导入-执行列表”任务
+    # 校验“数据导入-创建”任务
     @get_url()
-    def test_a054_execute_list_data_import(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-执行列表.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = DataImportPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“数据导入-预览数据集”任务
-    @get_url()
-    def test_a055_preview_data_import(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-预览数据集.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = DataImportPage(app)
-        page.operate()
-        page.check_point()
-
-    def setUp(self):
-        super(DataImportTest2, self).setUpClass()
+    def test_a043_create_data_import(self):
         self.to_resource_dir()
-
-    def tearDown(self):
-        super(DataImportTest2, self).tearDownClass()
-
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/data_import_yaml/数据导入-创建.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = DataImportPage(app)
+        page.operate()
+        page.check_point()
 
     @classmethod
     def setUpClass(cls):
-        pass
+        super(DataImportTest_SSSS, cls).setUpClass()
 
     @classmethod
     def tearDownClass(cls):
-        pass
+        super(DataImportTest_SSSS, cls).tearDownClass()
+
 
 if __name__ == "__main__":
     unittest.main()

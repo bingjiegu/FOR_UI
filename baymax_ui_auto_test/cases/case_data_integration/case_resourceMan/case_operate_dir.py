@@ -230,9 +230,17 @@ class OperateDirTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
+    # 校验“元数据-分析-新建schema”
+    @get_url()
+    def test_a029_analysis_create_schema(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/元数据-分析-新建schema.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
 
     # 校验“数据集-新建_mysql_Dataset”
-    @get_url()
+    @get_url(resourceMan_url)
     def test_a030_create_Dataset(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据集-新建Dataset.yaml"),
                "caseName": sys._getframe().f_code.co_name}
@@ -276,9 +284,17 @@ class OperateDirTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
+    # 校验“数据集-查看Dataset”
+    @get_url(resourceMan_url)
+    def test_a034_view_Dataset(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据集-查看Dataset.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
 
     # 校验“数据集-新建HDFSDataset”
-    @get_url()
+    @get_url(resourceMan_url)
     def test_a035_create_HDFSDataset(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据集-新建HDFSDataset.yaml"),
                "caseName": sys._getframe().f_code.co_name}
@@ -313,8 +329,17 @@ class OperateDirTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
+    # 校验“数据集-查看HDFSDataset”
+    @get_url(resourceMan_url)
+    def test_a039_view_HDFSDataset(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据集-查看HDFSDataset.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = ResourceManPage(app)
+        page.operate()
+        page.check_point()
+
     # 校验“数据标准-新建standard”
-    @get_url()
+    @get_url(resourceMan_url)
     def test_a040_create_standard(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据标准-新建standard.yaml"),
                "caseName": sys._getframe().f_code.co_name}
@@ -348,76 +373,6 @@ class OperateDirTest(ParametrizedTestCase):
     @classmethod
     def tearDownClass(cls):
         super(OperateDirTest, cls).tearDownClass()
-
-
-class OperateDirTest2(ParametrizedTestCase):
-    def login(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = LoginTestPage(app)
-        page.operate()
-
-    #链接到某url装饰器
-    def get_url(to_url=""):
-        def decorator(func):
-            def wrapper(self, *args, **kwargs):
-                if to_url != "":
-                    self.driver.get(to_url)
-                    time.sleep(1)
-                rerun(self, to_url, func)
-            return wrapper
-        return decorator
-
-    def to_resource_dir(self):
-        self.login()
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/资源目录.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = HomePage(app)
-        page.operate()
-
-    # 校验“元数据-分析-新建schema”
-    @get_url()
-    def test_a029_analysis_create_schema(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/元数据-分析-新建schema.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ResourceManPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“数据集-查看Dataset”
-    @get_url()
-    def test_a034_view_Dataset(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据集-查看Dataset.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ResourceManPage(app)
-        page.operate()
-        page.check_point()
-
-
-    # 校验“数据集-查看HDFSDataset”
-    @get_url()
-    def test_a039_view_HDFSDataset(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据集-查看HDFSDataset.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ResourceManPage(app)
-        page.operate()
-        page.check_point()
-
-
-    def setUp(self):
-        super(OperateDirTest2, self).setUpClass()
-        self.to_resource_dir()
-
-    def tearDown(self):
-        super(OperateDirTest2, self).tearDownClass()
-
-    @classmethod
-    def setUpClass(cls):
-        pass
-
-    @classmethod
-    def tearDownClass(cls):
-        pass
 
 
 '''
@@ -455,28 +410,10 @@ class OperateDirTestSSSS(ParametrizedTestCase):
     def test_a017_open_dir(self):
         self.to_resource_dir()
 
-# 校验“元数据-新建schema”
+    # 校验“元数据-分析-新建schema”
     @get_url()
-    def test_a025_create_schema(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/元数据-新建schema.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ResourceManPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“元数据-移动schema”
-    @get_url()
-    def test_a026_move_schema(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/元数据-移动schema.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = ResourceManPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“元数据-复制schema”
-    @get_url()
-    def test_a027_copy_schema(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/元数据-复制schema.yaml"),
+    def test_a029_analysis_create_schema(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/元数据-分析-新建schema.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = ResourceManPage(app)
         page.operate()

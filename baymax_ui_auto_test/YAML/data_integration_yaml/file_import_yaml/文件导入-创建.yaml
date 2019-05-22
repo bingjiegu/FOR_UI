@@ -14,16 +14,17 @@ testcase:
   operate_type: click
   info: 点击数据源“选择”按钮（数据源输入框后面的放大镜按钮）
   is_time: 0.5
-- element_info: //*[@id="dataTree"]//*[@name="数据源"]/preceding-sibling::i[1]
+- element_info: //*[@name="ch-components-dataSourceInq-dataSourceInquire-search-table-data"]//input[@placeholder="请输入名称"]
+  find_type: xpath
+  operate_type: send_keys
+  msg: ftp_info4_twac
+  info: 数据源查询输入“ftp_info4_twac”
+- element_info: //*[@name="ch-components-dataSourceInq-dataSourceInquire-search-table-data"]//button
   find_type: xpath
   operate_type: click
-  info: 点击“弹出树-数据源”文件夹按钮
-- element_info: //*[@id="dataTree"]//em[@name="auto_initial_data_source"]
-  find_type: xpath
-  operate_type: click
-  info: 点击“弹出树-auto_initial_data_source”文字
-  is_time: 0.5
-- element_info: //*[@id="bm-ch-filesys-step1-tmp"]/div[1]/div/div[2]/form/div/div[3]/div[1]/div[3]/table/tbody/tr[1]/td[1]/div/label/span/span
+  info:  点击“数据源查询输入框后的”搜索按钮
+  is_time: 1
+- element_info: //*[@id="ch-components-dataSourceInq-dataSourceInquire-table"]/div[3]/table/tbody/tr/td[1]/div/label
   find_type: xpath
   operate_type: click
   info: 勾选列表中ftp_info4_twac 数据源
