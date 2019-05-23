@@ -19,6 +19,10 @@ testcase:
   operate_type: click
   is_time: 1
   info: 点击列表中“执行列表”
+- element_info: '//*[@id="bm-rh-design-history-table"]//*[@class="el-loading-mask"and @style="display: none;"]'
+  find_type: xpath
+  info: 等待加载圈消失
+  check_time: 30
 check:
 - operate_type: get_current_url
   check: current_contain_expect

@@ -79,6 +79,7 @@ check:
   find_type: xpath
   check: displayed
   info: 断言“success，保存成功！”吐词出现
+  is_time: 3
 - element_info: //*[@id="bm-designdrawing-form"]//button[1]/span[contains(text(), '历史')]
   find_type: xpath
   operate_type: get_text

@@ -11,7 +11,7 @@ testcase:
   operate_type: click
   info: 点击 第一条任务的“执行日志信息”
   is_time: 0.8
-- element_info: //*[@id="bm-qa-teInformation"]//button[@aria-label="Close"]
+- element_info: //*[@id="bm-qa-teInformation-showLog"]//button[@aria-label="Close"]
   find_type: xpath
   operate_type: click
   info: 点击“关闭的X”

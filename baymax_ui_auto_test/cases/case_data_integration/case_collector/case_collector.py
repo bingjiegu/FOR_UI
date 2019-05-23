@@ -594,6 +594,16 @@ class CollectorTaskListTest_SSSS(ParametrizedTestCase):
     def test_a072_collector_dir(self):
         self.to_resource_dir()
 
+    # 校验“校验采集器-资源目录-同步”
+    @get_url(dir_url)
+    def test_a073_collector_dir_sync(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_integration_yaml/collector_yaml/collector_task_list_yaml/采集器-资源目录-同步.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = CollectorPage(app)
+        page.operate()
+        page.check_point()
+
     #     # 校验“校验采集器-详细信息-页面校验”
     # @get_url(view_url)
     # def test_a074_collector_detail(self):

@@ -410,15 +410,14 @@ class OperateDirTestSSSS(ParametrizedTestCase):
     def test_a017_open_dir(self):
         self.to_resource_dir()
 
-    # 校验“元数据-分析-新建schema”
+    # 校验“创建jdbc数据源-链接测试”
     @get_url()
-    def test_a029_analysis_create_schema(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/元数据-分析-新建schema.yaml"),
+    def test_a023_create_dbsource_jdbc_connect(self):
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/data_integration_yaml/resourceMan_yaml/数据源-新建JDBC数据源-链接测试.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = ResourceManPage(app)
         page.operate()
         page.check_point()
-
 
 
     @classmethod

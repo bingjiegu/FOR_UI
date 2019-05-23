@@ -64,7 +64,7 @@ class SchemaAnalyzeTest(ParametrizedTestCase):
 
     # 校验“源数据分析-选择元数据-保存”
     @get_url(schema_analyze_url)
-    def test_a166_schemaanalyze_schema_save(self):
+    def test_a167_schemaanalyze_schema_save(self):
         app = {"logTest": self.logTest, "driver": self.driver,
                "path": PATH("../YAML/data_govern_yaml/schema_analyze_yaml/源数据分析-选择元数据-保存.yaml"),
                "caseName": sys._getframe().f_code.co_name}
