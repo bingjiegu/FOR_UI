@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
 import sys
 sys.path.append("..")
-from common.BaseRunner import ParametrizedTestCase
+from common.BaseRunner import ParametrizedTestCase, get_driver
 from cases.case_home.case_home_page_click import HomePageTest
+from cases.case_home.case_home_page_for_dam import HomePageTest_Dam
+from cases.case_home.case_home_page_for_Beiruan import HomePageTest_Beiruan
+from cases.case_home.case_home_page_cab import HomePageTest_Cab
+from cases.case_home.case_home_page_for_cad import HomePageTest_Cad
+from cases.case_home.case_home_page_for_yinpao import HomePageTest_Yinpao
+from cases.case_home.case_home_page_for_shubo import HomePageTest_Shubo
 from cases.case_login import LoginTest
 from cases.case_data_integration.case_resourceMan.case_operate_dir import OperateDirTest
 from cases.case_data_integration.case_data_import import DataImportTest
@@ -19,28 +25,46 @@ from cases.case_data_analyze.case_project_dir.case_project_dir import ProjectDir
 import unittest
 from datetime import datetime
 from common.TearDown import mk_file
-from common.Count import countDate,writeExcel
+from common.Count import countDate, writeExcel
 from common.Email import send
 
-def runnerCaseApp():
-    start_time = datetime.now()
+
+def suite_case(who):
     suite = unittest.TestSuite()
-    suite.addTest(ParametrizedTestCase.parametrize(LoginTest))
-    suite.addTest(ParametrizedTestCase.parametrize(HomePageTest))
-    suite.addTest(ParametrizedTestCase.parametrize(OperateDirTest))
-    suite.addTest(ParametrizedTestCase.parametrize(DataImportTest))
-    suite.addTest(ParametrizedTestCase.parametrize(FileManagementTest))
-    suite.addTest(ParametrizedTestCase.parametrize(FileImportTest))
-    suite.addTest(ParametrizedTestCase.parametrize(CollectorTemplateTest))
-    suite.addTest(ParametrizedTestCase.parametrize(CollectorimportDataTest))
-    suite.addTest(ParametrizedTestCase.parametrize(CollectorTaskListTest))
-    suite.addTest(ParametrizedTestCase.parametrize(OperationalMonitoringTest))
-    suite.addTest(ParametrizedTestCase.parametrize(TaskControlTest))
-    suite.addTest(ParametrizedTestCase.parametrize(QualityAnalyzeTest))
-    suite.addTest(ParametrizedTestCase.parametrize(BloodAnalyzeTest))
-    suite.addTest(ParametrizedTestCase.parametrize(SchemaAnalyzeTest))
-    suite.addTest(ParametrizedTestCase.parametrize(FlowManagementTest))
-    suite.addTest(ParametrizedTestCase.parametrize(ProjectDirTest))
+    Check_module = {
+        'Dam': [LoginTest, HomePageTest_Dam, OperateDirTest, DataImportTest, FileManagementTest, FileImportTest, CollectorTemplateTest,
+                   CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
+                   BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
+        'bayMax': [LoginTest, HomePageTest, OperateDirTest, DataImportTest, FileManagementTest, FileImportTest, CollectorTemplateTest,
+                   CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
+                   BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
+        'Beiruan': [LoginTest, HomePageTest_Beiruan, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
+                   CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
+                   BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest],
+        'Cab': [LoginTest, HomePageTest_Cab, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
+                   CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
+                   BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest],
+        'Cad': [LoginTest, HomePageTest_Cad, OperateDirTest, DataImportTest, FileManagementTest, FileImportTest, CollectorTemplateTest,
+                   CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
+                   BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
+        'ShuBo': [LoginTest, HomePageTest_Shubo, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
+                   CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
+                   BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest],
+        'YinPao': [LoginTest, HomePageTest_Yinpao, OperateDirTest, DataImportTest, FileManagementTest, FileImportTest, CollectorTemplateTest,
+                   CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
+                   BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
+    }
+    cases = map(ParametrizedTestCase.parametrize, Check_module[who])
+    for i in cases:
+        suite.addTest(i)
+    return suite
+
+def runnerCaseApp():
+
+    driver, who = get_driver()
+    driver.quit()
+    start_time = datetime.now()
+    suite = suite_case(who)
     unittest.TextTestRunner(verbosity=2).run(suite)
     end_time = datetime.now()
     countDate(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), str((end_time - start_time).seconds) + "秒")

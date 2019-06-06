@@ -92,7 +92,7 @@ testcase:
   find_type: id
   operate_type: click
   info: 在design页 点击“保存”按钮
-  is_time: 2
+  is_time: 4
 - element_info: //*[@id="right"]//div[contains(text(), "IO")]
   find_type: xpath
   operate_type: click
@@ -149,6 +149,7 @@ check:
   find_type: xpath
   check: displayed
   info: 断言“success，保存成功！”吐词出现
+  is_time: 3
 - element_info: //*[@id="bm-designdrawing-form"]//button[1]/span[contains(text(), '历史')]
   find_type: xpath
   operate_type: get_text

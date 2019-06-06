@@ -4,6 +4,7 @@ from common.BaseRunner import ParametrizedTestCase
 import unittest, os, sys, time
 from PageObject.login.login_page import LoginTestPage
 from common.case_false_rerun import rerun
+from common.login_who import who_login
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
@@ -24,12 +25,15 @@ class LoginTest(ParametrizedTestCase):
 
     @get_url()
     def testlogin(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/login/login.yaml"),
+        print('1', self.who)
+        print('2', who_login(self.who))
+        print('3', PATH(who_login(self.who)))
+
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
         page = LoginTestPage(app)
         page.operate()
         page.check_point()
-
 
     @classmethod
     def setUpClass(cls):

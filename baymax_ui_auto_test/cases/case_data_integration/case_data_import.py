@@ -7,6 +7,7 @@ from PageObject.home.home_page import HomePage
 from PageObject.login.login_page import LoginTestPage
 from common.case_false_rerun import rerun
 from common.ElementParam import ElementParam
+from common.login_who import who_login
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(__file__)), p)
@@ -15,7 +16,7 @@ PATH = lambda p: os.path.abspath(
 class DataImportTest(ParametrizedTestCase):
     data_import_url = ElementParam.HOST + '/#/synchronization'
     def login(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
         page = LoginTestPage(app)
         page.operate()

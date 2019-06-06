@@ -44,7 +44,7 @@ testcase:
   operate_type: click
   info: 点击‘目录’按钮
   is_time: 1
-- element_info: //ul//*[contains(text(), "移动目录")]
+- element_info: //ul[@name="bm-rm-dropdpwn-name1"]//*[contains(text(), "移动目录")]
   find_type: xpath
   operate_type: click
   info: 点击‘移动目录’按钮

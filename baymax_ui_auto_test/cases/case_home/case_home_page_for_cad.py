@@ -10,7 +10,7 @@ from common.login_who import who_login
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(__file__)), p)
 )
-class HomePageTest(ParametrizedTestCase):
+class HomePageTest_Cad(ParametrizedTestCase):
     def login(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
@@ -176,14 +176,14 @@ class HomePageTest(ParametrizedTestCase):
 
     @classmethod
     def setUpClass(cls):
-        super(HomePageTest, cls).setUpClass()
+        super(HomePageTest_Cad, cls).setUpClass()
 
     @classmethod
     def tearDownClass(cls):
-        super(HomePageTest, cls).tearDownClass()
+        super(HomePageTest_Cad, cls).tearDownClass()
 
 
-class HomePageTest_SSSS(ParametrizedTestCase):
+class HomePageTest_Cad_SSSS(ParametrizedTestCase):
     def login(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/login/login.yaml"),
                "caseName": sys._getframe().f_code.co_name}
@@ -239,11 +239,11 @@ class HomePageTest_SSSS(ParametrizedTestCase):
 
     @classmethod
     def setUpClass(cls):
-        super(HomePageTest_SSSS, cls).setUpClass()
+        super(HomePageTest_Cad_SSSS, cls).setUpClass()
 
     @classmethod
     def tearDownClass(cls):
-        super(HomePageTest_SSSS, cls).tearDownClass()
+        super(HomePageTest_Cad_SSSS, cls).tearDownClass()
 
 
 if __name__ == "__main__":

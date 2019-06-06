@@ -7,6 +7,7 @@ from PageObject.login.login_page import LoginTestPage
 from PageObject.home.home_page import HomePage
 import sys, os, time
 from common.case_false_rerun import rerun
+from common.login_who import who_login
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), p)
@@ -20,7 +21,7 @@ class FlowManagementTest(ParametrizedTestCase):
 
 
     def login(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
         page = LoginTestPage(app)
         page.operate()
@@ -812,87 +813,201 @@ class FlowManagementTest_SSSS(ParametrizedTestCase):
     def test_a167_flow_management_create_dataflow(self):
         self.to_resource_dir()
 
-    # 校验“流程管理-workflow-step-提交”
+    # # 校验“流程管理-flow-step-历史”
+    # @get_url(flow_management_url)
+    # def test_a183_flow_management_flow_step_history(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver,
+    #            "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-历史.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = FlowManagementPage(app)
+    #     page.operate()
+    #     page.check_point()
+#  ========================================= 提交 start ========================================================================================
+    # 校验“流程管理-flow-step-提交”
     @get_url(flow_management_url)
-    def test_a217_flow_management_workflow_step_submit(self):
+    def test_a184_flow_management_flow_step_submit(self):
         app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-workflow-step-提交.yaml"),
+               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-提交.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = FlowManagementPage(app)
         page.operate()
         page.check_point()
 
-    # 校验“流程管理-workflow-step-计划”
-    def test_a218_flow_management_workflow_step_plan(self):
+    # 校验“流程管理-flow-step-计划”
+    def test_a185_flow_management_flow_step_plan(self):
         app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-workflow-step-计划.yaml"),
+               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-计划.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = FlowManagementPage(app)
         page.operate()
         page.check_point()
 
-    # 校验“流程管理-workflow-step-执行明细-running详细信息”
-    def test_a219_flow_management_workflow_step_detail_info_running(self):
+    # 校验“流程管理-flow-step-执行明细-running详细信息”
+    def test_a186_flow_management_flow_step_detail_info_running(self):
         app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-workflow-step-执行明细-running详细信息.yaml"),
+               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-running详细信息.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = FlowManagementPage(app)
         page.operate()
         page.check_point()
 
-    # 校验“流程管理-workflow-step-执行明细-running输出”
-    def test_a220_flow_management_workflow_step_detail_output_running(self):
+    # 校验“流程管理-flow-step-执行明细-running输出”
+    def test_a187_flow_management_flow_step_detail_output_running(self):
         app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-workflow-step-执行明细-running输出.yaml"),
+               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-running输出.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = FlowManagementPage(app)
         page.operate()
         page.check_point()
 
-    # 校验“流程管理-workflow-step-执行明细-running日志”
-    def test_a221_flow_management_workflow_step_detail_log_running(self):
+    # 校验“流程管理-flow-step-执行明细-running日志”
+    def test_a188_flow_management_flow_step_detail_log_running(self):
         app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-workflow-step-执行明细-running日志.yaml"),
+               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-running日志.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = FlowManagementPage(app)
         page.operate()
         page.check_point()
 
-    # 校验“流程管理-workflow-step-执行历史”
-    def test_a222_flow_management_workflow_step_history(self):
+    # 校验“流程管理-flow-step-执行历史”
+    def test_a189_flow_management_flow_step_history(self):
         app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-workflow-step-执行历史.yaml"),
+               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行历史.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = FlowManagementPage(app)
         page.operate()
         page.check_point()
-
-    # 校验“流程管理-workflow-step-执行明细-success详细信息”
-    def test_a223_flow_management_workflow_step_detail_info_success(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-workflow-step-执行明细-success详细信息.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = FlowManagementPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“流程管理-workflow-step-执行明细-success输出”
-    def test_a224_flow_management_workflow_step_detail_output_success(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-workflow-step-执行明细-success输出.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = FlowManagementPage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“流程管理-workflow-step-执行明细-success日志”
-    def test_a225_flow_management_workflow_step_detail_log_success(self):
-        app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-workflow-step-执行明细-success日志.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = FlowManagementPage(app)
-        page.operate()
-        page.check_point()
+    #
+    # # 校验“流程管理-flow-step-执行明细-success详细信息”
+    # def test_a190_flow_management_flow_step_detail_info_success(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver,
+    #            "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-success详细信息.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = FlowManagementPage(app)
+    #     page.operate()
+    #     page.check_point()
+    #
+    # # 校验“流程管理-flow-step-执行明细-success输出”
+    # def test_a191_flow_management_flow_step_detail_output_success(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver,
+    #            "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-success输出.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = FlowManagementPage(app)
+    #     page.operate()
+    #     page.check_point()
+    #
+    # # 校验“流程管理-flow-step-执行明细-success输出-预览”
+    # def test_a192_flow_management_flow_step_detail_output_success_preview(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver,
+    #            "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-success输出-预览.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = FlowManagementPage(app)
+    #     page.operate()
+    #     page.check_point()
+    #
+    # # 校验“流程管理-flow-step-执行明细-success日志”
+    # def test_a193_flow_management_flow_step_detail_log_success(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver,
+    #            "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-success日志.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = FlowManagementPage(app)
+    #     page.operate()
+    #     page.check_point()
+# # ========================================= 提交 end ========================================================================================
+# # ========================================= 调度 start ========================================================================================
+#
+#     # 校验“流程管理-flow-step-调度”
+#     @get_url(flow_management_url)
+#     def test_a195_flow_management_flow_step_schedule(self):
+#         app = {"logTest": self.logTest, "driver": self.driver,
+#                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-调度.yaml"),
+#                "caseName": sys._getframe().f_code.co_name}
+#         page = FlowManagementPage(app)
+#         page.operate()
+#         page.check_point()
+#
+#     # 校验“流程管理-flow-step-计划-调度”
+#     @get_url(flow_plan_url)
+#     def test_a196_flow_management_flow_step_plan_schedule(self):
+#         app = {"logTest": self.logTest, "driver": self.driver,
+#                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-计划-调度.yaml"),
+#                "caseName": sys._getframe().f_code.co_name}
+#         page = FlowManagementPage(app)
+#         page.operate()
+#         page.check_point()
+#
+#     # 校验“流程管理-flow-step-执行明细-running详细信息-schedule”
+#     def test_a197_flow_management_flow_step_detail_info_running_schedule(self):
+#         app = {"logTest": self.logTest, "driver": self.driver,
+#                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-running详细信息-schedule.yaml"),
+#                "caseName": sys._getframe().f_code.co_name}
+#         page = FlowManagementPage(app)
+#         page.operate()
+#         page.check_point()
+#
+#     # 校验“流程管理-flow-step-执行明细-running输出-schedule”
+#     def test_a198_flow_management_flow_step_detail_output_running_schedule(self):
+#         app = {"logTest": self.logTest, "driver": self.driver,
+#                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-running输出-schedule.yaml"),
+#                "caseName": sys._getframe().f_code.co_name}
+#         page = FlowManagementPage(app)
+#         page.operate()
+#         page.check_point()
+#
+#     # 校验“流程管理-flow-step-执行明细-running日志-schedule”
+#     def test_a199_flow_management_flow_step_detail_log_running_schedule(self):
+#         app = {"logTest": self.logTest, "driver": self.driver,
+#                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-running日志-schedule.yaml"),
+#                "caseName": sys._getframe().f_code.co_name}
+#         page = FlowManagementPage(app)
+#         page.operate()
+#         page.check_point()
+#
+#     # 校验“流程管理-flow-step-执行历史-schedule”
+#     def test_a200_flow_management_flow_step_history_schedule(self):
+#         app = {"logTest": self.logTest, "driver": self.driver,
+#                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行历史-schedule.yaml"),
+#                "caseName": sys._getframe().f_code.co_name}
+#         page = FlowManagementPage(app)
+#         page.operate()
+#         page.check_point()
+#
+#     # 校验“流程管理-flow-step-执行明细-success详细信息-schedule”
+#     def test_a201_flow_management_flow_step_detail_info_success_schedule(self):
+#         app = {"logTest": self.logTest, "driver": self.driver,
+#                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-success详细信息-schedule.yaml"),
+#                "caseName": sys._getframe().f_code.co_name}
+#         page = FlowManagementPage(app)
+#         page.operate()
+#         page.check_point()
+#
+#     # 校验“流程管理-flow-step-执行明细-success输出-schedule”
+#     def test_a202_flow_management_flow_step_detail_output_success_schedule(self):
+#         app = {"logTest": self.logTest, "driver": self.driver,
+#                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-success输出-schedule.yaml"),
+#                "caseName": sys._getframe().f_code.co_name}
+#         page = FlowManagementPage(app)
+#         page.operate()
+#         page.check_point()
+#
+#     # 校验“流程管理-flow-step-执行明细-success输出-预览-schedule”
+#     def test_a203_flow_management_flow_step_detail_output_success_preview_schedule(self):
+#         app = {"logTest": self.logTest, "driver": self.driver,
+#                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-success输出-预览-schedule.yaml"),
+#                "caseName": sys._getframe().f_code.co_name}
+#         page = FlowManagementPage(app)
+#         page.operate()
+#         page.check_point()
+#
+#     # 校验“流程管理-flow-step-执行明细-success日志-schedule”
+#     def test_a204_flow_management_flow_step_detail_log_success_schedule(self):
+#         app = {"logTest": self.logTest, "driver": self.driver,
+#                "path": PATH("../YAML/data_analyze_yaml/flow_management_yaml/流程管理-flow-step-执行明细-success日志-schedule.yaml"),
+#                "caseName": sys._getframe().f_code.co_name}
+#         page = FlowManagementPage(app)
+#         page.operate()
+#         page.check_point()
+# #  ========================================= 调度 end ========================================================================================
 
 
 

@@ -7,6 +7,8 @@ from PageObject.home.home_page import HomePage
 from PageObject.login.login_page import LoginTestPage
 from common.ElementParam import ElementParam
 from common.case_false_rerun import rerun
+from common.login_who import who_login
+
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), p)
@@ -15,7 +17,7 @@ PATH = lambda p: os.path.abspath(
 # 采集器列表页
 class CollectorTemplateTest(ParametrizedTestCase):
     def login(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+        app = {"logTest": self.logTest, "driver": self.driver,  "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
         page = LoginTestPage(app)
         page.operate()
@@ -79,7 +81,7 @@ class CollectorTemplateTest(ParametrizedTestCase):
 class CollectorimportDataTest(ParametrizedTestCase):
     importData_url = ElementParam.IMPORT_DATA_URL
     def login(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
         page = LoginTestPage(app)
         page.operate()
@@ -209,7 +211,7 @@ class CollectorTaskListTest(ParametrizedTestCase):
     dir_url = ElementParam.DIR_URL     # 资源目录页
 
     def login(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
         page = LoginTestPage(app)
         page.operate()
@@ -420,7 +422,7 @@ class CollectorTaskListTest(ParametrizedTestCase):
 # 采集器列表页
 class CollectorTemplateTest_SSSS(ParametrizedTestCase):
     def login(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
         page = LoginTestPage(app)
         page.operate()
@@ -470,7 +472,7 @@ class CollectorTemplateTest_SSSS(ParametrizedTestCase):
 class CollectorimportDataTest_SSSS(ParametrizedTestCase):
     importData_url = ElementParam.IMPORT_DATA_URL
     def login(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
         page = LoginTestPage(app)
         page.operate()
@@ -569,7 +571,7 @@ class CollectorTaskListTest_SSSS(ParametrizedTestCase):
     dir_url = ElementParam.DIR_URL     # 资源目录页
 
     def login(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
         page = LoginTestPage(app)
         page.operate()

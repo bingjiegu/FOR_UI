@@ -7,6 +7,7 @@ from PageObject.login.login_page import LoginTestPage
 from PageObject.home.home_page import HomePage
 import sys, os, time
 from common.case_false_rerun import rerun
+from common.login_who import who_login
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), p)
@@ -17,7 +18,7 @@ class OperationalMonitoringTest(ParametrizedTestCase):
     operational_url = ElementParam.OPERATIONAL_URL
 
     def login(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/user_for_test/user_dir1.yaml"),
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
         page = LoginTestPage(app)
         page.operate()

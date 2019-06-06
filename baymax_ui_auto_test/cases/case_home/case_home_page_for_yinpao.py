@@ -10,7 +10,7 @@ from common.login_who import who_login
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(__file__)), p)
 )
-class HomePageTest(ParametrizedTestCase):
+class HomePageTest_Yinpao(ParametrizedTestCase):
     def login(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
@@ -109,14 +109,6 @@ class HomePageTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
-    # 校验 “数据治理--项目目录”
-    @get_url()
-    def test_a010_project_dir(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/项目目录.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = HomePage(app)
-        page.operate()
-        page.check_point()
 
     # 校验 “数据监控--运维管控”
     @get_url()
@@ -172,18 +164,16 @@ class HomePageTest(ParametrizedTestCase):
     #     page.operate()
     #     page.check_point()
 
-
-
     @classmethod
     def setUpClass(cls):
-        super(HomePageTest, cls).setUpClass()
+        super(HomePageTest_Yinpao, cls).setUpClass()
 
     @classmethod
     def tearDownClass(cls):
-        super(HomePageTest, cls).tearDownClass()
+        super(HomePageTest_Yinpao, cls).tearDownClass()
 
 
-class HomePageTest_SSSS(ParametrizedTestCase):
+class HomePageTest_Yinpao_SSSS(ParametrizedTestCase):
     def login(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/login/login.yaml"),
                "caseName": sys._getframe().f_code.co_name}
@@ -239,11 +229,11 @@ class HomePageTest_SSSS(ParametrizedTestCase):
 
     @classmethod
     def setUpClass(cls):
-        super(HomePageTest_SSSS, cls).setUpClass()
+        super(HomePageTest_Yinpao_SSSS, cls).setUpClass()
 
     @classmethod
     def tearDownClass(cls):
-        super(HomePageTest_SSSS, cls).tearDownClass()
+        super(HomePageTest_Yinpao_SSSS, cls).tearDownClass()
 
 
 if __name__ == "__main__":

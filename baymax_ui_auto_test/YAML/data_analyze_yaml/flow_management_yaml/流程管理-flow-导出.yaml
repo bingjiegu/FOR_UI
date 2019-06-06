@@ -32,10 +32,12 @@ testcase:
   find_type: name
   operate_type: click
   info: 点击‘确定’按钮
+  is_time: 1.5
 check:
 - element_info: //*[text()="恭喜你，导出已成功！"]
   find_type: xpath
   check: displayed
   info: 断言“恭喜你，导出已成功！”吐词出现
 - check: time_difference
+  max_time: 10
   info: 断言“本地的下载目录”最新下载的文件的创建时间小于现在5秒

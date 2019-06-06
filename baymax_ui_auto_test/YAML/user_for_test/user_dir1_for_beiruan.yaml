@@ -4,20 +4,6 @@ testinfo:
   launch: 1
   info: 环境正常
 testcase:
-- element_info: //*[@placeholder="租户"]
-  find_type: xpath
-  operate_type: click
-  info: 点击租户输入框
-- element_info: //*[@placeholder="租户"]
-  find_type: xpath
-  operate_type: send_keys
-#  msg: autoui
-  msg: default
-  info: 向租户输入框输入内容
-- element_info: /html/body/div[2]/div[1]/div[1]/ul/li
-  find_type: xpath
-  operate_type: click
-  info: 点击租户的下拉框
 - element_info: 用户名
   find_type: name
   operate_type: send_keys

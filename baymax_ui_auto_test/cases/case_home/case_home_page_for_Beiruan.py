@@ -10,7 +10,7 @@ from common.login_who import who_login
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(__file__)), p)
 )
-class HomePageTest(ParametrizedTestCase):
+class HomePageTest_Beiruan(ParametrizedTestCase):
     def login(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
@@ -32,15 +32,6 @@ class HomePageTest(ParametrizedTestCase):
     def test_a002_resource_dir(self):
         self.login()
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/资源目录.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = HomePage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验“文件管理”页面
-    @get_url()
-    def test_a003_file_manage(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/文件管理.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = HomePage(app)
         page.operate()
@@ -93,7 +84,7 @@ class HomePageTest(ParametrizedTestCase):
 
     # 校验 “数据治理--血缘分析”
     @get_url()
-    def test_ba009_schema_analyze(self):
+    def test_a009_schema_analyze(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/元数据分析.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = HomePage(app)
@@ -102,17 +93,8 @@ class HomePageTest(ParametrizedTestCase):
 
     # 校验 “数据治理--流程管理”
     @get_url()
-    def test_a009_flow_manage(self):
+    def test_a010_flow_manage(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/流程管理.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = HomePage(app)
-        page.operate()
-        page.check_point()
-
-    # 校验 “数据治理--项目目录”
-    @get_url()
-    def test_a010_project_dir(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/项目目录.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = HomePage(app)
         page.operate()
@@ -127,14 +109,6 @@ class HomePageTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
-    # 校验 “数据监控--访问监控yaml”
-    @get_url()
-    def test_a012_inquiry_control(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/访问监控1.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = HomePage(app)
-        page.operate()
-        page.check_point()
 
     # 校验 “数据监控--任务监控.yaml”
     @get_url()
@@ -146,44 +120,16 @@ class HomePageTest(ParametrizedTestCase):
         page.check_point()
 
 
-
-
-    # # 校验 “实时计算--作业管理.yaml”
-    # def test_a014_work_manage(self):
-    #     app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/作业管理.yaml"),
-    #            "caseName": sys._getframe().f_code.co_name}
-    #     page = HomePage(app)
-    #     page.operate()
-    #     page.check_point()
-    #
-    # # 校验 “实时计算--作业运维.yaml”
-    # def test_a015_work_operations(self):
-    #     app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/作业运维.yaml"),
-    #            "caseName": sys._getframe().f_code.co_name}
-    #     page = HomePage(app)
-    #     page.operate()
-    #     page.check_point()
-    #
-    # # 校验 “实时计算--作业模板.yaml”
-    # def test_a016_work_template(self):
-    #     app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/作业模板.yaml"),
-    #            "caseName": sys._getframe().f_code.co_name}
-    #     page = HomePage(app)
-    #     page.operate()
-    #     page.check_point()
-
-
-
     @classmethod
     def setUpClass(cls):
-        super(HomePageTest, cls).setUpClass()
+        super(HomePageTest_Beiruan, cls).setUpClass()
 
     @classmethod
     def tearDownClass(cls):
-        super(HomePageTest, cls).tearDownClass()
+        super(HomePageTest_Beiruan, cls).tearDownClass()
 
 
-class HomePageTest_SSSS(ParametrizedTestCase):
+class HomePageTest_Beiruan_SSSS(ParametrizedTestCase):
     def login(self):
         app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/login/login.yaml"),
                "caseName": sys._getframe().f_code.co_name}
@@ -239,14 +185,8 @@ class HomePageTest_SSSS(ParametrizedTestCase):
 
     @classmethod
     def setUpClass(cls):
-        super(HomePageTest_SSSS, cls).setUpClass()
+        super(HomePageTest_Beiruan_SSSS, cls).setUpClass()
 
     @classmethod
     def tearDownClass(cls):
-        super(HomePageTest_SSSS, cls).tearDownClass()
-
-
-if __name__ == "__main__":
-    unittest.main()
-
-
+        super(HomePageTest_Beiruan_SSSS, cls).tearDownClass()

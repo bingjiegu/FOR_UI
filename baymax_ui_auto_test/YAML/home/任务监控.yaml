@@ -4,12 +4,12 @@ testinfo:
   launch: 1
   info: 成功登录
 testcase:
-- element_info: //*[text()="数据监控"]
+- element_info: //*[@test-id="/sjjk"]
   find_type: xpath
   operate_type: action_chains
   info: 鼠标悬停到‘数据监控’标签
   is_time: 0.5
-- element_info: //*[text()="任务监控"]
+- element_info: //*[@test-id="/hippo/taskControl"]
   find_type: xpath
   operate_type: click
   info: 点击任务监控

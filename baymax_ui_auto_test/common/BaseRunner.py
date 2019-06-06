@@ -5,6 +5,7 @@ from common.Logger import myLog
 from selenium import webdriver
 from common.ElementParam import ElementParam
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
 
 PATH = lambda p: os.path.abspath(os.path.join(os.path.dirname(__file__), p))
 
@@ -45,7 +46,9 @@ def get_driver():
     driver.maximize_window()  # 将浏览器最大化
     # driver = webdriver.Chrome()
     driver.get(ElementParam.URL)
-    return driver
+    el = WebDriverWait(driver, 20, 1).until(lambda x: driver.find_element_by_id("bm-login"))
+    who = el.get_attribute('name')
+    return driver, who
 
 class ParametrizedTestCase(unittest.TestCase):
 
@@ -55,7 +58,7 @@ class ParametrizedTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         pass
-        cls.driver = get_driver()
+        cls.driver, cls.who = get_driver()
         cls.logTest = myLog().getLog("chrome")  # 每个设备实例化一个日志记录器
 
     def setUp(self):
