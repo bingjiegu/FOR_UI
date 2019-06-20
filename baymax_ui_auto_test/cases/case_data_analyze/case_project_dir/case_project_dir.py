@@ -26,7 +26,7 @@ class ProjectDirTest(ParametrizedTestCase):
 
 
     def login(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/流程管理.yaml"),
+        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH(who_login(self.who)),
                "caseName": sys._getframe().f_code.co_name}
         page = LoginTestPage(app)
         page.operate()

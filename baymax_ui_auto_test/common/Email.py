@@ -58,3 +58,7 @@ def send():
     report = PATH("../Report/Report.xlsx")
     send_mail(to_addr=to_addr, mail_host=mail_host, mail_user=mail_user, port=port, mail_pass=mail_pass, header_msg=header_msg, report=report, attach=attach, report_name="ui测试报告.xlsx")
 
+
+
+if __name__ == "__main__":
+    send()
