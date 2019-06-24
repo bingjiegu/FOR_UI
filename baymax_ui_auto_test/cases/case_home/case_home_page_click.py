@@ -37,14 +37,14 @@ class HomePageTest(ParametrizedTestCase):
         page.operate()
         page.check_point()
 
-    # 校验“文件管理”页面
-    @get_url()
-    def test_a003_file_manage(self):
-        app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/文件管理.yaml"),
-               "caseName": sys._getframe().f_code.co_name}
-        page = HomePage(app)
-        page.operate()
-        page.check_point()
+    # # 校验“文件管理”页面
+    # @get_url()
+    # def test_a003_file_manage(self):
+    #     app = {"logTest": self.logTest, "driver": self.driver, "path": PATH("../YAML/home/文件管理.yaml"),
+    #            "caseName": sys._getframe().f_code.co_name}
+    #     page = HomePage(app)
+    #     page.operate()
+    #     page.check_point()
 
     # 校验“数据导入”
     @get_url()

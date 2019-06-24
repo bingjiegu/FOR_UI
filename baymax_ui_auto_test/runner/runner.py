@@ -32,10 +32,11 @@ from common.Email import send
 def suite_case(who):
     suite = unittest.TestSuite()
     Check_module = {
-        'Dam': [LoginTest, HomePageTest_Dam, OperateDirTest, DataImportTest, FileManagementTest, FileImportTest, CollectorTemplateTest,
+        # FileManagementTest 文件管理
+        'Dam': [LoginTest, HomePageTest_Dam, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
                    CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
                    BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
-        'bayMax': [LoginTest, HomePageTest, OperateDirTest, DataImportTest, FileManagementTest, FileImportTest, CollectorTemplateTest,
+        'bayMax': [LoginTest, HomePageTest, OperateDirTest, DataImportTest,  FileImportTest, CollectorTemplateTest,
                    CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
                    BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
         'Beiruan': [LoginTest, HomePageTest_Beiruan, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
@@ -44,13 +45,13 @@ def suite_case(who):
         'Cab': [LoginTest, HomePageTest_Cab, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
                    CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
                    BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest],
-        'Cad': [LoginTest, HomePageTest_Cad, OperateDirTest, DataImportTest, FileManagementTest, FileImportTest, CollectorTemplateTest,
+        'Cad': [LoginTest, HomePageTest_Cad, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
                    CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
                    BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
         'ShuBo': [LoginTest, HomePageTest_Shubo, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
                    CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
                    BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest],
-        'YinPao': [LoginTest, HomePageTest_Yinpao, OperateDirTest, DataImportTest, FileManagementTest, FileImportTest, CollectorTemplateTest,
+        'YinPao': [LoginTest, HomePageTest_Yinpao, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
                    CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
                    BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
     }

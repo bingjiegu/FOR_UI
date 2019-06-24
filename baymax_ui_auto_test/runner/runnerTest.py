@@ -70,7 +70,7 @@ def suite_case(who):
         #            CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
         #            BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
 
-        'bayMax': [LoginTest],
+        'bayMax': [HomePageTest],
         'Beiruan': [OperateDirTest],
         'Beiruan': [OperateDirTestSSSS],
         'Cab': [HomePageTest_Cab],
@@ -138,4 +138,4 @@ if __name__ == '__main__':
     # for i in range(100):
     runnerCaseApp()
     writeExcel()
-    send()
+    # send()

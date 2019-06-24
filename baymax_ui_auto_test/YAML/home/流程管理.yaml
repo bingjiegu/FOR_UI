@@ -4,7 +4,7 @@ testinfo:
   launch: 1
   info: 成功登录
 testcase:
-- element_info: //*[@test-id="/sjfx"]
+- element_info: //*[@test-id="/dataAnalysis"]
   find_type: xpath
   operate_type: action_chains
   info: 鼠标悬停到‘数据分析’标签
