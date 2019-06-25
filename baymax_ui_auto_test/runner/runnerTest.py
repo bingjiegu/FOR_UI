@@ -70,8 +70,8 @@ def suite_case(who):
         #            CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
         #            BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
 
-        'bayMax': [HomePageTest],
-        'Beiruan': [OperateDirTest],
+        'bayMax': [OperateDirTestSSSS],
+        'Beiruan': [ProjectDirTest],
         'Beiruan': [OperateDirTestSSSS],
         'Cab': [HomePageTest_Cab],
         'Cad': [HomePageTest_Cad],

@@ -19,7 +19,7 @@ testcase:
 check:
 - operate_type: get_current_url
   check: current_equal_expect
-  expect_value: /#/hippo/visit/拼接值后+前host+拼接
+  expect_value: /#/hippo/visit拼接值后+前host+拼接
   info: 检查"访问监控的URL"是否正确
 - element_info: //*[text()='请求数']
   find_type: xpath
