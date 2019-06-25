@@ -1,6 +1,6 @@
 testinfo:
-- id: test_a188
-  title: 校验“流程管理-flow-step-执行明细-runnning日志”
+- id: test_c010
+  title: 校验“流程管理-mysql_to_hive-flow-step-执行明细-success日志”
   launch: 0
   info: 先进入流程管理
 testcase:

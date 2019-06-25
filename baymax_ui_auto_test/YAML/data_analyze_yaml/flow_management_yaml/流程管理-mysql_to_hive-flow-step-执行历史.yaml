@@ -1,6 +1,6 @@
 testinfo:
-- id: test_a187
-  title: 校验“流程管理-flow-step-执行历史”
+- id: test_c006
+  title: 校验“流程管理-mysql_to_hive-flow-step-执行历史”
   launch: 0
   info: 先进入流程管理
 testcase:
@@ -28,8 +28,8 @@ check:
   find_type: xpath
   operate_type: get_text
   check: current_equal_expect
-  expect_value: mysql_to_hdfs
-  info: 断言执行历史的流程名字为“mysql_to_hdfs”
+  expect_value: mysql_to_hive
+  info: 断言执行历史的流程名字为“mysql_to_hive”
 - element_info: //*[@id="bm-rh-design-history-table"]/div[3]/table/tbody/tr/td[5]/div
   find_type: xpath
   operate_type: get_text

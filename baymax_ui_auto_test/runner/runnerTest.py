@@ -70,7 +70,7 @@ def suite_case(who):
         #            CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
         #            BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
 
-        'bayMax': [OperateDirTestSSSS],
+        'bayMax': [FlowManagementTest_SSSS],
         'Beiruan': [ProjectDirTest],
         'Beiruan': [OperateDirTestSSSS],
         'Cab': [HomePageTest_Cab],
@@ -87,48 +87,14 @@ def suite_case(who):
 
 def runnerCaseApp():
 
-    driver, who = get_driver()
-    driver.quit()
+    # driver, who = get_driver()
+    # driver.quit()
 
     start_time = datetime.now()
     # suite = unittest.TestSuite()
 
-    suite = suite_case(who)
+    suite = suite_case('bayMax')
 
-    # suite.addTest(ParametrizedTestCase.parametrize(LoginTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(HomePageTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(OperateDirTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(DataImportTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(FileManagementTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(FileImportTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(CollectorTemplateTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(CollectorimportDataTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(CollectorTaskListTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(OperationalMonitoringTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(TaskControlTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(QualityAnalyzeTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(BloodAnalyzeTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(SchemaAnalyzeTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(FlowManagementTest))
-    # suite.addTest(ParametrizedTestCase.parametrize(ProjectDirTest))
-
-
-# ---------------- SSSSSSSSSSSSSSSSS--------------------------------
-#     suite.addTest(ParametrizedTestCase.parametrize(HomePageTest_SSSS))
-#     suite.addTest(ParametrizedTestCase.parametrize(OperateDirTestSSSS))
-#     suite.addTest(ParametrizedTestCase.parametrize(DataImportTest_SSSS))
-#     suite.addTest(ParametrizedTestCase.parametrize(FileManagementTest_SSSS))
-#     suite.addTest(ParametrizedTestCase.parametrize(FileImportTest))
-#     suite.addTest(ParametrizedTestCase.parametrize(CollectorTemplateTest_SSSS))
-#     suite.addTest(ParametrizedTestCase.parametrize(CollectorimportDataTest_SSSS))
-#     suite.addTest(ParametrizedTestCase.parametrize(CollectorTaskListTest_SSSS))
-#     suite.addTest(ParametrizedTestCase.parametrize(OperationalMonitoringTest_SSSS))
-#     suite.addTest(ParametrizedTestCase.parametrize(TaskControlTest_SSSS))
-#     suite.addTest(ParametrizedTestCase.parametrize(QualityAnalyzeTest_SSSS))
-#     suite.addTest(ParametrizedTestCase.parametrize(BloodAnalyzeTest))
-#     suite.addTest(ParametrizedTestCase.parametrize(SchemaAnalyzeTest))
-#     suite.addTest(ParametrizedTestCase.parametrize(FlowManagementTest_SSSS))
-#     suite.addTest(ParametrizedTestCase.parametrize(ProjectDirTest_SSSS))
     unittest.TextTestRunner(verbosity=2).run(suite)
     end_time = datetime.now()
     countDate(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), str((end_time - start_time).seconds) + "秒")

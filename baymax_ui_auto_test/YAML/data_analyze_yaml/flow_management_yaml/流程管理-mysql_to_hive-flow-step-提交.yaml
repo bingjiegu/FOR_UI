@@ -1,6 +1,6 @@
 testinfo:
-- id: test_a184
-  title: 校验“流程管理-flow-step-提交”
+- id: test_c001
+  title: 校验“流程管理-mysql_to_hive_flow-step-提交”
   launch: 0
   info: 先进入流程管理
 testcase:
@@ -16,18 +16,18 @@ testcase:
 - element_info: seachInput
   find_type: name
   operate_type: send_keys
-  msg: mysql_to_hdfs
-  info: 搜索框输入‘mysql_to_hdfs'的文字
+  msg: mysql_to_hive
+  info: 搜索框输入‘mysql_to_hive'的文字
 - element_info: searchTable
   find_type: name
   operate_type: click
   info:  点击“输入框后的”搜索按钮
   is_time: 1
-- element_info: //*[@id="bm-rh-flowManage-table"]/div[3]/table/tbody/tr/td/div/span[text()="mysql_to_hdfs"]
+- element_info: //*[@id="bm-rh-flowManage-table"]/div[3]/table/tbody/tr/td/div/span[text()="mysql_to_hive"]
   find_type: xpath
   v_index: 0
   operate_type: click
-  info:  点击“mysql_to_hdfs”flow的名字
+  info:  点击“mysql_to_hive”flow的名字
   is_time: 0.5
 - element_info: //*[@title="source_mysql_c_1_in"]
   find_type: xpath
