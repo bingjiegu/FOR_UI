@@ -31,8 +31,8 @@ check:
   find_type: xpath
   operate_type: get_text
   check: current_equal_expect
-  expect_value: RUNNING
-  info: 断言“第一行此时的状态”为 RUNNING
+  expect_value: READY
+  info: 断言“第一行此时的状态”为 READY
 - element_info: //*[@id="bm-qa-teInformation-table"]/div[3]/table/tbody/tr[1]/td[6]/div/span
   find_type: xpath
   check: contrary

@@ -28,7 +28,7 @@ testcase:
   find_type: xpath
   operate_type: click
   info: 在提示弹框点击“确定”按钮
-  is_time: 1
+  is_time: 2
 - element_info: bm-qa-analysisTemplate-sure
   find_type: name
   operate_type: click
@@ -40,12 +40,12 @@ check:
   info: 断言“恭喜你，运行成功！”吐词出现
   is_time: 1
 - operate_type: refresh
-  info:  刷新当前页面
-  is_time: 1
+  info: 刷新当前页面
 - element_info: //*[@id="bm-qa-teInformation-table"]/div[3]/table/tbody/tr[1]/td[11]/div
   find_type: xpath
-  operate_type: get_text
+  operate_type: refresh_time_difference
   check: time_difference
+  time_out: 60
   max_time: 10
   info: 断言“第一行的修改时间与此时小于10秒”
 - element_info: //*[@id="bm-qa-teInformation-table"]/div[3]/table/tbody/tr[1]/td[2]/div/span
@@ -62,25 +62,25 @@ check:
   find_type: xpath
   operate_type: get_text
   check: current_equal_expect
-  expect_value: RUNNING
-  info: 断言“第一行此时的状态”为 RUNNING
+  expect_value: READY
+  info: 断言“第一行此时的状态”为 READY
 - element_info: //*[@id="bm-qa-teInformation-table"]/div[3]/table/tbody/tr[1]/td[6]/div/span
   find_type: xpath
   check: contrary
   check_time: 2
-  info: 断言“RUNNING”状态时“执行结果”不存在
+  info: 断言“READY”状态时“执行结果”不存在
 - element_info: //*[@id="bm-qa-teInformation-table"]/div[3]/table/tbody/tr[1]/td[9]/div
   find_type: xpath
   operate_type: get_text
   check: current_equal_expect
   expect_value: None
-  info: 断言“第一行RUNNING”状态时“数据质量等级”为 空
+  info: 断言“第一行READY”状态时“数据质量等级”为 空
 - element_info: //*[@id="bm-qa-teInformation-table"]/div[3]/table/tbody/tr[1]/td[10]/div
   find_type: xpath
   operate_type: get_text
   check: current_equal_expect
   expect_value: None
-  info: 断言“第一行RUNNING”状态时“坏数据占比”为 空
+  info: 断言“第一行READY”状态时“坏数据占比”为 空
 
 
 

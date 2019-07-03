@@ -45,6 +45,9 @@ testcase:
   operate_type: click
   info: 点击‘确定'按钮
   is_time: 0.8
+- element_info: '//*[@id="bm-ch-res-table"]//*[@class="el-loading-mask"and @style="display: none;"]'
+  find_type: xpath
+  info: 等待加载圈消失
 - element_info: //*[@id="bm-ch-nav2"]//em[@name="movo_to_HDFSdataset"]
   find_type: xpath
   operate_type: click

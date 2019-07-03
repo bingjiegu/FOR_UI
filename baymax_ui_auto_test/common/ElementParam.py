@@ -36,6 +36,8 @@ class ElementParam(object):
     DRAG_EL = "drag_el"  # 拖拽元素 到第二元素 或者 某个 像素
     DOUBLE_CLICK = "double_click"  # 双击
     KEY_OPETATE = "key_operate" # 键盘操作
+    REFRESH_TIME_DIFFERENCE = "refresh_time_difference"  # 刷新页面直到时间差小于预期值
+    REFRESH_GET_TEXT_IS_EXPECT = "refresh_get_text_is_expect"  # 刷新页面 获取的值符合预期 返回最后的text
 
 
     # 错误日志
@@ -70,6 +72,9 @@ class ElementParam(object):
 
     URL = 'http://192.168.1.81:8515/#/login'
     HOST = 'http://192.168.1.81:8515'
+    # #测试83环境
+    # URL = 'http://192.168.1.83:8515/#/login'
+    # HOST = 'http://192.168.1.83:8515'
 
     # 页面url
     #资源目录
@@ -77,9 +82,9 @@ class ElementParam(object):
 
     #采集器页面
     IMPORT_DATA_URL = HOST + "/#/collector/importData"  # 导入任务页
-    VIEW_URL = HOST + "/#/collector/autoui83/view/edb0d32c-1af9-4d6b-9534-4a7f7ea9da0b"  #采集器autoui83 详细信息页
-    TASK_LIST_URL = HOST + "/#/collector/autoui83/taskList/edb0d32c-1af9-4d6b-9534-4a7f7ea9da0b"  #采集器autoui83 任务列表页
-    DIR_URL = HOST + "/#/collector/autoui83/dir/edb0d32c-1af9-4d6b-9534-4a7f7ea9da0b"      #采集器autoui83 资源目录页
+    VIEW_URL = HOST + "/#/collector/autoui83/view/10c7da46-8552-47cc-9b96-38b69a337ed5"  #采集器autoui83 详细信息页
+    TASK_LIST_URL = HOST + "/#/collector/autoui83/taskList/10c7da46-8552-47cc-9b96-38b69a337ed5"  #采集器autoui83 任务列表页
+    DIR_URL = HOST + "/#/collector/autoui83/dir/10c7da46-8552-47cc-9b96-38b69a337ed5"      #采集器autoui83 资源目录页
 
     # 数据监控
     OPERATIONAL_URL = HOST + "/#/hippo/index"  # 运维管控

@@ -6,6 +6,9 @@ testinfo:
 testcase:
 - info: 等待‘1’秒
   is_time: 1
+- element_info: '//*[@id="bm-com-datatree-secondNav-table"]//*[@class="el-loading-mask"and @style="display: none;"]'
+  find_type: xpath
+  info: 等待加载圈消失
 - element_info: 数据标准
   find_type: name
   operate_type: click
@@ -64,7 +67,7 @@ testcase:
   find_type: xpath
   operate_type: click
   info: 点击‘确定’按钮
-  is_time: 1
+  is_time: 2.5
 check:
 - element_info: //em[@name="数据标准"]/following-sibling::ul/*[@name='%s']+随机数
   v_index: 0

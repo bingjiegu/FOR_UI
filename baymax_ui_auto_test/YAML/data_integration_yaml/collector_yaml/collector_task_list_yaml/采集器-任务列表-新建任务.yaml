@@ -43,10 +43,10 @@ testcase:
   find_type: xpath
   operate_type: click
   info: 点击“弹出树-autoui83”文字
-- element_info: //*[@id="ch-components-dataSourceInq-dataSourceInquire-table"]/div[3]//*[text()="dbs_collector_orcl_info3"]/ancestor::td/preceding-sibling::td//label
+- element_info: //*[@id="ch-components-dataSourceInq-dataSourceInquire-table"]/div[3]//*[text()="dbs_collector_mysql_info5"]/ancestor::td/preceding-sibling::td//label
   find_type: xpath
   operate_type: click
-  info: 勾选“dbs_collector_orcl_info3”数据源
+  info: 勾选“dbs_collector_mysql_info5”数据源
 - element_info: bm-ch-step1Form-datasource-ok
   find_type: name
   operate_type: click
@@ -59,10 +59,10 @@ testcase:
 - element_info: bm-ch-step1Form-table-select
   find_type: name
   operate_type: send_keys
-  msg: c_in_1
-  info: 表选择输入框中输入 c_in_1
+  msg: c_1_in
+  info: 表选择输入框中输入 c_1_in
   is_time: 1
-- element_info: //li/span[text()="C_IN_1"]
+- element_info: //li/span[text()="c_1_in"]
   find_type: xpath
   operate_type: click
   info: 点击表 C_IN_1

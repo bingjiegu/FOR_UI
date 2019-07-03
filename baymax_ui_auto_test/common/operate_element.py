@@ -6,6 +6,7 @@ import selenium.common.exceptions
 from selenium.webdriver.common.action_chains import ActionChains
 import time, os, re, subprocess
 from selenium.webdriver.common.keys import Keys
+from common.operate_time import to_time_stamp
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
@@ -80,6 +81,8 @@ class OperateElement():
                 ep.UPLOAD_FILE: lambda: self.upload_file(operate),
                 ep.REFRESH_GET_TEXT: lambda: self.refresh_get_text(operate),
                 ep.REFRESH_GET_ATTR: lambda: self.refresh_get_attr(operate),
+                ep.REFRESH_TIME_DIFFERENCE: lambda: self.refresh_time_difference(operate),
+                ep.REFRESH_GET_TEXT_IS_EXPECT: lambda: self.refresh_get_text_is_expect(operate),
                 ep.TO_IFRAME: lambda: self.to_iframe(operate),
                 ep.DEFAULT_CONTENT: lambda: self.switch_default_content(),
                 ep.REFRESH: lambda: self.refresh(),
@@ -89,7 +92,8 @@ class OperateElement():
                 ep.CLOSE_WINDOW: lambda: self.close_window(),
                 ep.DRAG_EL: lambda: self.drag_el(operate),
                 ep.DOUBLE_CLICK: lambda: self.double_click_opetate(operate),
-                ep.KEY_OPETATE: lambda: self.key_operate(operate)
+                ep.KEY_OPETATE: lambda: self.key_operate(operate),
+
             }
             return elements[operate['operate_type']]()
 
@@ -235,6 +239,25 @@ class OperateElement():
             cs_time = int(time.time() - s_time)
         return {'result': False, 'text': new_text}
 
+    # 刷新页面 获取的值符合预期 返回最后的text
+    def refresh_get_text_is_expect(self, operate):
+        old_text =self.get_text(operate)["text"]
+        if old_text not in operate["expect_values"]:
+            return {'result': False, 'text': old_text}
+        time_out = int(operate["time_out"])
+        cs_time = 0
+        s_time = time.time()
+        while time_out > cs_time:
+            self.driver.refresh()
+            time.sleep(2)
+            # self.driver.implicitly_wait(3)
+            new_text =self.get_text(operate)["text"]
+            if new_text == operate["expect_value"]:
+                return {'result': True, 'text': new_text}
+            time.sleep(1)
+            cs_time = int(time.time() - s_time)
+        return {'result': False, 'text': new_text}
+
      # 刷新页面 直到页面属性变化或超时 返回最后的text
     def refresh_get_attr(self, operate):
         old_text =self.get_attr(operate)["text"]
@@ -249,6 +272,22 @@ class OperateElement():
             if new_text != old_text:
                 return {'result': True, 'text': new_text}
             time.sleep(1)
+            cs_time = int(time.time() - s_time)
+        return {'result': False, 'text': new_text}
+
+    # 刷新页面直到时间差小于预期值
+    def refresh_time_difference(self, operate):
+        time_out = int(operate["time_out"])
+        cs_time = 0
+        s_time = time.time()
+        while time_out > cs_time:
+            self.driver.refresh()
+            time.sleep(1)
+            # self.driver.implicitly_wait(3)
+            new_text =self.get_text(operate)["text"]
+            if (time.time() - to_time_stamp(f_time=new_text)) < operate["max_time"]:
+                return {'result': True, 'text': new_text}
+            # time.sleep(1)
             cs_time = int(time.time() - s_time)
         return {'result': False, 'text': new_text}
 

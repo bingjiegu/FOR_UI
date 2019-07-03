@@ -337,6 +337,7 @@ class TaskControlTest_SSSS(ParametrizedTestCase):
         def decorator(func):
             def wrapper(self, *args, **kwargs):
                 self.driver.get(to_url)
+                # self.driver.implicitly_wait(8)
                 func(self, *args, **kwargs)
             return wrapper
         return decorator
@@ -345,16 +346,25 @@ class TaskControlTest_SSSS(ParametrizedTestCase):
     def test_a095_taskControl_completion_detail(self):
         self.to_resource_dir()
 
-    # 校验“任务调度-详情列表-执行-停止”
+     # 校验“任务调度-详情列表-计划-创建”
     @get_url(task_control_url)
-    def test_a113_taskScheduler_detailList_execute_stop(self):
+    def test_a107_taskScheduler_detailList_plan_create(self):
         app = {"logTest": self.logTest, "driver": self.driver,
-               "path": PATH("../YAML/data_monitor_yaml/task_control_yaml/任务调度-详情列表-执行-停止.yaml"),
+               "path": PATH("../YAML/data_monitor_yaml/task_control_yaml/任务调度-详情列表-计划-创建.yaml"),
                "caseName": sys._getframe().f_code.co_name}
         page = TaskControlPage(app)
         page.operate()
         page.check_point()
 
+    # 校验“任务调度-详情列表-计划-停止”
+    @get_url(task_control_url)
+    def test_a108_taskScheduler_detailList_plan_stop(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_monitor_yaml/task_control_yaml/任务调度-详情列表-计划-停止.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = TaskControlPage(app)
+        page.operate()
+        page.check_point()
 
     @classmethod
     def setUpClass(cls):

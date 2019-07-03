@@ -2,7 +2,7 @@ testinfo:
 - id: test089
   title: 运维监控-集群详情-页面校验
   launch: 0
-  info: 先进入"运维监控"目录
+  info: 先进入"运维管理"目录
 testcase:
 - info: “等待1秒”
   is_time: 1

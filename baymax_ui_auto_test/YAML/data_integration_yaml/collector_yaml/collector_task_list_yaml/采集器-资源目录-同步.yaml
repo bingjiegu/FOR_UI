@@ -4,11 +4,11 @@ testinfo:
   launch: 0
   info: 先进入"采集器"
 testcase:
-- element_info: //td[not(contains(@class,"hidden"))]/div[text()="dbs_collector_orcl_info3"]/ancestor::td/following-sibling::td[7]/div
+- element_info: //td[not(contains(@class,"hidden"))]/div[text()="dbs_collector_mysql_info5"]/ancestor::td/following-sibling::td[7]/div
   find_type: xpath
   operate_type: get_text
-  info: 获取数据源“dbs_collector_orcl_info3” 最后同步时间
-- element_info: //div[text()="dbs_collector_orcl_info3"]//ancestor::td/following-sibling::td[not(contains(@class,"hidden"))]//button/span
+  info: 获取数据源“dbs_collector_mysql_info5” 最后同步时间
+- element_info: //div[text()="dbs_collector_mysql_info5"]//ancestor::td/following-sibling::td[not(contains(@class,"hidden"))]//button/span
   find_type: xpath
   operate_type: click
   info: 点击“元数据同步” 按钮
@@ -28,7 +28,7 @@ check:
 - operate_type: refresh
   info: 刷新当前页面
   is_time: 1
-- element_info: //td[not(contains(@class,"hidden"))]/div[text()="dbs_collector_orcl_info3"]/ancestor::td/following-sibling::td[7]/div
+- element_info: //td[not(contains(@class,"hidden"))]/div[text()="dbs_collector_mysql_info5"]/ancestor::td/following-sibling::td[7]/div
   find_type: xpath
   operate_type: get_text
   check: vessel_not_contain_current

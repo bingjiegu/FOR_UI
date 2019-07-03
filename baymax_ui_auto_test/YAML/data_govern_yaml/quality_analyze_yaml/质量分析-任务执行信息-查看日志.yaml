@@ -18,9 +18,6 @@ check:
 - element_info: tab-dataflow_0
   find_type: id
   info: 断言“tab-dataflow_0”存在
-- element_info: tab-monitor
-  find_type: id
-  info: 断言“tab-monitor”存在
 - element_info: tab-workflow
   find_type: id
   info: 断言“tab-workflow”存在

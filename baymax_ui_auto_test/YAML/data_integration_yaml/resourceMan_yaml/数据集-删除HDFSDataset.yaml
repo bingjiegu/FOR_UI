@@ -36,6 +36,7 @@ check:
 - element_info: //*[contains(text(), "恭喜你，删除已成功")]
   find_type: xpath
   info: 断言“恭喜你，删除已成功！”出现
+  is_time: 1
 - element_info: //*[contains(text(), "%s")]+随机数
   find_type: xpath
   v_index: 0

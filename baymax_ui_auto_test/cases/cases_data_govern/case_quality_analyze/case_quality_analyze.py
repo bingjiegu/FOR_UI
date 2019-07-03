@@ -458,9 +458,6 @@ class QualityAnalyzeTest(ParametrizedTestCase):
         super(QualityAnalyzeTest, cls).tearDownClass()
 
 
-
-
-
 ################ --------------------------------------------------===================调试区=====================------------------------------------------------------------------------------
 
 
@@ -484,23 +481,45 @@ class QualityAnalyzeTest_SSSS(ParametrizedTestCase):
         page = HomePage(app)
         page.operate()
 
+    #链接到某url装饰器
     def get_url(to_url=""):
-        # 连接到某个url且失败重跑的装饰器
         def decorator(func):
             def wrapper(self, *args, **kwargs):
                 if to_url != "":
                     self.driver.get(to_url)
-                    time.sleep(1)
-                rerun(self, to_url, func)
+                    func(self, *args, **kwargs)
             return wrapper
         return decorator
 
-
     # 校验“质量分析-分析模板-运行”
-    @get_url()
     def test_a121_qualityanalyze_mode_run(self):
         self.to_resource_dir()
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-分析模板-运行.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
 
+    # 校验“质量分析-任务执行信息-查看日志”
+    @get_url(execute_info_url)
+    def test_a126_qualityanalyze_taskeexecuteinfo_loginfo(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-任务执行信息-查看日志.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
+
+    # 校验“质量分析-任务执行信息-查看日志-关闭”
+    @get_url(execute_info_url)
+    def test_a127_qualityanalyze_taskeexecuteinfo_loginfo_close(self):
+        app = {"logTest": self.logTest, "driver": self.driver,
+               "path": PATH("../YAML/data_govern_yaml/quality_analyze_yaml/质量分析-任务执行信息-查看日志-关闭.yaml"),
+               "caseName": sys._getframe().f_code.co_name}
+        page = QualityAnalyzaPage(app)
+        page.operate()
+        page.check_point()
 
     @classmethod
     def setUpClass(cls):

@@ -11,14 +11,22 @@ testcase:
   operate_type: get_text
   info: 获取第一条任务的“状态”
 check:
-- check: vessel_contain_expect
-  expect_index: 0
-  expect_value: RUNNING
-  info: 断言“当前状态为RUNNING”
+#- check: vessel_contain_expect
+#  expect_index: 0
+#  expect_value: READY
+#  info: 断言“当前状态为READY”
+#- element_info: //*[@id="bm-qa-teInformation-table"]/div[3]/table/tbody/tr[1]/td[4]/div/span
+#  find_type: xpath
+#  operate_type: refresh_get_text
+#  time_out: 300
+#  check: current_contain_expect
+#  expect_value: RUNNING
+#  info: 断言“实时刷新页面，300秒内任务状态由READY变为RUNNING”
 - element_info: //*[@id="bm-qa-teInformation-table"]/div[3]/table/tbody/tr[1]/td[4]/div/span
   find_type: xpath
-  operate_type: refresh_get_text
+  operate_type: refresh_get_text_is_expect
   time_out: 300
+  expect_values: ['READY', 'RUNNING', 'SUCCEEDED']
   check: current_contain_expect
   expect_value: SUCCEEDED
   info: 断言“实时刷新页面，300秒内任务状态由RUNNING变为SUCCEEDED”

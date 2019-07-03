@@ -49,7 +49,7 @@ testcase:
   operate_type: click
   info: 点击“确定”按钮
 check:
-- element_info: //*[@id="bm-hippo-alarm-rule-table"]/div[3]//td[2]/div/a[text()="%s"]+随机数
+- element_info: //*[@id="bm-hippo-alarm-rule-table"]/div[3]//td[2]/div/a[contains(text(), "%s")]+随机数
   find_type: xpath
   v_index: 0
   check: displayed
