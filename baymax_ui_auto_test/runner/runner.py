@@ -22,6 +22,7 @@ from cases.cases_data_govern.case_blood_analyze.case_blood_analyze import BloodA
 from cases.cases_data_govern.case_schema_analyze.case_schema_analyze import SchemaAnalyzeTest
 from cases.case_data_analyze.case_flow_management.case_flow_management import FlowManagementTest
 from cases.case_data_analyze.case_project_dir.case_project_dir import ProjectDirTest
+from cases.case_authority_management.case_role_mange.case_role_management import RoleManagementTest
 import unittest
 from datetime import datetime
 from common.TearDown import mk_file
@@ -30,15 +31,17 @@ from common.Email import send
 
 
 def suite_case(who):
+    '''根据当前测试环境的ui包 判断执行某个测试用例集合'''
     suite = unittest.TestSuite()
     Check_module = {
         # FileManagementTest 文件管理
         'Dam': [LoginTest, HomePageTest_Dam, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
                    CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
                    BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
-        'bayMax': [LoginTest, HomePageTest, OperateDirTest, DataImportTest,  FileImportTest, CollectorTemplateTest,
-                   CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
-                   BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
+        # 'bayMax': [LoginTest, HomePageTest, OperateDirTest, DataImportTest,  FileImportTest, CollectorTemplateTest,
+        #            CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
+        #            BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest,RoleManagementTest],
+        'bayMax': [ProjectDirTest, RoleManagementTest],
         'Beiruan': [LoginTest, HomePageTest_Beiruan, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
                    CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
                    BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest],
