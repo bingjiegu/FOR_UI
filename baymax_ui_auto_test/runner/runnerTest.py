@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import sys
+
+from cases.case_authority_management.case_role_mange.case_role_management import RoleManagementTest
+
 sys.path.append("..")
 from common.BaseRunner import ParametrizedTestCase, get_driver
 from cases.case_home.case_home_page_click import HomePageTest
@@ -48,29 +51,7 @@ from common.Email import send
 def suite_case(who):
     suite = unittest.TestSuite()
     Check_module = {
-        # 'Dam': [LoginTest, HomePageTest_Dam, OperateDirTest, DataImportTest, FileManagementTest, FileImportTest, CollectorTemplateTest,
-        #            CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
-        #            BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
-        # 'bayMax': [LoginTest, HomePageTest, OperateDirTest, DataImportTest, FileManagementTest, FileImportTest, CollectorTemplateTest,
-        #            CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
-        #            BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
-        # 'Beiruan': [LoginTest, HomePageTest_Beiruan, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
-        #            CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
-        #            BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest],
-        # 'Cab': [LoginTest, HomePageTest_Cab, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
-        #            CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
-        #            BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest],
-        # 'Cad': [LoginTest, HomePageTest_Cad, OperateDirTest, DataImportTest, FileManagementTest, FileImportTest, CollectorTemplateTest,
-        #            CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
-        #            BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
-        # 'ShuBo': [LoginTest, HomePageTest_Shubo, OperateDirTest, DataImportTest, FileImportTest, CollectorTemplateTest,
-        #            CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
-        #            BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest],
-        # 'YinPao': [LoginTest, HomePageTest_Yinpao, OperateDirTest, DataImportTest, FileManagementTest, FileImportTest, CollectorTemplateTest,
-        #            CollectorimportDataTest, CollectorTaskListTest, OperationalMonitoringTest, TaskControlTest, QualityAnalyzeTest,
-        #            BloodAnalyzeTest, SchemaAnalyzeTest, FlowManagementTest, ProjectDirTest],
-
-        'bayMax': [FlowManagementTest_SSSS],
+        'bayMax': [RoleManagementTest],
         'Beiruan': [ProjectDirTest],
         'Beiruan': [OperateDirTestSSSS],
         'Cab': [HomePageTest_Cab],
@@ -104,4 +85,4 @@ if __name__ == '__main__':
     # for i in range(100):
     runnerCaseApp()
     writeExcel()
-    # send()
+    send()
