@@ -70,11 +70,11 @@ class ElementParam(object):
     SUM_FILE = "sum.pickle"
     REPORT_FILE = "Report.xlsx"
 
-    URL = 'http://192.168.1.81:8515/#/login'
-    HOST = 'http://192.168.1.81:8515'
+    # URL = 'http://192.168.1.81:8515/#/login'
+    # HOST = 'http://192.168.1.81:8515'
     # #测试83环境
-    # URL = 'http://192.168.1.83:8515/#/login'
-    # HOST = 'http://192.168.1.83:8515'
+    URL = 'http://192.168.1.83:8515/#/login'
+    HOST = 'http://192.168.1.83:8515'
 
     # 页面url
     #资源目录
@@ -108,6 +108,6 @@ class ElementParam(object):
 
 
     #脚本版本
-    VERSION = '2019-04-09'
+    VERSION = '2019-07-15'
 
 
